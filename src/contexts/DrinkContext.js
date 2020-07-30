@@ -8,5 +8,5 @@ export default function DrinksProvider({ children }) {
 }
 
 DrinksProvider.propTypes = {
-  children: PropTypes.any.isRequired,
+  children: PropTypes.node.isRequired,
 };

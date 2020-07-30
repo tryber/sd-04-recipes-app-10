@@ -8,5 +8,5 @@ export default function MeatsProvider({ children }) {
 }
 
 MeatsProvider.propTypes = {
-  children: PropTypes.any.isRequired,
+  children: PropTypes.node.isRequired,
 };

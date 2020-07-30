@@ -8,5 +8,5 @@ export default function UsersProvider({ children }) {
 }
 
 UsersProvider.propTypes = {
-  children: PropTypes.any.isRequired,
+  children: PropTypes.node.isRequired,
 };
