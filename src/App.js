@@ -5,7 +5,8 @@ import DrinksProvider from './contexts/DrinkContext';
 import MeatsProvider from './contexts/MeatContext';
 import UsersProvider from './contexts/UserContext';
 
-import Home from './pages/Home';
+import HomeDrinks from './pages/HomeDrinks';
+import HomeMeals from './pages/HomeMeals';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Progress from './pages/Progress';
@@ -27,7 +28,7 @@ function App() {
           <Route path="/receitas-favoritas" exact component={DoneAndFavRecipes} />
           <Route path="/explorar" exact component={ExploreIndex} />
           <MeatsProvider>
-            <Route path="/comidas" exact component={Home} />
+            <Route path="/comidas" exact component={HomeMeals} />
             <Route path="/comidas/:id" exact component={Details} />
             <Route path="/comidas/:id/in-progress" exact component={Progress} />
             <Route path="/explorar/comidas" exact component={Explore} />
@@ -35,7 +36,7 @@ function App() {
             <Route path="/explorar/comidas/area" exact component={ExploreArea} />
           </MeatsProvider>
           <DrinksProvider>
-            <Route path="/bebidas" exact component={Home} />
+            <Route path="/bebidas" exact component={HomeDrinks} />
             <Route path="/bebidas/:id" exact component={Details} />
             <Route path="/bebidas/:id/in-progress" exact component={Progress} />
             <Route path="/explorar/bebidas" exact component={Explore} />
