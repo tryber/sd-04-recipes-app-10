@@ -6,12 +6,12 @@ import mealIcon from '../images/mealIcon.svg';
 
 function Footer() {
   return (
-      <footer>
-          <Link to="/bebidas">{drinkIcon}</Link>
-          <Link to="/explorar">{exploreIcon}</Link>
-          <Link to="/comidas">{mealIcon}</Link>
-      </footer>
-    );
+    <footer>
+        <Link to="/bebidas">{drinkIcon}</Link>
+        <Link to="/explorar">{exploreIcon}</Link>
+        <Link to="/comidas">{mealIcon}</Link>
+    </footer>
+  );
 }
 
 export default Footer;
