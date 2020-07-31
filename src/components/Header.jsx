@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import { Link } from 'react-router-dom';
 
 const SearchBar = () => {
   const [query, setQuery] = useState({
@@ -93,3 +94,7 @@ export default function Header({ title }) {
     </React.Fragment>
   );
 }
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+};
