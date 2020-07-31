@@ -8,7 +8,7 @@ const ListMeals = () => {
       {meals.slice(0, 12).map((meal) => {
         const { strMeal, strMealThumb } = meal;
         return (
-          <div className="col-6 mb-4">
+          <div className="col-6 mb-3">
             <div className="card">
               <img src={strMealThumb} className="card-img-top" alt={strMeal} />
               <div className="card-body">
