@@ -108,3 +108,7 @@ export default function Header({ title }) {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
 };
+
+SearchBar.propTypes = {
+  getDrinks: PropTypes.func.isRequired,
+};
