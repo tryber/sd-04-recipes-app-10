@@ -9,7 +9,7 @@ export default function Login() {
     const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const regexPassword = /^[^W_]{6}$/;
     if (regexEmail.test(vEmail) && regexPassword.test(vPassword)) {
-      //enviar para o context
+      // enviar para o context
     } else {
       alert('credenciais inválidas');
     }
@@ -31,7 +31,7 @@ export default function Login() {
             onChange={(e) => setEmail(e.target.value)}
           />
           <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
+            Never share your email with anyone else.
           </small>
         </div>
         <div className="form-group">
