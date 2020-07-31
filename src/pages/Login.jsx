@@ -11,7 +11,6 @@ export default function Login() {
     const regexPassword = /^[^W_]{7}$/;
     if (regexEmail.test(vEmail) && regexPassword.test(vPassword)) {
       setIsDisable(false);
-      console.log('if OK');
     } else {
       setIsDisable(true);
     }
