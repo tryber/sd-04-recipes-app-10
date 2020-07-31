@@ -4,12 +4,12 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const validationFields = (e, email, password) => {
+  const validationFields = (e, vEmail, vPassword) => {
     e.preventDefault();
     const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const regexPassword = /^[^W_]{6}$/;
-    if (regexEmail.test(email) && regexPassword.test(password)) {
-      //enviar para o context 
+    if (regexEmail.test(vEmail) && regexPassword.test(vPassword)) {
+      //enviar para o context
     } else {
       alert('credenciais inválidas');
     }
@@ -20,9 +20,7 @@ export default function Login() {
       <div className="row justify-content-center">
         <h1 className="display-4">Login</h1>
       </div>
-      <form
-        onSubmit={(e) => validationFields(e, email, password)}
-      >
+      <form onSubmit={(e) => validationFields(e, email, password)}>
         <div className="form-group">
           <label htmlFor="email">Email address</label>
           <input
