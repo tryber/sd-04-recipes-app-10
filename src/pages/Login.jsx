@@ -1,26 +1,39 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isDisable, setIsDisable] = useState(true);
 
-  const validationFields = (e, vEmail, vPassword) => {
-    e.preventDefault();
+  const validationFields = (vEmail, vPassword) => {
     const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const regexPassword = /^[^W_]{6}$/;
+    const regexPassword = /^[^W_]{7}$/;
     if (regexEmail.test(vEmail) && regexPassword.test(vPassword)) {
-      // enviar para o context
+      setIsDisable(false);
+      console.log('if OK');
     } else {
-      alert('credenciais inválidas');
+      setIsDisable(true);
     }
   };
+
+  const sendLocalStorage = () => {
+    localStorage.setItem('mealsToken', JSON.stringify(1)); // alterar para os dados
+    localStorage.setItem('cocktailsToken', JSON.stringify(1)); // alterar para os dados
+    localStorage.setItem('user', JSON.stringify({ email }));
+  };
+
+  useEffect(() => {
+    validationFields(email, password);
+    console.log(isDisable);
+  }, [email, password]);
 
   return (
     <div className="col">
       <div className="row justify-content-center">
         <h1 className="display-4">Login</h1>
       </div>
-      <form onSubmit={(e) => validationFields(e, email, password)}>
+      <form>
         <div className="form-group">
           <label htmlFor="email">Email address</label>
           <input
@@ -49,7 +62,13 @@ export default function Login() {
             Must have 6 characters.
           </small>
         </div>
-        <button type="submit" className="btn btn-success" disabled={!email || !password} data-testid="login-submit-btn">
+        <button
+          type="submit"
+          className="btn btn-success"
+          disabled={isDisable}
+          data-testid="login-submit-btn"
+          onClick={() => sendLocalStorage()}
+        >
           Login
         </button>
       </form>
