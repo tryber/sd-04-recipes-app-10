@@ -73,7 +73,7 @@ export default function Header({ title }) {
   const [isSearchBarOpen, setSearchBarOpen] = useState(false);
 
   return (
-    <>
+    <React.Fragment>
       <div className="d-flex bg-light align-items-center justify-content-between">
         <Link to="/profile" data-testid="profile-top-btn">
           <img src={profileIcon} alt="" />
@@ -90,6 +90,6 @@ export default function Header({ title }) {
         </button>
       </div>
       {isSearchBarOpen && <SearchBar />}
-    </>
+    </React.Fragment>
   );
 }
