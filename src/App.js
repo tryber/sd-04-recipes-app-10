@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import DrinksProvider from './contexts/DrinkContext';
 import MeatsProvider from './contexts/MeatContext';
 import UsersProvider from './contexts/UserContext';
-import {getAllMeals} from './services/api'
+
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -17,7 +17,6 @@ import ExploreIndex from './pages/ExploreIndex';
 import ExploreIngredients from './pages/ExploreIngredients';
 
 function App() {
-getAllMeals().then(value => console.log(value))
   return (
     <BrowserRouter>
       <Switch>
