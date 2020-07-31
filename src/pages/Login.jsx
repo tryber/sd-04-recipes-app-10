@@ -29,6 +29,7 @@ export default function Login() {
             id="input-email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            data-testid="email-input"
           />
           <small id="emailHelp" className="form-text text-muted">
             Never share your email with anyone else.
@@ -42,12 +43,13 @@ export default function Login() {
             id="input-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            data-testid="password-input"
           />
           <small id="passwordHelp" className="form-text text-muted">
             Must have 6 characters.
           </small>
         </div>
-        <button type="submit" className="btn btn-success" disabled={!email || !password}>
+        <button type="submit" className="btn btn-success" disabled={!email || !password} data-testid="login-submit-btn">
           Login
         </button>
       </form>
