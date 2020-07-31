@@ -4,12 +4,17 @@ import PropTypes from 'prop-types';
 
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import useDrinks from '../hooks/useDrinks';
 
-const SearchBar = () => {
+const SearchBar = ({ getDrinks }) => {
   const [query, setQuery] = useState({
     text: '',
     searchBy: '',
   });
+
+  const handleSearch = () => {
+    getDrinks(query);
+  };
 
   return (
     <div>
@@ -63,7 +68,12 @@ const SearchBar = () => {
           Primeira letra
         </label>
       </div>
-      <button data-testid="exec-search-btn" type="button" className="btn btn-block btn-primary">
+      <button
+        onClick={handleSearch}
+        data-testid="exec-search-btn"
+        type="button"
+        className="btn btn-block btn-primary"
+      >
         Buscar
       </button>
     </div>
@@ -72,7 +82,7 @@ const SearchBar = () => {
 
 export default function Header({ title }) {
   const [isSearchBarOpen, setSearchBarOpen] = useState(false);
-
+  const [, getDrinks] = useDrinks();
   return (
     <React.Fragment>
       <div className="d-flex bg-light align-items-center justify-content-between">
@@ -90,7 +100,7 @@ export default function Header({ title }) {
           <img src={searchIcon} alt="" />
         </button>
       </div>
-      {isSearchBarOpen && <SearchBar />}
+      {isSearchBarOpen && <SearchBar getDrinks={getDrinks} />}
     </React.Fragment>
   );
 }

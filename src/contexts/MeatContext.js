@@ -1,10 +1,12 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 export const MeatContext = createContext();
 
 export default function MeatsProvider({ children }) {
-  return <MeatContext.Provider value={[]}>{children}</MeatContext.Provider>;
+  const [meats, setMeats] = useState([]);
+
+  return <MeatContext.Provider value={[meats, setMeats]}>{children}</MeatContext.Provider>;
 }
 
 MeatsProvider.propTypes = {
