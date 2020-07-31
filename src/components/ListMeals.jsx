@@ -6,9 +6,9 @@ const ListMeals = () => {
   return (
     <div className="row">
       {meals.slice(0, 12).map((meal, index) => {
-        const { strMeal, strMealThumb } = meal;
+        const { idMeal, strMeal, strMealThumb } = meal;
         return (
-          <div className="col-6 mb-3" key={index}>
+          <div className="col-6 mb-3" key={idMeal}>
             <div className="card">
               <img data-testid={`${index}-card-img`} src={strMealThumb} className="card-img-top" alt={strMeal} />
               <div className="card-body">
