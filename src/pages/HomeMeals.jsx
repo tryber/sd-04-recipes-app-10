@@ -1,5 +1,10 @@
 import React from 'react';
+import ListMeals from '../components/ListMeals';
 
 export default function HomeMeals() {
-  return <div />;
+  return (
+    <div className="container">
+      <ListMeals />
+    </div>
+  );
 }
