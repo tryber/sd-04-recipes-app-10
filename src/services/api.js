@@ -4,6 +4,7 @@ const urls = {
     byName: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
     byFirstLetter: 'https://www.themealdb.com/api/json/v1/1/search.php?f=',
     byIngredient: 'https://www.themealdb.com/api/json/v1/1/filter.php?i=',
+    categories: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
   },
   drinks: {
     all: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
@@ -11,6 +12,11 @@ const urls = {
     byFirstLetter: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=',
     byIngredient: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=',
   },
+};
+
+export const getCategoriesMeals = async () => {
+  const response = await fetch(urls.meals.categories);
+  return response.json();
 };
 
 export const getAllMeals = async () => {
