@@ -1,6 +1,10 @@
 import React from 'react';
-import Header from '../components/Header';
+import ListDrinks from '../components/ListDrinks';
 
 export default function HomeDrinks() {
-  return <Header title="asa" />;
+  return (
+    <div className="container">
+      <ListDrinks />
+    </div>
+  );
 }

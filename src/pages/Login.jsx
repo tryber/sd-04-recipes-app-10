@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import useAuthentication from '../hooks/useAuthentication';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisable, setIsDisable] = useState(true);
+  const [, login] = useAuthentication();
 
   const validationFields = (vEmail, vPassword) => {
     const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const regexPassword = /^[^W_]{7}$/;
     if (regexEmail.test(vEmail) && regexPassword.test(vPassword)) {
       setIsDisable(false);
-      console.log('if OK');
     } else {
       setIsDisable(true);
     }
-  };
-
-  const sendLocalStorage = () => {
-    localStorage.setItem('mealsToken', JSON.stringify(1)); // alterar para os dados
-    localStorage.setItem('cocktailsToken', JSON.stringify(1)); // alterar para os dados
-    localStorage.setItem('user', JSON.stringify({ email }));
   };
 
   useEffect(() => {
@@ -66,7 +61,7 @@ export default function Login() {
           className="btn btn-success"
           disabled={isDisable}
           data-testid="login-submit-btn"
-          onClick={() => sendLocalStorage()}
+          onClick={() => login(email)} // erro, retorna só um objeto vazio!
         >
           Login
         </button>
