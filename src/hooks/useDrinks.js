@@ -18,19 +18,19 @@ const useDrinks = () => {
     if (query) {
       switch (query.searchBy) {
         case 'ingredient':
-          getDrinksByIngredient(query.text).then((result) =>
-            result.error ? alert('Nao achado') : setDrinks(result),
-          );
+          getDrinksByIngredient(query.text).then((result) => {
+            return result.error ? alert('Nao achado') : setDrinks(result);
+          });
           break;
         case 'name':
-          getDrinksByName(query.text).then((result) =>
-            result.error || !result.drinks ? alert('Nao achado') : setDrinks(result),
-          );
+          getDrinksByName(query.text).then((result) => {
+            return result.error || !result.drinks ? alert('Nao achado') : setDrinks(result);
+          });
           break;
         case 'firstLetter':
-          getDrinksByFirstLetter(query.text).then((result) =>
-            result.error ? alert('Nao achado') : setDrinks(result),
-          );
+          getDrinksByFirstLetter(query.text).then((result) => {
+            return result.error ? alert('Nao achado') : setDrinks(result);
+          });
           break;
         default:
           getAllDrinks(query.text).then((result) => setDrinks(result));

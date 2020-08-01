@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { MeatContext } from '../contexts/MeatContext';
 import {
   getAllMeals,
@@ -14,19 +14,19 @@ const useMeals = () => {
     if (query) {
       switch (query.searchBy) {
         case 'ingredient':
-          getMealsByIngredient(query.text).then((result) =>
-            result.error ? alert('Nao achado') : setMeals(result),
-          );
+          getMealsByIngredient(query.text).then((result) => {
+            return result.error ? alert('Nao achado') : setMeals(result);
+          });
           break;
         case 'name':
-          getMealsByName(query.text).then((result) =>
-            result.error || !result.drinks ? alert('Nao achado') : setMeals(result),
-          );
+          getMealsByName(query.text).then((result) => {
+            return result.error || !result.drinks ? alert('Nao achado') : setMeals(result);
+          });
           break;
         case 'firstLetter':
-          getMealsByFirstLetter(query.text).then((result) =>
-            result.error ? alert('Nao achado') : setMeals(result),
-          );
+          getMealsByFirstLetter(query.text).then((result) => {
+            return result.error ? alert('Nao achado') : setMeals(result);
+          });
           break;
         default:
           getAllMeals(query.text).then((result) => setMeals(result));
