@@ -15,16 +15,19 @@ const useMeals = () => {
       switch (query.searchBy) {
         case 'ingredient':
           getMealsByIngredient(query.text).then((result) => {
+            console.log('')
             return result.error ? alert('Nao achado') : setMeals(result);
           });
           break;
         case 'name':
           getMealsByName(query.text).then((result) => {
+            console.log('')
             return result.error || !result.drinks ? alert('Nao achado') : setMeals(result);
           });
           break;
         case 'firstLetter':
           getMealsByFirstLetter(query.text).then((result) => {
+            console.log('')
             return result.error ? alert('Nao achado') : setMeals(result);
           });
           break;
