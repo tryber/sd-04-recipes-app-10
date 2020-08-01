@@ -25,7 +25,6 @@ export default function Login() {
 
   useEffect(() => {
     validationFields(email, password);
-    console.log(isDisable);
   }, [email, password]);
 
   return (

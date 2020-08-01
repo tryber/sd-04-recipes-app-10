@@ -14,37 +14,67 @@ const urls = {
 };
 
 export const getAllMeals = async () => {
-  const response = await fetch(urls.meals.all);
-  return response.json();
+  try {
+    const response = await fetch(urls.meals.all);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { meals: [], error: true };
+  }
 };
-
 export const getMealsByName = async (name) => {
-  const response = await fetch(urls.meals.byName + name);
-  return response.json();
+  try {
+    const response = await fetch(urls.meals.byName + name);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { meals: [], error: true };
+  }
 };
-
 export const getMealsByFirstLetter = async (letter) => {
-  const response = await fetch(urls.meals.byFirstLetter + letter);
-  return response.json();
+  try {
+    const response = await fetch(urls.meals.byFirstLetter + letter);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { meals: [], error: true };
+  }
 };
 export const getMealsByIngredient = async (ingredient) => {
-  const response = await fetch(urls.meals.byIngredient + ingredient);
-  return response.json();
+  try {
+    const response = await fetch(urls.meals.byIngredient + ingredient);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { meals: [], error: true };
+  }
 };
 
 export const getAllDrinks = async () => {
-  const response = await fetch(urls.drinks.all);
-  return response.json();
+  try {
+    const response = await fetch(urls.drinks.all);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { drinks: [], error: true };
+  }
 };
 export const getDrinksByName = async (name) => {
-  const response = await fetch(urls.drinks.byName + name);
-  return response.json();
+  try {
+    const response = await fetch(urls.drinks.byName + name);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { drinks: [], error: true };
+  }
 };
 export const getDrinksByFirstLetter = async (letter) => {
-  const response = await fetch(urls.drinks.byFirstLetter + letter);
-  return response.json();
+  try {
+    const response = await fetch(urls.drinks.byFirstLetter + letter);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { drinks: [], error: true };
+  }
 };
 export const getDrinksByIngredient = async (ingredient) => {
-  const response = await fetch(urls.drinks.byIngredient + ingredient);
-  return response.json();
+  try {
+    const response = await fetch(urls.drinks.byIngredient + ingredient);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { drinks: [], error: true };
+  }
 };

@@ -11,23 +11,29 @@ const useDrinks = () => {
   const [drinks, setDrinks] = useContext(DrinkContext);
 
   useEffect(() => {
-    getAllDrinks().then((result) => setDrinks(result.drinks));
-  }, [setDrinks]);
+    console.log(drinks);
+  }, [drinks]);
 
   const getDrinks = (query = null) => {
     if (query) {
       switch (query.searchBy) {
         case 'ingredient':
-          getDrinksByIngredient(query.text).then((result) => setDrinks(result.drinks));
+          getDrinksByIngredient(query.text).then((result) =>
+            result.error ? alert('Nao achado') : setDrinks(result),
+          );
           break;
         case 'name':
-          getDrinksByName(query.text).then((result) => setDrinks(result.drinks));
+          getDrinksByName(query.text).then((result) =>
+            result.error || !result.drinks ? alert('Nao achado') : setDrinks(result),
+          );
           break;
         case 'firstLetter':
-          getDrinksByFirstLetter(query.text).then((result) => setDrinks(result.drinks));
+          getDrinksByFirstLetter(query.text).then((result) =>
+            result.error ? alert('Nao achado') : setDrinks(result),
+          );
           break;
         default:
-          getAllDrinks(query.text).then((result) => setDrinks(result.drinks));
+          getAllDrinks(query.text).then((result) => setDrinks(result));
           break;
       }
     } else {
