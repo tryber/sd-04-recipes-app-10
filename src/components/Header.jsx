@@ -6,7 +6,9 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import useDrinks from '../hooks/useDrinks';
 
-const SearchBar = ({ getDrinks }) => {
+const SearchBar = () => {
+  const [, getDrinks] = useDrinks();
+
   const [query, setQuery] = useState({
     text: '',
     searchBy: '',
@@ -82,7 +84,6 @@ const SearchBar = ({ getDrinks }) => {
 
 export default function Header({ title }) {
   const [isSearchBarOpen, setSearchBarOpen] = useState(false);
-  const [, getDrinks] = useDrinks();
   return (
     <React.Fragment>
       <div className="d-flex bg-light align-items-center justify-content-between">
@@ -100,15 +101,11 @@ export default function Header({ title }) {
           <img src={searchIcon} alt="" />
         </button>
       </div>
-      {isSearchBarOpen && <SearchBar getDrinks={getDrinks} />}
+      {isSearchBarOpen && <SearchBar />}
     </React.Fragment>
   );
 }
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-};
-
-SearchBar.propTypes = {
-  getDrinks: PropTypes.func.isRequired,
 };
