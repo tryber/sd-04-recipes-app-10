@@ -15,11 +15,14 @@ const SearchBar = () => {
   });
 
   const handleSearch = () => {
+    if (query.searchBy === 'firstLetter' && query.text.length !== 1) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    }
     getDrinks(query);
   };
 
   return (
-    <div>
+    <div style={{ top: '50px' }} className="fixed-top bg-light p-3">
       <input
         type="text"
         value={query.text}
@@ -82,25 +85,26 @@ const SearchBar = () => {
   );
 };
 
-export default function Header({ title }) {
+export default function Header({ title, isSearcheable = false }) {
   const [isSearchBarOpen, setSearchBarOpen] = useState(false);
   return (
     <React.Fragment>
-      <div className="d-flex bg-light align-items-center justify-content-between">
-        <Link to="/profile" data-testid="profile-top-btn">
-          <img src={profileIcon} alt="" />
+      <header className="d-flex p-2 bg-light align-items-center justify-content-between fixed-top">
+        <Link to="/perfil">
+          <img src={profileIcon} alt="" data-testid="profile-top-btn" />
         </Link>
         <h2 className="mb-0" data-testid="page-title">
           {title}
         </h2>
-        <button
-          onClick={() => setSearchBarOpen(!isSearchBarOpen)}
-          className="border-0 bg-transparent p-0"
-          data-testid="search-top-btn"
-        >
-          <img src={searchIcon} alt="" />
-        </button>
-      </div>
+        {isSearcheable && (
+          <button
+            onClick={() => setSearchBarOpen(!isSearchBarOpen)}
+            className="border-0 bg-transparent p-0"
+          >
+            <img src={searchIcon} alt="" data-testid="search-top-btn" />
+          </button>
+        )}
+      </header>
       {isSearchBarOpen && <SearchBar />}
     </React.Fragment>
   );
@@ -108,4 +112,5 @@ export default function Header({ title }) {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  isSearcheable: PropTypes.bool.isRequired,
 };

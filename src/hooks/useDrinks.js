@@ -10,10 +10,6 @@ import {
 const useDrinks = () => {
   const [drinks, setDrinks] = useContext(DrinkContext);
 
-  useEffect(() => {
-    console.log(drinks);
-  }, [drinks]);
-
   const getDrinks = (query = null) => {
     if (query) {
       switch (query.searchBy) {
