@@ -19,19 +19,19 @@ const useDrinks = () => {
       switch (query.searchBy) {
         case 'ingredient':
           getDrinksByIngredient(query.text).then((result) => {
-            console.log('')
+            console.log('');
             return result.error ? alert('Nao achado') : setDrinks(result);
           });
           break;
         case 'name':
           getDrinksByName(query.text).then((result) => {
-            console.log('')
+            console.log('');
             return result.error || !result.drinks ? alert('Nao achado') : setDrinks(result);
           });
           break;
         case 'firstLetter':
           getDrinksByFirstLetter(query.text).then((result) => {
-            console.log('')
+            console.log('');
             return result.error ? alert('Nao achado') : setDrinks(result);
           });
           break;
