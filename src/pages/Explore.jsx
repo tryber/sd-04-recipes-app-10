@@ -1,6 +1,12 @@
 import React from 'react';
-import Header from '../components/Header';
+import HeaderMeals from '../components/HeaderMeals';
+import Footer from '../components/Footer';
 
 export default function Explore() {
-  return <Header title="Explorar Comidas" />;
+  return (
+    <>
+      <HeaderMeals title="Explorar" />
+      <Footer />
+    </>
+  );
 }

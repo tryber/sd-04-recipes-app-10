@@ -10,7 +10,7 @@ const ListMeals = () => {
           const { idMeal, strMeal, strMealThumb } = meal;
           return (
             <div className="col-6 mb-3" key={idMeal}>
-              <div className="card shadow-sm bg-white rounded">
+              <div data-testid={`${index}-recipe-card`} className="card shadow-sm bg-white rounded">
                 <img
                   data-testid={`${index}-card-img`}
                   src={strMealThumb}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import profileIcon from '../images/profileIcon.svg';
@@ -7,6 +7,7 @@ import searchIcon from '../images/searchIcon.svg';
 import useDrinks from '../hooks/useDrinks';
 
 const SearchBar = () => {
+  const history = useHistory();
   const [, getDrinks] = useDrinks();
 
   const [query, setQuery] = useState({
@@ -18,7 +19,17 @@ const SearchBar = () => {
     if (query.searchBy === 'firstLetter' && query.text.length !== 1) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
-    getDrinks(query);
+    const redirectByResult = ({ drinks }) => {
+      if (!drinks) {
+        alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+        return;
+      }
+      if (drinks.length === 1) {
+        history.push(`/bebidas/${drinks[0].idDrink}`);
+        return;
+      }
+    };
+    getDrinks(query, redirectByResult);
   };
 
   return (
@@ -85,7 +96,7 @@ const SearchBar = () => {
   );
 };
 
-export default function Header({ title, isSearcheable = false }) {
+export default function HeaderDrinks({ title, isSearcheable = false }) {
   const [isSearchBarOpen, setSearchBarOpen] = useState(false);
   return (
     <React.Fragment>
@@ -110,7 +121,11 @@ export default function Header({ title, isSearcheable = false }) {
   );
 }
 
-Header.propTypes = {
+HeaderDrinks.defaultProps = {
+  isSearcheable: false,
+};
+
+HeaderDrinks.propTypes = {
   title: PropTypes.string.isRequired,
-  isSearcheable: PropTypes.bool.isRequired,
+  isSearcheable: PropTypes.bool,
 };
