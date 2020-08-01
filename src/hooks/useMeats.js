@@ -5,7 +5,7 @@ import {
   getMealsByFirstLetter,
   getMealsByIngredient,
   getMealsByName,
-  getCategoriesMeals
+  getCategoriesMeals,
 } from '../services/api';
 
 const useMeals = () => {
