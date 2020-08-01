@@ -4,9 +4,9 @@ import Footer from '../components/Footer';
 
 export default function Profile() {
   return (
-    <>
+    <React.Fragment>
       <HeaderMeals title="Perfil" />
       <Footer />
-    </>
+    </React.Fragment>
   );
 }

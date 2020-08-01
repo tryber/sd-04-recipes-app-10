@@ -4,9 +4,9 @@ import Footer from '../components/Footer';
 
 export default function Explore() {
   return (
-    <>
+    <React.Fragment>
       <HeaderMeals title="Explorar" />
       <Footer />
-    </>
+    </React.Fragment>
   );
 }

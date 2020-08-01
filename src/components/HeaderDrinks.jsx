@@ -26,7 +26,6 @@ const SearchBar = () => {
       }
       if (drinks.length === 1) {
         history.push(`/bebidas/${drinks[0].idDrink}`);
-        return;
       }
     };
     getDrinks(query, redirectByResult);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import useAuthentication from '../hooks/useAuthentication';
 import { Redirect } from 'react-router-dom';
+import useAuthentication from '../hooks/useAuthentication';
 
 export default function Login() {
   const [email, setEmail] = useState('');

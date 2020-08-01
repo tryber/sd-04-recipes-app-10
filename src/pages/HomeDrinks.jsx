@@ -5,12 +5,12 @@ import HeaderDrinks from '../components/HeaderDrinks';
 
 export default function HomeDrinks() {
   return (
-    <>
+    <React.Fragment>
       <HeaderDrinks title="Bebidas" isSearcheable />
       <div className="my-5">
         <ListDrinks />
       </div>
       <Footer />
-    </>
+    </React.Fragment>
   );
 }

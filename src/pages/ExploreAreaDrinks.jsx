@@ -4,9 +4,9 @@ import Footer from '../components/Footer';
 
 export default function ExploreAreaDrinks() {
   return (
-    <>
+    <React.Fragment>
       <HeaderDrinks title="Explorar Origem" isSearcheable />
       <Footer />
-    </>
+    </React.Fragment>
   );
 }

@@ -4,9 +4,9 @@ import Footer from '../components/Footer';
 
 export default function ExploreAreaMeals() {
   return (
-    <>
+    <React.Fragment>
       <HeaderMeals title="Explorar Origem" isSearcheable />
       <Footer />
-    </>
+    </React.Fragment>
   );
 }
