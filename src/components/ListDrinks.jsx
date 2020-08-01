@@ -9,7 +9,7 @@ const ListDrinks = () => {
         const { idDrink, strDrink, strDrinkThumb } = drink;
         return (
           <div className="col-6 mb-3" key={idDrink}>
-            <div className="card">
+            <div className="card shadow-sm bg-white rounded">
               <img
                 data-testid={`${index}-card-img`}
                 src={strDrinkThumb}
