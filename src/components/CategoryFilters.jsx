@@ -11,8 +11,8 @@ export default function CategoryFilters() {
 
   return (
     <div>
-      <button type='button' data-testid={`All-category-filter`} >All</button>
-      {categories.slice(0, 5).map(({strCategory }) => (<button type="button" data-testid={ `${strCategory }-category-filter`} >{strCategory }</button>))}
+      <button type="button" data-testid={"All-category-filter"} >All</button>
+      {categories.slice(0, 5).map(({ strCategory }) => (<button type="button" data-testid={ `${strCategory }-category-filter`} >{strCategory }</button>))}
     </div>
   );
 }
