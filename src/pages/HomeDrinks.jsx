@@ -1,5 +1,10 @@
 import React from 'react';
+import ListDrinks from '../components/ListDrinks';
 
 export default function HomeDrinks() {
-  return <div />;
+  return (
+    <div className="container">
+      <ListDrinks />
+    </div>
+  );
 }
