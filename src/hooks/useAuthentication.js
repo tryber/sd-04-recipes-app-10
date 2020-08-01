@@ -7,8 +7,8 @@ const useAuthentication = () => {
   const login = (email) => {
     setUser({ ...user, email });
     localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('mealsToken', JSON.stringify(1));
+    localStorage.setItem('cocktailsToken', JSON.stringify(1));
   };
 
   return [user, login];
