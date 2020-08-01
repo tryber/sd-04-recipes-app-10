@@ -17,7 +17,7 @@ const ListDrinks = () => {
                 alt={strDrink}
               />
               <div className="card-body">
-                <h5 className="card-title mb-0" data-testid={`${index}-card-name`}>
+                <h5 className="card-title mb-1" data-testid={`${index}-card-name`}>
                   {strDrink}
                 </h5>
               </div>
