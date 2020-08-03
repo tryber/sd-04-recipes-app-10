@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import profileIcon from '../images/profileIcon.svg';
@@ -7,6 +7,7 @@ import searchIcon from '../images/searchIcon.svg';
 import useDrinks from '../hooks/useDrinks';
 
 const SearchBar = () => {
+  const history = useHistory();
   const [, getDrinks] = useDrinks();
 
   const [query, setQuery] = useState({
@@ -15,11 +16,23 @@ const SearchBar = () => {
   });
 
   const handleSearch = () => {
-    getDrinks(query);
+    if (query.searchBy === 'firstLetter' && query.text.length !== 1) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    }
+    const redirectByResult = ({ drinks }) => {
+      if (!drinks) {
+        alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+        return;
+      }
+      if (drinks.length === 1) {
+        history.push(`/bebidas/${drinks[0].idDrink}`);
+      }
+    };
+    getDrinks(query, redirectByResult);
   };
 
   return (
-    <div>
+    <div style={{ top: '50px' }} className="fixed-top bg-light p-3">
       <input
         type="text"
         value={query.text}
@@ -82,30 +95,36 @@ const SearchBar = () => {
   );
 };
 
-export default function Header({ title }) {
+export default function HeaderDrinks({ title, isSearcheable = false }) {
   const [isSearchBarOpen, setSearchBarOpen] = useState(false);
   return (
     <React.Fragment>
-      <div className="d-flex bg-light align-items-center justify-content-between">
-        <Link to="/profile" data-testid="profile-top-btn">
-          <img src={profileIcon} alt="" />
+      <header className="d-flex p-2 bg-light align-items-center justify-content-between fixed-top">
+        <Link to="/perfil">
+          <img src={profileIcon} alt="" data-testid="profile-top-btn" />
         </Link>
         <h2 className="mb-0" data-testid="page-title">
           {title}
         </h2>
-        <button
-          onClick={() => setSearchBarOpen(!isSearchBarOpen)}
-          className="border-0 bg-transparent p-0"
-          data-testid="search-top-btn"
-        >
-          <img src={searchIcon} alt="" />
-        </button>
-      </div>
+        {isSearcheable && (
+          <button
+            onClick={() => setSearchBarOpen(!isSearchBarOpen)}
+            className="border-0 bg-transparent p-0"
+          >
+            <img src={searchIcon} alt="" data-testid="search-top-btn" />
+          </button>
+        )}
+      </header>
       {isSearchBarOpen && <SearchBar />}
     </React.Fragment>
   );
 }
 
-Header.propTypes = {
+HeaderDrinks.defaultProps = {
+  isSearcheable: false,
+};
+
+HeaderDrinks.propTypes = {
   title: PropTypes.string.isRequired,
+  isSearcheable: PropTypes.bool,
 };

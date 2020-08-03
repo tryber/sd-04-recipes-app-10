@@ -1,11 +1,11 @@
 import React from 'react';
-import HeaderMeals from '../components/HeaderMeals';
+import HeaderDrinks from '../components/HeaderDrinks';
 import Footer from '../components/Footer';
 
-export default function Profile() {
+export default function ExploreDrinks() {
   return (
     <React.Fragment>
-      <HeaderMeals title="Perfil" />
+      <HeaderDrinks title="Explorar Bebidas" />
       <Footer />
     </React.Fragment>
   );

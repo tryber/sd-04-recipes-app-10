@@ -2,10 +2,10 @@ import React from 'react';
 import useDrinks from '../hooks/useDrinks';
 
 const ListDrinks = () => {
-  const [drinks] = useDrinks();
+  const [{ drinks }] = useDrinks();
   return (
     <div className="row">
-      {drinks.slice(0, 12).map(({ idDrink, strDrink, strDrinkThumb }, index) => (
+      {drinks && drinks.slice(0, 12).map(({ idDrink, strDrink, strDrinkThumb }, index) => (
         <div className="col-6 mb-3" key={idDrink}>
           <div className="card shadow-sm bg-white rounded">
             <img
