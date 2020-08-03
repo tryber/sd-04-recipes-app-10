@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function Progress() {
+export default function ProgressDrinks() {
   return <div />;
 }

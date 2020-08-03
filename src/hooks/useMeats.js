@@ -10,33 +10,39 @@ import {
 const useMeals = () => {
   const [meals, setMeals] = useContext(MeatContext);
 
-  const getMeals = (query = null) => {
+  const getMeals = (query = null, callback) => {
     if (query) {
       switch (query.searchBy) {
         case 'ingredient':
           getMealsByIngredient(query.text).then((result) => {
-            console.log('');
-            return result.error ? alert('Nao achado') : setMeals(result);
+            callback(result);
+            setMeals(result);
           });
           break;
         case 'name':
           getMealsByName(query.text).then((result) => {
-            console.log('');
-            return result.error || !result.drinks ? alert('Nao achado') : setMeals(result);
+            callback(result);
+            setMeals(result);
           });
           break;
         case 'firstLetter':
           getMealsByFirstLetter(query.text).then((result) => {
-            console.log('');
-            return result.error ? alert('Nao achado') : setMeals(result);
+            callback(result);
+            setMeals(result);
           });
           break;
         default:
-          getAllMeals(query.text).then((result) => setMeals(result));
+          getAllMeals(query.text).then((result) => {
+            callback(result);
+            setMeals(result);
+          });
           break;
       }
     } else {
-      getAllMeals().then((result) => setMeals(result));
+      getAllMeals().then((result) => {
+        callback(result);
+        setMeals(result);
+      });
     }
   };
 
