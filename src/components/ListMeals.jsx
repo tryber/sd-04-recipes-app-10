@@ -2,10 +2,10 @@ import React from 'react';
 import useMeals from '../hooks/useMeats';
 
 const ListMeals = () => {
-  const [meals] = useMeals();
+  const [{meals}] = useMeals();
   return (
     <div className="row">
-      {meals.slice(0, 12).map(({ idMeal, strMeal, strMealThumb }, index) => (
+      {meals && meals.slice(0, 12).map(({ idMeal, strMeal, strMealThumb }, index) => (
         <div className="col-6 mb-3" key={idMeal}>
           <div className="card shadow-sm bg-white rounded">
             <img
