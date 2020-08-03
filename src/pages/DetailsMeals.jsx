@@ -7,13 +7,20 @@ import { useState } from 'react';
 const makeArray = () => {
   const ingredientsMeals = [];
   for (let i = 1; i <= 20; i += 1) {
-    let number = mock[0][`strIngredient${i}`];
-    if (number.length) {
-      ingredientsMeals.push(number);
+    let ingredients = mock[0][`strIngredient${i}`];
+    let measure = mock[0][`strMeasure${i}`];
+    const result = `${ingredients} - ${measure}`;
+    if (ingredients.length) {
+      ingredientsMeals.push(result);
     }
   }
   return ingredientsMeals;
 };
+
+const getCodeYT = (link) => {
+  const code = link.slice(32);
+  return code;
+}
 
 export default function DetailsMeals() {
   const [ingredients, setIngredients] = useState([]);
@@ -32,12 +39,12 @@ export default function DetailsMeals() {
       </div>
       <div className="row justify-content-between">
         <div className="col">
-          <h3>{meal.strMeal}</h3>
-          <h5>{meal.strCategory}</h5>
+          <h3 data-testid="recipe-title">{meal.strMeal}</h3>
+          <h5 data-testid="recipe-category">{meal.strCategory}</h5>
         </div>
         <div>
-          <img src={shareIcon} alt="share" />
-          <img src={whiteHeartIcon} alt="share" />
+          <img data-testid="share-btn" src={shareIcon} alt="share" />
+          <img data-testid="favorite-btn" src={whiteHeartIcon} alt="share" />
         </div>
       </div>
       <div className="row">
@@ -45,7 +52,7 @@ export default function DetailsMeals() {
           <h4>Ingredients</h4>
           <ul>
             {ingredients.map((ingredient, index) => (
-              <li key={ingredient + index}>{ingredient}</li>
+              <li data-testid={`${index}-ingredient-name-and-measure`} key={ingredient + index}>{ingredient}</li>
             ))}
           </ul>
         </div>
@@ -53,13 +60,13 @@ export default function DetailsMeals() {
       <div className="row">
         <div className="col">
           <h4>instructions</h4>
-          <p>{meal.strInstructions}</p>
+          <p data-testid="instructions">{meal.strInstructions}</p>
         </div>
       </div>
       <div className="row">
         <div className="col">
           <h4>Vídeo</h4>
-            <p>{meal.strYoutube}</p>
+          <iframe src={`https://www.youtube.com/embed/${getCodeYT(meal.strYoutube)}`} title={meal.strMeal} />
         </div>
       </div>
       <div className="row">
