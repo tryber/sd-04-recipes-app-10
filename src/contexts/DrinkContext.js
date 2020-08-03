@@ -6,12 +6,17 @@ export const DrinkContext = createContext();
 
 export default function DrinksProvider({ children }) {
   const [drinks, setDrinks] = useState([]);
+  const [filters, setFilters] = useState({ on: false, by: 'All' });
 
   useEffect(() => {
     getAllDrinks().then((result) => setDrinks(result));
   }, []);
 
-  return <DrinkContext.Provider value={[drinks, setDrinks]}>{children}</DrinkContext.Provider>;
+  return (
+    <DrinkContext.Provider value={[drinks, setDrinks, filters, setFilters]}>
+      {children}
+    </DrinkContext.Provider>
+  );
 }
 
 DrinksProvider.propTypes = {

@@ -6,12 +6,17 @@ export const MeatContext = createContext();
 
 export default function MeatsProvider({ children }) {
   const [meats, setMeats] = useState([]);
+  const [filters, setFilters] = useState({ on: false, by: 'All' });
 
   useEffect(() => {
     getAllMeals().then((result) => setMeats(result));
   }, []);
 
-  return <MeatContext.Provider value={[meats, setMeats]}>{children}</MeatContext.Provider>;
+  return (
+    <MeatContext.Provider value={[meats, setMeats, filters, setFilters]}>
+      {children}
+    </MeatContext.Provider>
+  );
 }
 
 MeatsProvider.propTypes = {

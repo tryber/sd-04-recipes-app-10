@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getCategoriesDrinks } from '../services/api';
+import useDrinks from '../hooks/useDrinks';
 
 export default function CategoryFiltersDrinks() {
   const [categories, setCategories] = useState([]);
+  const [, [toggleFilter]] = useDrinks();
 
   useEffect(() => {
     getCategoriesDrinks().then((response) => setCategories(response.drinks));
@@ -14,6 +16,7 @@ export default function CategoryFiltersDrinks() {
         type="button"
         className="btn btn-primary btn-sm m-1 w-25"
         data-testid="All-category-filter"
+        onClick={() => toggleFilter('All')}
       >
         All
       </button>
@@ -23,6 +26,7 @@ export default function CategoryFiltersDrinks() {
           key={strCategory}
           type="button"
           data-testid={`${strCategory}-category-filter`}
+          onClick={() => toggleFilter(strCategory)}
         >
           {strCategory}
         </button>

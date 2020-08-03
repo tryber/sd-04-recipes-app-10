@@ -1,14 +1,37 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useCallback } from 'react';
 import { DrinkContext } from '../contexts/DrinkContext';
 import {
   getAllDrinks,
   getDrinksByFirstLetter,
   getDrinksByIngredient,
   getDrinksByName,
+  getDrinksByCategory,
 } from '../services/api';
 
 const useDrinks = () => {
-  const [drinks, setDrinks] = useContext(DrinkContext);
+  const [drinks, setDrinks, filters, setFilters] = useContext(DrinkContext);
+
+  const toggleFilters = (filter = null) =>
+    setFilters({ on: filters.by === filter ? !filters.on : true, by: filter });
+
+  const filter = useCallback(
+    (category) => {
+      if (category === 'All') {
+        getAllDrinks().then((result) => setDrinks(result));
+      } else {
+        getDrinksByCategory(category).then((result) => setDrinks(result));
+      }
+    },
+    [setDrinks],
+  );
+
+  useEffect(() => {
+    if (filters.on) {
+      filter(filters.by);
+    } else {
+      getAllDrinks().then((result) => setDrinks(result));
+    }
+  }, [filters, filter, setDrinks]);
 
   const getDrinks = (query = null, callback) => {
     if (query) {
@@ -46,7 +69,7 @@ const useDrinks = () => {
     }
   };
 
-  return [drinks, getDrinks];
+  return [[drinks, getDrinks], [toggleFilters]];
 };
 
 export default useDrinks;
