@@ -106,14 +106,14 @@ export default function HeaderDrinks({ title, isSearcheable = false }) {
         <h2 className="mb-0" data-testid="page-title">
           {title}
         </h2>
-        {isSearcheable && (
+        {isSearcheable ? (
           <button
             onClick={() => setSearchBarOpen(!isSearchBarOpen)}
             className="border-0 bg-transparent p-0"
           >
             <img src={searchIcon} alt="" data-testid="search-top-btn" />
           </button>
-        )}
+        ) : (<span />)}
       </header>
       {isSearchBarOpen && <SearchBar />}
     </React.Fragment>

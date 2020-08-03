@@ -11,11 +11,17 @@ const urls = {
     byName: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
     byFirstLetter: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=',
     byIngredient: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=',
+    categories: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
   },
 };
 
 export const getCategoriesMeals = async () => {
   const response = await fetch(urls.meals.categories);
+  return response.json();
+};
+
+export const getCategoriesDrinks = async () => {
+  const response = await fetch(urls.drinks.categories);
   return response.json();
 };
 
