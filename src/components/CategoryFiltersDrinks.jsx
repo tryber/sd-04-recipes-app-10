@@ -10,7 +10,11 @@ export default function CategoryFiltersDrinks() {
 
   return (
     <div className="row justify-content-center mb-3">
-      <button type="button" className="btn btn-primary btn-sm m-1 w-25" data-testid="All-category-filter">
+      <button
+        type="button"
+        className="btn btn-primary btn-sm m-1 w-25"
+        data-testid="All-category-filter"
+      >
         All
       </button>
       {categories.slice(0, 5).map(({ strCategory }) => (

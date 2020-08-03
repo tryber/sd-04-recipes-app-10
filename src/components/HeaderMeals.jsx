@@ -115,7 +115,9 @@ export default function HeaderMeals({ title, isSearcheable = false }) {
           >
             <img src={searchIcon} alt="" data-testid="search-top-btn" />
           </button>
-        ):(<span />)}
+        ) : (
+          <span />
+        )}
       </header>
       {isSearchBarOpen && <SearchBar />}
     </React.Fragment>
