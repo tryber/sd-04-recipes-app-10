@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { mock } from '../services/mock';
+import mock from '../services/mock';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 const makeArray = () => {
   const ingredientsMeals = [];
   for (let i = 1; i <= 20; i += 1) {
-    let ingredients = mock[0][`strIngredient${i}`];
-    let measure = mock[0][`strMeasure${i}`];
+    const ingredients = mock[0][`strIngredient${i}`];
+    const measure = mock[0][`strMeasure${i}`];
     const result = `${ingredients} - ${measure}`;
     if (ingredients.length) {
       ingredientsMeals.push(result);
@@ -53,7 +53,7 @@ export default function DetailsMeals() {
           <h4>Ingredients</h4>
           <ul className="bg-light">
             {ingredients.map((ingredient, index) => (
-              <li data-testid={`${index}-ingredient-name-and-measure`} key={ingredient + index}>
+              <li data-testid={`${index}-ingredient-name-and-measure`} key={ingredient}>
                 {ingredient}
               </li>
             ))}

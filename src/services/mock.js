@@ -1,4 +1,4 @@
-export const mock = [
+const mock = [
   {
     idMeal: '52977',
     strMeal: 'Corba',
@@ -54,3 +54,5 @@ export const mock = [
     dateModified: null,
   },
 ];
+
+export default mock;
