@@ -30,9 +30,8 @@ const ListDrinks = () => {
                 </div>
               </Link>
             </div>
-          </div>
-        </div>
-      ))}
+          );
+        })}
     </div>
   );
 };

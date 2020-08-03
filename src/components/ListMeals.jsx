@@ -30,9 +30,8 @@ const ListMeals = () => {
                 </div>
               </Link>
             </div>
-          </div>
-        </div>
-      ))}
+          );
+        })}
     </div>
   );
 };
