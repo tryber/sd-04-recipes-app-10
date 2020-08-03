@@ -4,6 +4,7 @@ const urls = {
     byName: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
     byFirstLetter: 'https://www.themealdb.com/api/json/v1/1/search.php?f=',
     byIngredient: 'https://www.themealdb.com/api/json/v1/1/filter.php?i=',
+    byCategory: 'https://www.themealdb.com/api/json/v1/1/filter.php?c=',
     categories: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
   },
   drinks: {
@@ -11,6 +12,7 @@ const urls = {
     byName: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
     byFirstLetter: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=',
     byIngredient: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=',
+    byCategory: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=',
     categories: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
   },
 };
@@ -57,6 +59,14 @@ export const getMealsByIngredient = async (ingredient) => {
     return { meals: [], error: true };
   }
 };
+export const getMealsByCategory = async (category) => {
+  try {
+    const response = await fetch(urls.meals.byCategory + category);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { meals: [], error: true };
+  }
+};
 
 export const getAllDrinks = async () => {
   try {
@@ -88,5 +98,13 @@ export const getDrinksByIngredient = async (ingredient) => {
     return { ...(await response.json()), error: false };
   } catch (e) {
     return { drinks: [], error: true };
+  }
+};
+export const getDrinksByCategory = async (category) => {
+  try {
+    const response = await fetch(urls.drinks.byCategory + category);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { meals: [], error: true };
   }
 };
