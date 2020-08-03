@@ -9,10 +9,10 @@ import {
 } from '../services/api';
 
 const useDrinks = () => {
-  const [drinks, setDrinks, filters, setFilters] = useContext(DrinkContext);
+  const [drinks, setDrinks, filtersDrinks, setFiltersDrinks] = useContext(DrinkContext);
 
   const toggleFilters = (filter = null) =>
-    setFilters({ on: filters.by === filter ? !filters.on : true, by: filter });
+    setFiltersDrinks({ on: filtersDrinks.by === filter ? !filtersDrinks.on : true, by: filter });
 
   const filter = useCallback(
     (category) => {
@@ -26,12 +26,12 @@ const useDrinks = () => {
   );
 
   useEffect(() => {
-    if (filters.on) {
-      filter(filters.by);
+    if (filtersDrinks.on) {
+      filter(filtersDrinks.by);
     } else {
       getAllDrinks().then((result) => setDrinks(result));
     }
-  }, [filters, filter, setDrinks]);
+  }, [filtersDrinks, filter, setDrinks]);
 
   const getDrinks = (query = null, callback) => {
     if (query) {

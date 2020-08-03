@@ -9,10 +9,10 @@ import {
 } from '../services/api';
 
 const useMeals = () => {
-  const [meals, setMeals, filters, setFilters] = useContext(MeatContext);
+  const [meals, setMeals, filtersMeals, setFiltersMeals] = useContext(MeatContext);
 
   const toggleFilters = (filter = null) =>
-    setFilters({ on: filters.by === filter ? !filters.on : true, by: filter });
+    setFiltersMeals({ on: filtersMeals.by === filter ? !filtersMeals.on : true, by: filter });
 
   const filter = useCallback(
     (category) => {
@@ -26,12 +26,12 @@ const useMeals = () => {
   );
 
   useEffect(() => {
-    if (filters.on) {
-      filter(filters.by);
+    if (filtersMeals.on) {
+      filter(filtersMeals.by);
     } else {
       getAllMeals().then((result) => setMeals(result));
     }
-  }, [filters, filter, setMeals]);
+  }, [filtersMeals, filter, setMeals]);
 
   const getMeals = (query = null, callback) => {
     if (query) {
