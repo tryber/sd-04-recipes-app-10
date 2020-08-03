@@ -20,7 +20,7 @@ const makeArray = () => {
 const getCodeYT = (link) => {
   const code = link.slice(32);
   return code;
-}
+};
 
 export default function DetailsMeals() {
   const [ingredients, setIngredients] = useState([]);
@@ -31,7 +31,7 @@ export default function DetailsMeals() {
 
   const meal = mock[0];
   return (
-    <div className="container-fluid">
+    <div>
       <div className="row justify-content-center p-0">
         <div className="col-12 p-0">
           <img src={meal.strMealThumb} alt="foto" width="100%" />
@@ -40,7 +40,9 @@ export default function DetailsMeals() {
       <div className="row justify-content-between">
         <div className="col">
           <h3 data-testid="recipe-title">{meal.strMeal}</h3>
-          <h5 data-testid="recipe-category">{meal.strCategory}</h5>
+          <h5 data-testid="recipe-category" className="text-muted">
+            {meal.strCategory}
+          </h5>
         </div>
         <div>
           <img data-testid="share-btn" src={shareIcon} alt="share" />
@@ -50,9 +52,11 @@ export default function DetailsMeals() {
       <div className="row">
         <div className="col">
           <h4>Ingredients</h4>
-          <ul>
+          <ul className="bg-light">
             {ingredients.map((ingredient, index) => (
-              <li data-testid={`${index}-ingredient-name-and-measure`} key={ingredient + index}>{ingredient}</li>
+              <li data-testid={`${index}-ingredient-name-and-measure`} key={ingredient + index}>
+                {ingredient}
+              </li>
             ))}
           </ul>
         </div>
@@ -60,23 +64,35 @@ export default function DetailsMeals() {
       <div className="row">
         <div className="col">
           <h4>instructions</h4>
-          <p data-testid="instructions">{meal.strInstructions}</p>
+          <p data-testid="instructions" className="bg-light">
+            {meal.strInstructions}
+          </p>
         </div>
       </div>
       <div className="row">
         <div className="col">
           <h4>Vídeo</h4>
-          <iframe src={`https://www.youtube.com/embed/${getCodeYT(meal.strYoutube)}`} title={meal.strMeal} />
+          <iframe
+            src={`https://www.youtube.com/embed/${getCodeYT(meal.strYoutube)}`}
+            title={meal.strMeal}
+            data-testid="video"
+          />
         </div>
       </div>
       <div className="row">
         <div className="col">
           <h4>Recomended</h4>
-            <p>Componente de recomendação</p>
+          <p>Componente de recomendação</p>
         </div>
       </div>
       <div className="row justify-content-center">
-        <button type="button" className="btn btn-success">Iniciar Receita</button>
+        <button
+          type="button"
+          className="btn btn-block btn-success mb-3"
+          data-testid="start-recipe-btn"
+        >
+          Iniciar Receita
+        </button>
       </div>
     </div>
   );
