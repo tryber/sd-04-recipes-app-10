@@ -12,7 +12,7 @@ export default function DetailsDrinks() {
   const [ingredients, setIngredients] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const { id } = useParams();
-  const [enableHeart, setEnableHeart] = useState(false);
+  const [heart, setHeart] = useState(false);
 
   useEffect(() => {
     getDrinksById(id).then(({ drink: { drinks } }) => {
@@ -40,8 +40,8 @@ export default function DetailsDrinks() {
             </div>
             <div>
               <img data-testid="share-btn" src={shareIcon} alt="share" />
-              <button onClick={() => setEnableHeart(!enableHeart)} >
-                <img data-testid="favorite-btn" src={enableHeart ? blackHearticon : whiteHeartIcon} alt="share" />
+              <button onClick={() => setHeart(!heart)} >
+                <img data-testid="favorite-btn" src={heart ? blackHearticon : whiteHeartIcon} alt="share" />
               </button>
             </div>
           </div>
