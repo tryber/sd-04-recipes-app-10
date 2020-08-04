@@ -40,7 +40,7 @@ export default function DetailsDrinks() {
             </div>
             <div>
               <img data-testid="share-btn" src={shareIcon} alt="share" />
-              <button onClick={() => setEnableHeart(!enableHeart)} >
+              <button onClick={() => setEnableHeart(!enableHeart)}>
                 <img
                   data-testid="favorite-btn"
                   src={enableHeart ? blackHearticon : whiteHeartIcon}
@@ -95,14 +95,12 @@ export default function DetailsDrinks() {
             </div>
           </div>
           <div className="row justify-content-center">
-            <Link to={`/bebidas/${drink.idDrink}/in-progress`}>
-              <button
-                type="button"
-                className="btn btn-block btn-success fixed-bottom drinks"
-                data-testid="start-recipe-btn"
-              >
-                Iniciar Receita
-              </button>
+            <Link
+              to={`/bebidas/${drink.idDrink}/in-progress`}
+              className="btn btn-block btn-success fixed-bottom drinks"
+              data-testid="start-recipe-btn"
+            >
+              Iniciar Receita
             </Link>
           </div>
         </React.Fragment>
