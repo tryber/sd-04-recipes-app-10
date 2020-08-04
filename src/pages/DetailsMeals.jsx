@@ -39,7 +39,7 @@ export default function DetailsMeals() {
             </div>
             <div>
               <img data-testid="share-btn" src={shareIcon} alt="share" />
-              <img data-testid="favorite-btn" src={whiteHeartIcon} alt="share" />
+              <img data-testid="favorite-btn" src={whiteHeartIcon} alt="" />
             </div>
           </div>
           <div className="row">

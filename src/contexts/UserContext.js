@@ -13,19 +13,19 @@ export default function UsersProvider({ children }) {
   const [doneRecipes, setDoneRecipes] = useState(() => {
     const doneRecipesStoraged = localStorage.getItem('doneRecipes');
     if (doneRecipesStoraged) return JSON.parse(doneRecipesStoraged);
-    return {};
+    return [];
   });
 
   const [favoriteRecipes, setFavoriteRecipes] = useState(() => {
     const favoriteRecipesStoraged = localStorage.getItem('favoriteRecipes');
     if (favoriteRecipesStoraged) return JSON.parse(favoriteRecipesStoraged);
-    return {};
+    return [];
   });
 
   const [inProgressRecipes, setInProgressRecipes] = useState(() => {
     const inProgressRecipesStoraged = localStorage.getItem('inProgressRecipes');
     if (inProgressRecipesStoraged) return JSON.parse(inProgressRecipesStoraged);
-    return {};
+    return [];
   });
 
   const context = [
