@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -98,13 +98,15 @@ export default function DetailsMeals() {
             </div>
           </div>
           <div className="row justify-content-center">
-            <button
-              type="button"
-              className="btn btn-block btn-success fixed-bottom"
-              data-testid="start-recipe-btn"
-            >
-              Iniciar Receita
-            </button>
+            <Link to={`/comidas/${meal.idMeal}/in-progress`}>
+              <button
+                type="button"
+                className="btn btn-block btn-success fixed-bottom"
+                data-testid="start-recipe-btn"
+              >
+                Iniciar Receita
+              </button>
+            </Link>
           </div>
         </React.Fragment>
       )}
