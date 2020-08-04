@@ -3,11 +3,7 @@ import { useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import makeArray from '../utils/makeIngredientsArray';
-import { getMealsById, getAllDrinks } from '../services/api';
-// import getCodeYT from '../utils/getYoutubeId';
-// import mock from '../services/mock';
-
-// const meal = mock[0];
+import { getMealsById } from '../services/api';
 
 export default function ProgressMeals() {
   const [meal, setMeal] = useState({});
@@ -44,9 +40,14 @@ export default function ProgressMeals() {
         <div className="col">
           <h4>Ingredients</h4>
           <div className="bg-light">
-            {ingredients.map((ingredient) => (
+            {ingredients.map((ingredient, index) => (
               <div className="form-check" key={ingredient}>
-                <input type="checkbox" className="form-check-input" id={ingredient} />
+                <input
+                  data-testid={`${index}-ingredient-step`}
+                  type="checkbox"
+                  className="form-check-input"
+                  id={ingredient}
+                />
                 <label className="form-check-label" htmlFor={ingredient}>
                   {ingredient}
                 </label>
@@ -67,7 +68,7 @@ export default function ProgressMeals() {
         <button
           type="button"
           className="btn btn-block btn-success fixed-bottom"
-          data-testid="start-recipe-btn"
+          data-testid="finish-recipe-btn"
         >
           Finalizar Receita
         </button>
