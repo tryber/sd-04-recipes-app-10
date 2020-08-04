@@ -22,9 +22,8 @@ const useUserRecipes = () => {
     array.filter((favRecipe) => {
       if (recipe.idMeal) {
         return favRecipe.idMeal !== recipe.idMeal;
-      } else {
-        return favRecipe.idDrink !== recipe.idDrink;
       }
+      return favRecipe.idDrink !== recipe.idDrink;
     });
 
   const addToDoneRecipes = (recipe) => {
