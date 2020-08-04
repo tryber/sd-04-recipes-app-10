@@ -20,11 +20,11 @@ export default function ProgressMeals() {
     });
   }, [id]);
 
-  function handleInput(e) {
-    if (inputs.includes(e)) {
-      setInputs(inputs.filter((input) => input !== e));
+  function handleInput(x) {
+    if (inputs.includes(x)) {
+      setInputs(inputs.filter((input) => input !== x));
     } else {
-      setInputs([...inputs, e]);
+      setInputs([...inputs, x]);
     }
   }
 
