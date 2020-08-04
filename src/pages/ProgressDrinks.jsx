@@ -4,12 +4,14 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import makeArray from '../utils/makeIngredientsArray';
 import { getDrinksById } from '../services/api';
+import blackHearticon from '../images/blackHeartIcon.svg';
 
 export default function ProgressMeals() {
   const [drink, setDrink] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [inputs, setInputs] = useState([]);
   const { id } = useParams();
+  const [enableHeart, setEnableHeart] = useState(false);
 
   useEffect(() => {
     getDrinksById(id).then(({ drink: { drinks } }) => {
@@ -41,7 +43,13 @@ export default function ProgressMeals() {
         </div>
         <div>
           <img data-testid="share-btn" src={shareIcon} alt="share" />
-          <img data-testid="favorite-btn" src={whiteHeartIcon} alt="share" />
+          <button onClick={() => setEnableHeart(!enableHeart)}>
+          <img
+            data-testid="favorite-btn"
+            src={enableHeart ? blackHearticon : whiteHeartIcon}
+            alt="share"
+            />
+          </button>
         </div>
       </div>
       <div className="row">
