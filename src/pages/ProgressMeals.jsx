@@ -56,15 +56,15 @@ export default function ProgressMeals() {
                 <label
                   className={
                     inputs.some((input) => input === ingredient)
-                      ? `form-check-label done`
-                      : `form-check-label`
+                      ? 'form-check-label done'
+                      : 'form-check-label cc'
                   }
                   htmlFor={ingredient}
                 >
                   <input
                     data-testid={`${index}-ingredient-step`}
                     type="checkbox"
-                    className="form-check-input"
+                    className="form-check-input cc"
                     value={ingredient}
                     onClick={(e) => handleInput(e.target.value)}
                   />
@@ -87,7 +87,7 @@ export default function ProgressMeals() {
       <div className="row justify-content-center">
         <button
           type="button"
-          className="btn btn-block btn-success fixed-bottom"
+          className="btn btn-block btn-success fixed-bottom cc"
           data-testid="finish-recipe-btn"
         >
           Finalizar Receita

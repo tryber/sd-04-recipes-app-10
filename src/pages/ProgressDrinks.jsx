@@ -55,13 +55,13 @@ export default function ProgressMeals() {
                   type="checkbox"
                   className="form-check-input"
                   value={ingredient}
-                  onClick={(e)=> handleInput(e.target.value)}
+                  onClick={(e) => handleInput(e.target.value)}
                 />
                 <label
                   className={
                     inputs.some((input) => input === ingredient)
-                      ? `form-check-label done`
-                      : `form-check-label`
+                      ? 'form-check-label done'
+                      : 'form-check-label'
                   }
                   htmlFor={ingredient}
                 >
