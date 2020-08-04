@@ -24,7 +24,7 @@ export default function DetailsMeals() {
   return (
     <div>
       {meal.idMeal && (
-        <>
+        <React.Fragment>
           <div className="row justify-content-center p-0">
             <div className="col-12 p-0">
               <img data-testid="recipe-photo" src={meal.strMealThumb} alt="foto" width="100%" />
@@ -106,7 +106,7 @@ export default function DetailsMeals() {
               Iniciar Receita
             </button>
           </div>
-        </>
+        </React.Fragment>
       )}
     </div>
   );

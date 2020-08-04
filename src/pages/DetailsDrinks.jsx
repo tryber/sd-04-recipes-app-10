@@ -23,7 +23,7 @@ export default function DetailsDrinks() {
   return (
     <div>
       {drink.idDrink && (
-        <>
+        <React.Fragment>
           <div className="row justify-content-center p-0">
             <div className="col-12 p-0">
               <img data-testid="recipe-photo" src={drink.strDrinkThumb} alt="foto" width="100%" />
@@ -89,13 +89,13 @@ export default function DetailsDrinks() {
           <div className="row justify-content-center">
             <button
               type="button"
-              className="btn btn-block btn-success fixed-bottom"
+              className="btn btn-block btn-success fixed-bottom drinks"
               data-testid="start-recipe-btn"
             >
               Iniciar Receita
             </button>
           </div>
-        </>
+        </React.Fragment>
       )}
     </div>
   );
