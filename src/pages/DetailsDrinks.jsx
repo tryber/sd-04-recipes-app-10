@@ -44,7 +44,9 @@ export default function DetailsDrinks() {
                 <img 
                   data-testid="favorite-btn" 
                   src={enableHeart ? blackHearticon : whiteHeartIcon} 
-                  alt="share" />
+                  alt="share" 
+
+                />
               </button>
             </div>
           </div>

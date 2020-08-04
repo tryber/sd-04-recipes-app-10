@@ -45,7 +45,8 @@ export default function DetailsMeals() {
                 <img 
                   data-testid="favorite-btn" 
                   src={enableHeart ? blackHearticon : whiteHeartIcon} 
-                  alt="share" />
+                  alt="share"
+                />
               </button>
             </div>
           </div>
