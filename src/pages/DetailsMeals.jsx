@@ -40,8 +40,9 @@ export default function DetailsMeals() {
               </h5>
             </div>
             <div>
-              <img data-testid="share-btn" src={shareIcon} alt="share"  />
-              <img data-testid="favorite-btn" src={enableHeart ? blackHearticon : whiteHeartIcon } onClick={()=>setEnableHeart(!enableHeart)} alt="share" />
+              <img data-testid="share-btn" src={shareIcon} alt="share" />
+              <img data-testid="favorite-btn" src={enableHeart ? blackHearticon : whiteHeartIcon}
+                onClick={() => setEnableHeart(!enableHeart)} alt="share" />
             </div>
           </div>
           <div className="row">
