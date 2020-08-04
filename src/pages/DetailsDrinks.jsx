@@ -41,7 +41,10 @@ export default function DetailsDrinks() {
             <div>
               <img data-testid="share-btn" src={shareIcon} alt="share" />
               <button onClick={() => setEnableHeart(!enableHeart)} >
-                <img data-testid="favorite-btn" src={enableHeart ? blackHearticon : whiteHeartIcon} alt="share" />
+                <img 
+                  data-testid="favorite-btn" 
+                  src={enableHeart ? blackHearticon : whiteHeartIcon} 
+                  alt="share" />
               </button>
             </div>
           </div>
