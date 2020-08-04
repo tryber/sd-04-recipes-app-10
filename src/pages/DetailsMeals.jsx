@@ -6,12 +6,14 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { getMealsById, getAllDrinks } from '../services/api';
 import makeArray from '../utils/makeIngredientsArray';
 import getCodeYT from '../utils/getYoutubeId';
+import blackHearticon from '../images/blackHeartIcon.svg';
 
 export default function DetailsMeals() {
   const [meal, setMeal] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const { id } = useParams();
+  const [enableHeart, setEnableHeart] = useState(false);
 
   useEffect(() => {
     getMealsById(id).then(({ meal: { meals } }) => {
@@ -39,7 +41,13 @@ export default function DetailsMeals() {
             </div>
             <div>
               <img data-testid="share-btn" src={shareIcon} alt="share" />
-              <img data-testid="favorite-btn" src={whiteHeartIcon} alt="share" />
+              <button onClick={() => setEnableHeart(!enableHeart)} >
+                <img
+                  data-testid="favorite-btn"
+                  src={enableHeart ? blackHearticon : whiteHeartIcon}
+                  alt="share"
+                />
+              </button>
             </div>
           </div>
           <div className="row">
