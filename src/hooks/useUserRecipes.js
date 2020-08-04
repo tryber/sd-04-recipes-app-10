@@ -19,9 +19,13 @@ const useUserRecipes = () => {
   }, [inProgress]);
 
   const genericRemoveRecipe = (array, recipe) =>
-    array.filter((favRecipe) =>
-      recipe.idMeal ? favRecipe.idMeal !== recipe.idMeal : favRecipe.idDrink !== recipe.idDrink,
-    );
+    array.filter((favRecipe) => {
+      if (recipe.idMeal) {
+        return favRecipe.idMeal !== recipe.idMeal;
+      } else {
+        return favRecipe.idDrink !== recipe.idDrink;
+      }
+    });
 
   const addToDoneRecipes = (recipe) => {
     setDones([...dones, recipe]);
