@@ -8,7 +8,7 @@ import useMeals from '../hooks/useMeats';
 
 const SearchBar = () => {
   const history = useHistory();
-  const [, getMeals] = useMeals();
+  const [[, getMeals]] = useMeals();
 
   const [query, setQuery] = useState({
     text: '',

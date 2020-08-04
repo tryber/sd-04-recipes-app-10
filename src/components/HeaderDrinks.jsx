@@ -8,7 +8,7 @@ import useDrinks from '../hooks/useDrinks';
 
 const SearchBar = () => {
   const history = useHistory();
-  const [, getDrinks] = useDrinks();
+  const [[, getDrinks]] = useDrinks();
 
   const [query, setQuery] = useState({
     text: '',
@@ -113,7 +113,9 @@ export default function HeaderDrinks({ title, isSearcheable = false }) {
           >
             <img src={searchIcon} alt="" data-testid="search-top-btn" />
           </button>
-        ) : (<span />)}
+        ) : (
+          <span />
+        )}
       </header>
       {isSearchBarOpen && <SearchBar />}
     </React.Fragment>
