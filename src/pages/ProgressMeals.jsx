@@ -5,9 +5,12 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import makeArray from '../utils/makeIngredientsArray';
 import { getMealsById } from '../services/api';
 
+import './ProgressMeals.css';
+
 export default function ProgressMeals() {
   const [meal, setMeal] = useState({});
   const [ingredients, setIngredients] = useState([]);
+  const [inputs, setInputs] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -16,6 +19,14 @@ export default function ProgressMeals() {
       setIngredients(makeArray(meals[0]));
     });
   }, [id]);
+
+  function handleInput(e) {
+    if (inputs.includes(e)) {
+      setInputs(inputs.filter((input) => input !== e));
+    } else {
+      setInputs([...inputs, e]);
+    }
+  }
 
   return (
     <React.Fragment>
@@ -42,13 +53,22 @@ export default function ProgressMeals() {
           <div className="bg-light">
             {ingredients.map((ingredient, index) => (
               <div className="form-check" key={ingredient}>
-                <input
-                  data-testid={`${index}-ingredient-step`}
-                  type="checkbox"
-                  className="form-check-input"
-                  id={ingredient}
-                />
-                <label className="form-check-label" htmlFor={ingredient}>
+                <label
+                  className={
+                    inputs.some((input) => input === ingredient)
+                      ? `form-check-label done`
+                      : `form-check-label`
+                  }
+                  htmlFor={ingredient}
+                >
+                  <input
+                    data-testid={`${index}-ingredient-step`}
+                    type="checkbox"
+                    className="form-check-input"
+                    value={ingredient}
+                    onClick={(e) => handleInput(e.target.value)}
+                  />
+
                   {ingredient}
                 </label>
               </div>

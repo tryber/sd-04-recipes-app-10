@@ -8,6 +8,7 @@ import { getDrinksById } from '../services/api';
 export default function ProgressMeals() {
   const [drink, setDrink] = useState({});
   const [ingredients, setIngredients] = useState([]);
+  const [inputs, setInputs] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -17,6 +18,13 @@ export default function ProgressMeals() {
     });
   }, [id]);
 
+  function handleInput(e) {
+    if (inputs.includes(e)) {
+      setInputs(inputs.filter((input) => input !== e));
+    } else {
+      setInputs([...inputs, e]);
+    }
+  }
   return (
     <React.Fragment>
       <div className="row justify-content-center p-0">
@@ -46,9 +54,17 @@ export default function ProgressMeals() {
                   data-testid={`${index}-ingredient-step`}
                   type="checkbox"
                   className="form-check-input"
-                  id={ingredient}
+                  value={ingredient}
+                  onClick={(e)=> handleInput(e.target.value)}
                 />
-                <label className="form-check-label" htmlFor={ingredient}>
+                <label
+                  className={
+                    inputs.some((input) => input === ingredient)
+                      ? `form-check-label done`
+                      : `form-check-label`
+                  }
+                  htmlFor={ingredient}
+                >
                   {ingredient}
                 </label>
               </div>
