@@ -48,7 +48,7 @@ export default function DoneRecipes() {
             <img data-testid={`${index}-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
           </div>
           <div className="col">
-          <div className="row">
+            <div className="row">
             <p data-testid={`${index}-horizontal-top-text`} >
               {meal.strCategory}, {meal.strArea}
             </p>
