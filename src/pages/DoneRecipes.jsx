@@ -78,13 +78,13 @@ export default function DoneRecipes() {
           <div className="col">
             <div className="row">
               <p data-testid={`${index}-horizontal-top-text`}>
-              {meal.strCategory}, {meal.strArea}
+                {meal.strCategory}, {meal.strArea}
               </p>
               <img data-testid={`${index}-horizontal-share-btn`} src={shareIcon} alt="Share" />
             </div>
             <div className="row">
               <p data-testid={`${index}-horizontal-name`} >
-              {meal.strMeal}
+                {meal.strMeal}
               </p>
             </div>
             <div className="row">
