@@ -4,14 +4,23 @@ import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
 import useAuthentication from '../hooks/useAuthentication';
 
-function createButton(name) {
+function createButton(name, link) {
   return (
     <div className="row justify-content-center py-3">
-      <Link to="/" className="btn btn-secondary btn-lg btn-block justify-content-center">
+      <Link
+        to={link}
+        className="btn btn-secondary btn-lg btn-block justify-content-center"
+      >
         {name}
       </Link>
     </div>
   );
+}
+
+function endApp() {
+  localStorage.removeItem('mealsToken');
+  localStorage.removeItem('cocktailsToken');
+  localStorage.removeItem('user');
 }
 
 export default function Profile() {
@@ -23,9 +32,9 @@ export default function Profile() {
         <div className="row justify-content-center py-3">
           <h5 className="">{user.email}</h5>
         </div>
-        {createButton('Receitas Feitas')}
-        {createButton('Receitas Favoritas')}
-        {createButton('Sair')}
+        {createButton('Receitas Feitas', 'receitas-feitas')}
+        {createButton('Receitas Favoritas', 'receitas-favoritas')}
+        {createButton('Sair', '/')}
       </div>
       <Footer />
     </React.Fragment>
