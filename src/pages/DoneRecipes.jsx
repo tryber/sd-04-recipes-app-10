@@ -4,18 +4,17 @@ import mock from '../services/mock';
 import shareIcon from '../images/shareIcon.svg';
 
 export default function DoneRecipes() {
-
   const meal = mock[0];
 
-  function getTag (tags) { 
-      const newTags = tags.split(",")
-      const result = newTags.slice(0,2)
-      return result
-   }
+  function getTag(tags) { 
+    const newTags = tags.split(',');
+    const result = newTags.slice(0, 2);
+    return result;
+  }
 
-  return(
+  return (
     <React.Fragment>
-    <HeaderMeals title="Receitas Feitas" />;
+  <HeaderMeals title="Receitas Feitas" />;
 
     <div className="row justify-content-center mb-2 mt-5">
       <button
@@ -42,7 +41,7 @@ export default function DoneRecipes() {
       >
         Drinks
       </button>
-      </div>
+    </div>
       <div className="card pt-2">
       <div className="row">
         <div className="col">
