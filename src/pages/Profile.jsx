@@ -4,6 +4,16 @@ import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
 import useAuthentication from '../hooks/useAuthentication';
 
+function createButton(name) {
+  return (
+    <div className="row justify-content-center py-3">
+      <Link to="/" className="btn btn-secondary btn-lg btn-block justify-content-center">
+        {name}
+      </Link>
+    </div>
+  );
+}
+
 export default function Profile() {
   const [user] = useAuthentication();
   return (
@@ -13,30 +23,9 @@ export default function Profile() {
         <div className="row justify-content-center py-3">
           <h5 className="">{user.email}</h5>
         </div>
-        <div className="row justify-content-center py-3">
-          <Link
-            to="/"
-            className="btn btn-secondary btn-lg btn-block justify-content-center"
-          >
-            Receitas Feitas
-          </Link>
-        </div>
-        <div className="row justify-content-center py-3">
-        <Link
-            to="/"
-            className="btn btn-secondary btn-lg btn-block justify-content-center"
-          >
-            Receitas Favoritas
-          </Link>
-        </div>
-        <div className="row justify-content-center py-3">
-        <Link
-            to="/"
-            className="btn btn-secondary btn-lg btn-block justify-content-center"
-          >
-            Sair
-          </Link>
-        </div>
+        {createButton('Receitas Feitas')}
+        {createButton('Receitas Favoritas')}
+        {createButton('Sair')}
       </div>
       <Footer />
     </React.Fragment>
