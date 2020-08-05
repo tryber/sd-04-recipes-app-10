@@ -36,7 +36,7 @@ export default function DoneRecipes() {
       <div className="card pt-2">
         <div className="row">
           <div className="col">
-            <img src={meal.strMealThumb} width="100%" alt="Food" />
+            <img src={meal.strMealThumb} width="100%" alt="Food-Favorite" />
           </div>
           <div className="col">
             <div className="row">
@@ -59,12 +59,12 @@ export default function DoneRecipes() {
       <div className="card pt-2">
         <div className="row">
           <div className="col">
-            <img src={meal.strMealThumb} width="100%" alt="Food" />
+            <img src={meal.strMealThumb} width="100%" alt="Food-Favorite" />
           </div>
           <div className="col">
             <div className="row">
               <p>
-              {meal.strCategory}, {meal.strArea}
+                {meal.strCategory}, {meal.strArea}
               </p>
             </div>
             <div className="row">
@@ -74,7 +74,7 @@ export default function DoneRecipes() {
             </div>
             <div className="row d-flex justify-content-around">
               <img src={shareIcon} alt="Share" />
-              <img data-testid={`${index}-horizontal-favorite-btn`}  src={blackHeartIcon} alt="Icon-Heart" />
+              <img data-testid={`${index}-horizontal-favorite-btn`} src={blackHeartIcon} alt="Icon-Heart" />
             </div>
           </div>
         </div>
