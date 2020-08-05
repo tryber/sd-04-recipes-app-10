@@ -6,7 +6,7 @@ import shareIcon from '../images/shareIcon.svg';
 export default function DoneRecipes() {
   const meal = mock[0];
 
-  function getTag(tags) { 
+  function getTag(tags) {
     const newTags = tags.split(',');
     const result = newTags.slice(0, 2);
     return result;
@@ -14,7 +14,7 @@ export default function DoneRecipes() {
 
   return (
     <React.Fragment>
-  <HeaderMeals title="Receitas Feitas" />;
+      <HeaderMeals title="Receitas Feitas" />;
 
     <div className="row justify-content-center mb-2 mt-5">
       <button
@@ -43,16 +43,16 @@ export default function DoneRecipes() {
       </button>
     </div>
       <div className="card pt-2">
-      <div className="row">
+        <div className="row">
         <div className="col">
-          <img data-testid={`${index}-horizontal-image`}  src={meal.strMealThumb} width="100%" />
+          <img data-testid={`${index}-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
         </div>
         <div className="col">
           <div className="row">
-              <p data-testid={`${index}-horizontal-top-text`} >
+            <p data-testid={`${index}-horizontal-top-text`} >
                 {meal.strCategory}, {meal.strArea}
               </p>
-                <img data-testid={`${index}-horizontal-share-btn`}  src={shareIcon} />
+            <img data-testid={`${index}-horizontal-share-btn`}  src={shareIcon} alt="Share" />
           </div>
           <div className="row">
             <p data-testid={`${index}-horizontal-name`}>
@@ -73,14 +73,14 @@ export default function DoneRecipes() {
       <div className="card pt-2">
       <div className="row">
         <div className="col">
-          <img data-testid={`${index}-horizontal-image`} src={meal.strMealThumb} width="100%" />
+          <img data-testid={`${index}-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
         </div>
         <div className="col">
           <div className="row">
               <p data-testid={`${index}-horizontal-top-text`}>
                 {meal.strCategory}, {meal.strArea}
               </p>
-                <img data-testid={`${index}-horizontal-share-btn`} src={shareIcon} />
+                <img data-testid={`${index}-horizontal-share-btn`} src={shareIcon} alt="Share" />
           </div>
           <div className="row">
             <p data-testid={`${index}-horizontal-name`} >
