@@ -17,12 +17,6 @@ function createButton(name, link) {
   );
 }
 
-function endApp() {
-  localStorage.removeItem('mealsToken');
-  localStorage.removeItem('cocktailsToken');
-  localStorage.removeItem('user');
-}
-
 export default function Profile() {
   const [user] = useAuthentication();
   return (
