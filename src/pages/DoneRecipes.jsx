@@ -44,15 +44,15 @@ export default function DoneRecipes() {
     </div>
       <div className="card pt-2">
         <div className="row">
-        <div className="col">
+          <div className="col">
           <img data-testid={`${index}-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
         </div>
-        <div className="col">
+          <div className="col">
           <div className="row">
             <p data-testid={`${index}-horizontal-top-text`} >
-                {meal.strCategory}, {meal.strArea}
+              {meal.strCategory}, {meal.strArea}
               </p>
-            <img data-testid={`${index}-horizontal-share-btn`}  src={shareIcon} alt="Share" />
+            <img data-testid={`${index}-horizontal-share-btn`} src={shareIcon} alt="Share" />
           </div>
           <div className="row">
             <p data-testid={`${index}-horizontal-name`}>
@@ -71,16 +71,16 @@ export default function DoneRecipes() {
         </div>
       </div>
       <div className="card pt-2">
-      <div className="row">
+        <div className="row">
         <div className="col">
           <img data-testid={`${index}-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
         </div>
         <div className="col">
           <div className="row">
-              <p data-testid={`${index}-horizontal-top-text`}>
+            <p data-testid={`${index}-horizontal-top-text`}>
                 {meal.strCategory}, {meal.strArea}
               </p>
-                <img data-testid={`${index}-horizontal-share-btn`} src={shareIcon} alt="Share" />
+            <img data-testid={`${index}-horizontal-share-btn`} src={shareIcon} alt="Share" />
           </div>
           <div className="row">
             <p data-testid={`${index}-horizontal-name`} >
@@ -96,8 +96,8 @@ export default function DoneRecipes() {
             {getTag(meal.strTags).map((tag) => <p key={tag} className="mr-2">{tag}</p>)}
           </div>
         </div>
-        </div>
+      </div>
       </div>
     </React.Fragment>
-  ) 
-}
+  );
+};
