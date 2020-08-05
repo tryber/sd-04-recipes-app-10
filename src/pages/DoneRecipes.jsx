@@ -50,14 +50,14 @@ export default function DoneRecipes() {
           <div className="col">
             <div className="row">
               <p data-testid={`${index}-horizontal-top-text`} >
-              {meal.strCategory}, {meal.strArea}
-            </p>
+                {meal.strCategory}, {meal.strArea}
+              </p>
               <img data-testid={`${index}-horizontal-share-btn`} src={shareIcon} alt="Share" />
             </div>
             <div className="row">
               <p data-testid={`${index}-horizontal-name`}>
-              {meal.strMeal}
-            </p>
+                {meal.strMeal}
+              </p>
             </div>
             <div className="row">
               <p data-testid={`${index}-horizontal-done-date`}>
@@ -73,28 +73,28 @@ export default function DoneRecipes() {
       <div className="card pt-2">
         <div className="row">
           <div className="col">
-          <img data-testid={`${index}-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
-        </div>
+            <img data-testid={`${index}-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
+          </div>
           <div className="col">
             <div className="row">
-            <p data-testid={`${index}-horizontal-top-text`}>
+              <p data-testid={`${index}-horizontal-top-text`}>
               {meal.strCategory}, {meal.strArea}
-            </p>
-            <img data-testid={`${index}-horizontal-share-btn`} src={shareIcon} alt="Share" />
-          </div>
+              </p>
+              <img data-testid={`${index}-horizontal-share-btn`} src={shareIcon} alt="Share" />
+            </div>
             <div className="row">
-            <p data-testid={`${index}-horizontal-name`} >
+              <p data-testid={`${index}-horizontal-name`} >
               {meal.strMeal}
-            </p>
-          </div>
+              </p>
+            </div>
             <div className="row">
-            <p data-testid={`${index}-horizontal-done-date`}>
+              <p data-testid={`${index}-horizontal-done-date`}>
               Feito em 29/07/2020
-            </p>
-          </div>
+              </p>
+            </div>
             <div data-testid={`${index}-${tagName}-horizontal-tag`} className="row">
-            {getTag(meal.strTags).map((tag) => <p key={tag} className="mr-2">{tag}</p>)}
-          </div>
+              {getTag(meal.strTags).map((tag) => <p key={tag} className="mr-2">{tag}</p>)}
+            </div>
           </div>
         </div>
       </div>
