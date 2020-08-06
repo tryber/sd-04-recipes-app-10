@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { getMealsById, getAllDrinks } from '../services/api';
 import makeArray from '../utils/makeIngredientsArray';
 import getCodeYT from '../utils/getYoutubeId';
+import useUserRecipes from '../hooks/useUserRecipes';
+
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHearticon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
+import useCopy from '../hooks/useCopy';
 
 export default function DetailsMeals() {
   const [meal, setMeal] = useState({});
+  const [message, copy] = useCopy(window.location.href);
   const [ingredients, setIngredients] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const { id } = useParams();
+  const {
+    enableHeart,
+    addToFavoriteRecipes,
+    isRecipeDoneOrInProgress,
+  } = useUserRecipes(meal);
 
   useEffect(() => {
     getMealsById(id).then(({ meal: { meals } }) => {
@@ -27,7 +37,12 @@ export default function DetailsMeals() {
         <React.Fragment>
           <div className="row justify-content-center p-0">
             <div className="col-12 p-0">
-              <img data-testid="recipe-photo" src={meal.strMealThumb} alt="foto" width="100%" />
+              <img
+                data-testid="recipe-photo"
+                src={meal.strMealThumb}
+                alt="foto"
+                width="100%"
+              />
             </div>
           </div>
           <div className="row justify-content-between">
@@ -37,9 +52,26 @@ export default function DetailsMeals() {
                 {meal.strCategory}
               </h5>
             </div>
-            <div>
-              <img data-testid="share-btn" src={shareIcon} alt="share" />
-              <img data-testid="favorite-btn" src={whiteHeartIcon} alt="" />
+            <div className="d-flex align-items-start pr-2">
+              {message ? (
+                message
+              ) : (
+                <input
+                  type="image"
+                  data-testid="share-btn"
+                  src={shareIcon}
+                  alt="share"
+                  onClick={() => copy()}
+                />
+              )}
+              <input
+                className="pl-2"
+                type="image"
+                data-testid="favorite-btn"
+                src={enableHeart ? blackHearticon : whiteHeartIcon}
+                alt="favorite"
+                onClick={() => addToFavoriteRecipes(meal)}
+              />
             </div>
           </div>
           <div className="row">
@@ -47,7 +79,10 @@ export default function DetailsMeals() {
               <h4>Ingredients</h4>
               <ul className="bg-light">
                 {ingredients.map((ingredient, index) => (
-                  <li data-testid={`${index}-ingredient-name-and-measure`} key={ingredient}>
+                  <li
+                    data-testid={`${index}-ingredient-name-and-measure`}
+                    key={ingredient}
+                  >
                     {ingredient}
                   </li>
                 ))}
@@ -66,7 +101,9 @@ export default function DetailsMeals() {
             <div className="col">
               <h4>Vídeo</h4>
               <iframe
-                src={`https://www.youtube.com/embed/${getCodeYT(meal.strYoutube)}`}
+                src={`https://www.youtube.com/embed/${getCodeYT(
+                  meal.strYoutube
+                )}`}
                 title={meal.strMeal}
                 data-testid="video"
               />
@@ -77,34 +114,59 @@ export default function DetailsMeals() {
               <h4>Recomendadas</h4>
               <div className="d-flex flex-row  overflow-auto">
                 {suggestions &&
-                  suggestions.map(({ idDrink, strDrink, strAlcoholic, strDrinkThumb }, index) => (
-                    <div
-                      key={idDrink}
-                      data-testid={`${index}-recomendation-card`}
-                      className={index < 2 ? 'col-6' : 'col-6 invisible'} //  gambiarra pro teste
-                    >
-                      <div className="card w-100">
-                        <img src={strDrinkThumb} className="card-img-top" alt={strDrink} />
-                        <div className="card-body">
-                          <p className="card-subtitle text-muted">{strAlcoholic}</p>
-                          <h5 data-testid={`${index}-recomendation-title`} className={'card-title'}>
-                            {strDrink}
-                          </h5>
+                  suggestions.map(
+                    (
+                      { idDrink, strDrink, strAlcoholic, strDrinkThumb },
+                      index
+                    ) => (
+                      <div
+                        key={idDrink}
+                        data-testid={`${index}-recomendation-card`}
+                        className={index < 2 ? 'col-6' : 'col-6 invisible'} //  gambiarra pro teste
+                      >
+                        <div className="card w-100">
+                          <img
+                            src={strDrinkThumb}
+                            className="card-img-top"
+                            alt={strDrink}
+                          />
+                          <div className="card-body">
+                            <p className="card-subtitle text-muted">
+                              {strAlcoholic}
+                            </p>
+                            <h5
+                              data-testid={`${index}-recomendation-title`}
+                              className={'card-title'}
+                            >
+                              {strDrink}
+                            </h5>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
               </div>
             </div>
           </div>
           <div className="row justify-content-center">
-            <button
-              type="button"
-              className="btn btn-block btn-success fixed-bottom"
-              data-testid="start-recipe-btn"
-            >
-              Iniciar Receita
-            </button>
+            {isRecipeDoneOrInProgress === 'none' && (
+              <Link
+                to={`/comidas/${meal.idMeal}/in-progress`}
+                className="btn btn-block btn-success fixed-bottom"
+                data-testid="start-recipe-btn"
+              >
+                Iniciar Receita
+              </Link>
+            )}
+            {isRecipeDoneOrInProgress === 'progress' && (
+              <Link
+                to={`/comidas/${meal.idMeal}/in-progress`}
+                className="btn btn-block btn-success fixed-bottom"
+                data-testid="start-recipe-btn"
+              >
+                Continuar Receita
+              </Link>
+            )}
           </div>
         </React.Fragment>
       )}

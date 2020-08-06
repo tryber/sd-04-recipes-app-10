@@ -25,7 +25,7 @@ export default function UsersProvider({ children }) {
   const [inProgressRecipes, setInProgressRecipes] = useState(() => {
     const inProgressRecipesStoraged = localStorage.getItem('inProgressRecipes');
     if (inProgressRecipesStoraged) return JSON.parse(inProgressRecipesStoraged);
-    return [];
+    return { meals: {}, cocktails: {} };
   });
 
   const context = [
@@ -35,7 +35,9 @@ export default function UsersProvider({ children }) {
     [inProgressRecipes, setInProgressRecipes],
   ];
 
-  return <UserContext.Provider value={context}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={context}>{children}</UserContext.Provider>
+  );
 }
 
 UsersProvider.propTypes = {
