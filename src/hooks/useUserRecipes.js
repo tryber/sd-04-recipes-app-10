@@ -91,40 +91,48 @@ const useUserRecipes = (currentRecipe) => {
     setInProgress(genericRemoveRecipe(inProgress, recipe));
   };
 
-  const addToFavoriteRecipes = (recipe) => {
+  const addToFavorites = () =>
+    setFavorites([
+      ...favorites,
+      {
+        id: recipe.idMeal || recipe.idDrink,
+        type: recipe.idMeal ? 'comida' : 'bebida',
+        area: recipe.strArea || '',
+        category: recipe.strCategory,
+        alcoholicOrNot: recipe.strAlcoholic || '',
+        name: recipe.strMeal || recipe.strDrink,
+        image: recipe.strMealThumb || recipe.strDrinkThumb,
+      },
+    ]);
+
+  const removeFromFavorites = () =>
+    setFavorites(genericRemoveRecipe(favorites, recipe));
+
+  const handleFavoriteRecipes = (recipe) => {
     if (favorites.some(checkIfRecipeIsInArray)) {
-      setFavorites(genericRemoveRecipe(favorites, recipe));
+      removeFromFavorites();
     } else {
-      setFavorites([
-        ...favorites,
-        {
-          id: recipe.idMeal || recipe.idDrink,
-          type: recipe.idMeal ? 'comida' : 'bebida',
-          area: recipe.strArea || '',
-          category: recipe.strCategory,
-          alcoholicOrNot: recipe.strAlcoholic || '',
-          name: recipe.strMeal || recipe.strDrink,
-          image: recipe.strMealThumb || recipe.strDrinkThumb,
-        },
-      ]);
+      addToFavorites();
     }
   };
   const addToInProgressRecipes = (key, id, ingredients = []) => {
-    key === 'meals'
-      ? setInProgress({
-          ...inProgress,
-          meals: {
-            ...inProgress.meals,
-            [id]: ingredients,
-          },
-        })
-      : setInProgress({
-          ...inProgress,
-          cocktails: {
-            ...inProgress.cocktails,
-            [id]: ingredients,
-          },
-        });
+    if (key === 'meals') {
+      setInProgress({
+        ...inProgress,
+        meals: {
+          ...inProgress.meals,
+          [id]: ingredients,
+        },
+      });
+    } else {
+      setInProgress({
+        ...inProgress,
+        cocktails: {
+          ...inProgress.cocktails,
+          [id]: ingredients,
+        },
+      });
+    }
   };
 
   return {
