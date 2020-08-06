@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { getDrinksById, getAllMeals } from '../services/api';
 import makeArray from '../utils/makeIngredientsArray';
+import blackHearticon from '../images/blackHeartIcon.svg';
 
 export default function DetailsDrinks() {
   const [drink, setMeal] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const { id } = useParams();
+  const [enableHeart, setEnableHeart] = useState(false);
 
   useEffect(() => {
     getDrinksById(id).then(({ drink: { drinks } }) => {
@@ -38,7 +40,13 @@ export default function DetailsDrinks() {
             </div>
             <div>
               <img data-testid="share-btn" src={shareIcon} alt="share" />
-              <img data-testid="favorite-btn" src={whiteHeartIcon} alt="share" />
+              <button onClick={() => setEnableHeart(!enableHeart)} >
+                <img
+                  data-testid="favorite-btn"
+                  src={enableHeart ? blackHearticon : whiteHeartIcon}
+                  alt="share"
+                />
+              </button>
             </div>
           </div>
           <div className="row">
@@ -87,13 +95,15 @@ export default function DetailsDrinks() {
             </div>
           </div>
           <div className="row justify-content-center">
-            <button
-              type="button"
-              className="btn btn-block btn-success fixed-bottom drinks"
-              data-testid="start-recipe-btn"
-            >
-              Iniciar Receita
-            </button>
+            <Link to={`/bebidas/${drink.idDrink}/in-progress`}>
+              <button
+                type="button"
+                className="btn btn-block btn-success fixed-bottom drinks"
+                data-testid="start-recipe-btn"
+              >
+                Iniciar Receita
+              </button>
+            </Link>
           </div>
         </React.Fragment>
       )}
