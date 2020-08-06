@@ -14,8 +14,12 @@ export default function ProgressMeals() {
   const { id } = useParams();
   const [inputs, setInputs] = useState(() => {
     const inputsInLocalStorage = localStorage.getItem('inProgressRecipes');
-    if (inputsInLocalStorage && Object.keys(JSON.parse(inputsInLocalStorage).cocktails).includes(id))
+    if (
+      inputsInLocalStorage &&
+      Object.keys(JSON.parse(inputsInLocalStorage).cocktails).includes(id)
+    ) {
       return JSON.parse(inputsInLocalStorage).cocktails[id];
+    }
     return [];
   });
   const { addToInProgressRecipes, handleFavoriteRecipes, enableHeart } = useUserRecipes(drink);
@@ -119,7 +123,7 @@ export default function ProgressMeals() {
           type="button"
           className="btn btn-block btn-success fixed-bottom"
           data-testid="finish-recipe-btn"
-          disabled={ingredients.length === inputs.length ? false : true}
+          disabled={ingredients.length !== inputs.length}
           onClick={() => history.push('/receitas-feitas')}
         >
           Finalizar Receita
