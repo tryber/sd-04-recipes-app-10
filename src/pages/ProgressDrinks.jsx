@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import makeArray from '../utils/makeIngredientsArray';
 import { getDrinksById } from '../services/api';
 import useUserRecipes from '../hooks/useUserRecipes';
+import useCopy from '../hooks/useCopy';
 
 export default function ProgressMeals() {
   const [drink, setDrink] = useState({});
   const [ingredients, setIngredients] = useState([]);
-  const [inputs, setInputs] = useState([]);
   const { id } = useParams();
-  const { addToInProgressRecipes } = useUserRecipes(drink);
+  const [inputs, setInputs] = useState(() => {
+    const inputsInLocalStorage = localStorage.getItem('inProgressRecipes');
+    if (
+      inputsInLocalStorage &&
+      Object.keys(JSON.parse(inputsInLocalStorage).cocktails).includes(id)
+    ) {
+      return JSON.parse(inputsInLocalStorage).cocktails[id];
+    }
+    return [];
+  });
+  const { addToInProgressRecipes, handleFavoriteRecipes, enableHeart } = useUserRecipes(drink);
+  const [message, copy] = useCopy(`http://localhost:3000/bebidas/${id}`);
+  const history = useHistory();
 
   useEffect(() => {
     getDrinksById(id).then(({ drink: { drinks } }) => {
@@ -47,8 +60,23 @@ export default function ProgressMeals() {
           </h5>
         </div>
         <div>
-          <img data-testid="share-btn" src={shareIcon} alt="share" />
-          <img data-testid="favorite-btn" src={whiteHeartIcon} alt="share" />
+          {message || (
+            <input
+              type="image"
+              data-testid="share-btn"
+              src={shareIcon}
+              alt="share"
+              onClick={() => copy()}
+            />
+          )}
+
+          <input
+            type="image"
+            data-testid="favorite-btn"
+            src={enableHeart ? blackHeartIcon : whiteHeartIcon}
+            alt="share"
+            onClick={() => handleFavoriteRecipes(drink)}
+          />
         </div>
       </div>
       <div className="row">
@@ -64,9 +92,10 @@ export default function ProgressMeals() {
                       : 'form-check-label'
                   }
                   htmlFor={index}
+                  data-testid={`${index}-ingredient-step`}
                 >
                   <input
-                    data-testid={`${index}-ingredient-step`}
+                    defaultChecked={inputs.some((input) => input === ingredient)}
                     type="checkbox"
                     name={index}
                     className="form-check-input"
@@ -81,7 +110,7 @@ export default function ProgressMeals() {
           </div>
         </div>
       </div>
-      <div className="row">
+      <div className="row mb-4">
         <div className="col">
           <h4>Instructions</h4>
           <p data-testid="instructions" className="bg-light">
@@ -94,6 +123,8 @@ export default function ProgressMeals() {
           type="button"
           className="btn btn-block btn-success fixed-bottom"
           data-testid="finish-recipe-btn"
+          disabled={ingredients.length !== inputs.length}
+          onClick={() => history.push('/receitas-feitas')}
         >
           Finalizar Receita
         </button>
