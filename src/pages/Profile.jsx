@@ -10,7 +10,7 @@ function createButton(name, link, testid) {
       <Link
         to={link}
         className="btn btn-secondary btn-lg btn-block justify-content-center"
-        data-testid={`profile-${testid}-btn`} 
+        data-testid={`profile-${testid}-btn`}
       >
         {name}
       </Link>
