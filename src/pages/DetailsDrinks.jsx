@@ -52,9 +52,7 @@ export default function DetailsDrinks() {
               </h5>
             </div>
             <div className="d-flex align-items-start pr-2">
-              {message ? (
-                message
-              ) : (
+              {message || (
                 <input
                   type="image"
                   data-testid="share-btn"
@@ -127,7 +125,7 @@ export default function DetailsDrinks() {
                           </div>
                         </div>
                       </div>
-                    )
+                    ),
                   )}
               </div>
             </div>

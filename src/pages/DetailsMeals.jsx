@@ -53,9 +53,7 @@ export default function DetailsMeals() {
               </h5>
             </div>
             <div className="d-flex align-items-start pr-2">
-              {message ? (
-                message
-              ) : (
+              {message || (
                 <input
                   type="image"
                   data-testid="share-btn"
@@ -102,7 +100,7 @@ export default function DetailsMeals() {
               <h4>Vídeo</h4>
               <iframe
                 src={`https://www.youtube.com/embed/${getCodeYT(
-                  meal.strYoutube
+                  meal.strYoutube,
                 )}`}
                 title={meal.strMeal}
                 data-testid="video"
@@ -117,7 +115,7 @@ export default function DetailsMeals() {
                   suggestions.map(
                     (
                       { idDrink, strDrink, strAlcoholic, strDrinkThumb },
-                      index
+                      index,
                     ) => (
                       <div
                         key={idDrink}
@@ -143,7 +141,7 @@ export default function DetailsMeals() {
                           </div>
                         </div>
                       </div>
-                    )
+                    ),
                   )}
               </div>
             </div>
