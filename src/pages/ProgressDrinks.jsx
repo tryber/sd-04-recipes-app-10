@@ -36,12 +36,7 @@ export default function ProgressMeals() {
     <React.Fragment>
       <div className="row justify-content-center p-0">
         <div className="col-12 p-0">
-          <img
-            data-testid="recipe-photo"
-            src={drink.strDrinkThumb}
-            alt="foto"
-            width="100%"
-          />
+          <img data-testid="recipe-photo" src={drink.strDrinkThumb} alt="foto" width="100%" />
         </div>
       </div>
       <div className="row justify-content-between">
@@ -62,21 +57,21 @@ export default function ProgressMeals() {
           <div className="bg-light">
             {ingredients.map((ingredient, index) => (
               <div className="form-check" key={ingredient}>
-                <input
-                  data-testid={`${index}-ingredient-step`}
-                  type="checkbox"
-                  className="form-check-input"
-                  value={ingredient}
-                  onClick={(e) => handleInput(e.target.value)}
-                />
                 <label
                   className={
                     inputs.some((input) => input === ingredient)
                       ? 'form-check-label done'
                       : 'form-check-label'
                   }
-                  htmlFor={ingredient}
                 >
+                  <input
+                    data-testid={`${index}-ingredient-step`}
+                    type="checkbox"
+                    className="form-check-input"
+                    value={ingredient}
+                    onClick={(e) => handleInput(e.target.value)}
+                  />
+
                   {ingredient}
                 </label>
               </div>

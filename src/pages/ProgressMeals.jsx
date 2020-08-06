@@ -39,12 +39,7 @@ export default function ProgressMeals() {
     <React.Fragment>
       <div className="row justify-content-center p-0">
         <div className="col-12 p-0">
-          <img
-            data-testid="recipe-photo"
-            src={meal.strMealThumb}
-            alt="foto"
-            width="100%"
-          />
+          <img data-testid="recipe-photo" src={meal.strMealThumb} alt="foto" width="100%" />
         </div>
       </div>
       <div className="row justify-content-between">
@@ -71,10 +66,9 @@ export default function ProgressMeals() {
                       ? 'form-check-label done'
                       : 'form-check-label cc'
                   }
-                  htmlFor={ingredient}
                 >
                   <input
-                    data-testid={`${index}-ingredient-step`}
+                    data-testid={`ingredient-step`}
                     type="checkbox"
                     className="form-check-input cc"
                     value={ingredient}
