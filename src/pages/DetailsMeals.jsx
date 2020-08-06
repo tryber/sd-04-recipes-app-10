@@ -70,7 +70,7 @@ export default function DetailsMeals() {
                 data-testid="favorite-btn"
                 src={enableHeart ? blackHearticon : whiteHeartIcon}
                 alt="favorite"
-                onClick={() => addToFavoriteRecipes(meal)}
+                onClick={() => handleFavoriteRecipes(meal)}
               />
             </div>
           </div>
