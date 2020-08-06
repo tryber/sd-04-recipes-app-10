@@ -1,4 +1,4 @@
-import { link, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import HeaderMeals from '../components/HeaderMeals';
 import mock from '../services/mock';
@@ -15,18 +15,18 @@ export default function DoneRecipes() {
         {/* <ButtonToggle /> */}
       <div className="card pt-2">
         <div className="row">
-          <div className="col">
+          <div className="col aa">
             <Link to="/comidas">
               <img src={meal.strMealThumb} width="100%" alt="Food-Favorite" />
             </Link>
           </div>
           <div className="col">
-            <div className="row">
+            <div className="row cc">
               <p>
                 {meal.strCategory}, {meal.strArea}
               </p>
             </div>
-            <div className="row">
+            <div className="row bb">
               <p >
                 <Link to="/comidas">
                   {meal.strMeal}
@@ -53,7 +53,7 @@ export default function DoneRecipes() {
                 {meal.strCategory}, {meal.strArea}
               </p>
             </div>
-            <div className="row">
+            <div className="row ">
               <p>
                 <Link to="/comidas">
                   {meal.strMeal}
