@@ -30,9 +30,9 @@ const useUserRecipes = (currentRecipe) => {
     [currentRecipe],
   );
 
-  const [enableHeart, setEnableHeart] = useState(() => {
-    return favorites.some(checkIfRecipeIsInArray);
-  });
+  const [enableHeart, setEnableHeart] = useState(() =>
+    favorites.some(checkIfRecipeIsInArray),
+  );
 
   const [isRecipeDoneOrInProgress, setIsRecipeDoneOrInProgress] = useState(
     () => {
@@ -91,22 +91,24 @@ const useUserRecipes = (currentRecipe) => {
     setInProgress(genericRemoveRecipe(inProgress, recipe));
   };
 
-  const addToFavoriteRecipes = (recipe) =>
-    favorites.some(checkIfRecipeIsInArray)
-      ? setFavorites(genericRemoveRecipe(favorites, recipe))
-      : setFavorites([
-          ...favorites,
-          {
-            id: recipe.idMeal || recipe.idDrink,
-            type: recipe.idMeal ? 'comida' : 'bebida',
-            area: recipe.strArea || '',
-            category: recipe.strCategory,
-            alcoholicOrNot: recipe.strAlcoholic || '',
-            name: recipe.strMeal || recipe.strDrink,
-            image: recipe.strMealThumb || recipe.strDrinkThumb,
-          },
-        ]);
-
+  const addToFavoriteRecipes = (recipe) => {
+    if (favorites.some(checkIfRecipeIsInArray)) {
+      setFavorites(genericRemoveRecipe(favorites, recipe));
+    } else {
+      setFavorites([
+        ...favorites,
+        {
+          id: recipe.idMeal || recipe.idDrink,
+          type: recipe.idMeal ? 'comida' : 'bebida',
+          area: recipe.strArea || '',
+          category: recipe.strCategory,
+          alcoholicOrNot: recipe.strAlcoholic || '',
+          name: recipe.strMeal || recipe.strDrink,
+          image: recipe.strMealThumb || recipe.strDrinkThumb,
+        },
+      ]);
+    }
+  };
   const addToInProgressRecipes = (key, id, ingredients = []) => {
     key === 'meals'
       ? setInProgress({
