@@ -1,9 +1,11 @@
 import React from 'react'
+import useUserRecipes from '../hooks/useUserRecipes';
 
 function ButtonToggle() {
+
+
     return (
-        
-            <div className="row justify-content-center mb-2 mt-5">
+    <div className="row justify-content-center mb-2 mt-5">
       <button
         type="button"
         className="btn btn-primary btn-sm m-1 w-25"
@@ -16,7 +18,7 @@ function ButtonToggle() {
         type="button"
         className="btn btn-primary btn-sm m-1 w-25"
         data-testid="All-category-filter"
-        // onClick={() => toggleFilter('All')}
+        // onClick={() => toggleFilter('Food')}
       >
         Food
       </button>
@@ -24,7 +26,7 @@ function ButtonToggle() {
         type="button"
         className="btn btn-primary btn-sm m-1 w-25"
         data-testid="All-category-filter"
-        // onClick={() => toggleFilter('All')}
+        // onClick={() => toggleFilter('Drinks')}
       >
         Drinks
       </button>

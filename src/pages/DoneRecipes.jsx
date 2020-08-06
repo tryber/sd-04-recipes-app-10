@@ -4,6 +4,7 @@ import mock from '../services/mock';
 import shareIcon from '../images/shareIcon.svg';
 import useCopy from '../hooks/useCopy';
 import ButtonToggle from '../components/ButtonToggle';
+import { Link } from 'react-router-dom';
 
 export default function DoneRecipes() {
   const meal = mock[0];
@@ -22,7 +23,9 @@ export default function DoneRecipes() {
       <div className="card pt-2">
         <div className="row">
           <div className="col">
+          <Link to="/comidas">
             <img data-testid={`-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
+          </Link>
           </div>
           <div className="col">
             <div className="row">
@@ -34,9 +37,11 @@ export default function DoneRecipes() {
                 </button>)}
             </div>
             <div className="row">
+            <Link to="/comidas">
               <p data-testid={`-horizontal-name`}>
                 {meal.strMeal}
               </p>
+            </Link>
             </div>
             <div className="row">
               <p data-testid={`-horizontal-done-date`}>
@@ -52,21 +57,25 @@ export default function DoneRecipes() {
       <div className="card pt-2">
         <div className="row">
           <div className="col">
+          <Link to="comidas">
             <img data-testid={`-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
+            </Link>
           </div>
           <div className="col">
             <div className="row">
               <p data-testid={`-horizontal-top-text`}>
                 {meal.strCategory}, {meal.strArea}
               </p>
-              {/* <button onClick={() => onClickMessage()}>
-                <img data-testid={`-horizontal-share-btn`} src={shareIcon} alt="Share" />
-              </button> */}
+              {message || (<button type="button" onClick={() => copy()}>
+                  <img data-testid={`-horizontal-share-btn`} src={shareIcon} alt="Share" />
+                </button>)}
             </div>
             <div className="row">
+            <Link to="/comidas">
               <p data-testid={`-horizontal-name`} >
                 {meal.strMeal}
               </p>
+            </Link>
             </div>
             <div className="row">
               <p data-testid={`-horizontal-done-date`}>
@@ -77,17 +86,8 @@ export default function DoneRecipes() {
               {getTag(meal.strTags).map((tag) => <p key={tag} className="mr-2">{tag}</p>)}
             </div>
           </div>
+          
         </div>
-      {/* <Modal show={true}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            Mensagem
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Boby>
-        Link copiado!
-        </Modal.Boby>
-      </Modal> */}
       </div>
     </React.Fragment>
   );
