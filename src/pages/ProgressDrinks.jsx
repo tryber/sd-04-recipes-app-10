@@ -94,6 +94,7 @@ export default function ProgressMeals() {
           type="button"
           className="btn btn-block btn-success fixed-bottom"
           data-testid="finish-recipe-btn"
+          disabled={ingredients.length === inputs.length ? false : true}
         >
           Finalizar Receita
         </button>
