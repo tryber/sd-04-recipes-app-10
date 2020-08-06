@@ -19,7 +19,7 @@ export default function DetailsMeals() {
   const { id } = useParams();
   const {
     enableHeart,
-    addToFavoriteRecipes,
+    handleFavoriteRecipes,
     isRecipeDoneOrInProgress,
   } = useUserRecipes(meal);
 

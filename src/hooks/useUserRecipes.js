@@ -91,7 +91,7 @@ const useUserRecipes = (currentRecipe) => {
     setInProgress(genericRemoveRecipe(inProgress, recipe));
   };
 
-  const addToFavorites = () =>
+  const addToFavorites = (recipe) =>
     setFavorites([
       ...favorites,
       {
@@ -105,14 +105,14 @@ const useUserRecipes = (currentRecipe) => {
       },
     ]);
 
-  const removeFromFavorites = () =>
+  const removeFromFavorites = (recipe) =>
     setFavorites(genericRemoveRecipe(favorites, recipe));
 
   const handleFavoriteRecipes = (recipe) => {
     if (favorites.some(checkIfRecipeIsInArray)) {
-      removeFromFavorites();
+      removeFromFavorites(recipe);
     } else {
-      addToFavorites();
+      addToFavorites(recipe);
     }
   };
   const addToInProgressRecipes = (key, id, ingredients = []) => {
@@ -137,7 +137,7 @@ const useUserRecipes = (currentRecipe) => {
 
   return {
     addToDoneRecipes,
-    addToFavoriteRecipes,
+    handleFavoriteRecipes,
     addToInProgressRecipes,
     enableHeart,
     isRecipeDoneOrInProgress,

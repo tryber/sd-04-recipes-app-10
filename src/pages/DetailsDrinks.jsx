@@ -17,7 +17,7 @@ export default function DetailsDrinks() {
   const { id } = useParams();
   const {
     enableHeart,
-    addToFavoriteRecipes,
+    handleFavoriteRecipes,
     isRecipeDoneOrInProgress,
   } = useUserRecipes(drink);
   const [message, copy] = useCopy(window.location.href);
@@ -69,7 +69,7 @@ export default function DetailsDrinks() {
                 data-testid="favorite-btn"
                 src={enableHeart ? blackHearticon : whiteHeartIcon}
                 alt="favorite"
-                onClick={() => addToFavoriteRecipes(drink)}
+                onClick={() => handleFavoriteRecipes(drink)}
               />
             </div>
           </div>
