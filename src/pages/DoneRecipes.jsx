@@ -33,7 +33,7 @@ export default function DoneRecipes() {
                 {meal.strCategory}, {meal.strArea}
               </p>
               {message || (<button type="button" onClick={() => copy()}>
-                <img data-testid={`-horizontal-share-btn`} src={shareIcon} alt="Share" />
+                <img data-testid={'-horizontal-share-btn'} src={shareIcon} alt="Share" />
                 </button>)}
             </div>
             <div className="row">
@@ -67,12 +67,12 @@ export default function DoneRecipes() {
                 {meal.strCategory}, {meal.strArea}
               </p>
               {message || (<button type="button" onClick={() => copy()}>
-                <img data-testid={`-horizontal-share-btn`} src={shareIcon} alt="Share" />
+                <img data-testid={'-horizontal-share-btn'} src={shareIcon} alt="Share" />
                 </button>)}
             </div>
             <div className="row">
               <Link to="/comidas">
-                <p data-testid={`-horizontal-name`} >
+                <p data-testid={'-horizontal-name'} >
                   {meal.strMeal}
                 </p>
               </Link>
@@ -82,7 +82,7 @@ export default function DoneRecipes() {
               Feito em 29/07/2020
               </p>
             </div>
-            <div data-testid={'-horizontal-tag'} className="row">
+            <div data-testid={'aaaaaa-horizontal-tag'} className="row">
               {getTag(meal.strTags).map((tag) => <p key={tag} className="mr-2">{tag}</p>)}
             </div>
           </div>
