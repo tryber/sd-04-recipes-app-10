@@ -24,12 +24,12 @@ export default function DoneRecipes() {
         <div className="row">
           <div className="col">
             <Link to="/comidas">
-              <img data-testid={`-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
+              <img data-testid={'-horizontal-image'} src={meal.strMealThumb} width="100%" alt="Food" />
             </Link>
           </div>
           <div className="col">
             <div className="row">
-              <p data-testid={`-horizontal-top-text`} >
+              <p data-testid={'-horizontal-top-text'} >
                 {meal.strCategory}, {meal.strArea}
               </p>
               {message || (<button type="button" onClick={() => copy()}>
@@ -38,17 +38,17 @@ export default function DoneRecipes() {
             </div>
             <div className="row">
               <Link to="/comidas">
-                <p data-testid={`-horizontal-name`}>
+                <p data-testid={'-horizontal-name'}>
                   {meal.strMeal}
                 </p>
               </Link>
             </div>
             <div className="row">
-              <p data-testid={`-horizontal-done-date`}>
+              <p data-testid={'-horizontal-done-date'}>
               Feito em 05/08/2020
             </p>
             </div>
-            <div data-testid={`-horizontal-tag`} className="row">
+            <div data-testid={'-horizontal-tag'} className="row">
               {getTag(meal.strTags).map((tag) => <p key={tag} className="mr-2">{tag}</p>)}
             </div>
           </div>
@@ -58,12 +58,12 @@ export default function DoneRecipes() {
         <div className="row">
           <div className="col">
             <Link to="comidas">
-              <img data-testid={`-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
+              <img data-testid={'-horizontal-image'} src={meal.strMealThumb} width="100%" alt="Food" />
             </Link>
           </div>
           <div className="col">
             <div className="row">
-              <p data-testid={`-horizontal-top-text`}>
+              <p data-testid={'-horizontal-top-text'}>
                 {meal.strCategory}, {meal.strArea}
               </p>
               {message || (<button type="button" onClick={() => copy()}>
@@ -78,11 +78,11 @@ export default function DoneRecipes() {
               </Link>
             </div>
             <div className="row">
-              <p data-testid={`-horizontal-done-date`}>
+              <p data-testid={'-horizontal-done-date'}>
               Feito em 29/07/2020
               </p>
             </div>
-            <div data-testid={`-horizontal-tag`} className="row">
+            <div data-testid={'-horizontal-tag'} className="row">
               {getTag(meal.strTags).map((tag) => <p key={tag} className="mr-2">{tag}</p>)}
             </div>
           </div>
