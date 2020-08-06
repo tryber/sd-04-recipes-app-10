@@ -6,6 +6,7 @@ export default function Explore() {
   return (
     <React.Fragment>
       <HeaderMeals title="Explorar" />
+      A festa vai começar
       <Footer />
     </React.Fragment>
   );
