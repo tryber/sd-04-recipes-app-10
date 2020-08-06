@@ -9,24 +9,24 @@ export default function Explore() {
       <HeaderMeals title="Explorar" />
       <div className="row justify-content-center align-items-center">
         <div className="col-12 mt-5 pt-5">
-        <Link to="/comidas" >
-          <button
-            data-testid="explore-food"
-            className="btn btn-secondary btn-block btn-lg" 
-            type="button"
-          >
-            Explorar Comidas
-          </button>
-        </Link>
-        <Link to="/bebidas">
-          <button
-            data-testid="explore-drinks"
-            className="btn btn-secondary btn-block btn-lg"
-            type="button"
-          >
-            Explorar Bebidas
-          </button>
-        </Link>
+          <Link to="/comidas" >
+            <button
+              data-testid="explore-food"
+              className="btn btn-secondary btn-block btn-lg"
+              type="button"
+            >
+              Explorar Comidas
+            </button>
+          </Link>
+          <Link to="/bebidas">
+            <button
+              data-testid="explore-drinks"
+              className="btn btn-secondary btn-block btn-lg"
+              type="button"
+            >
+              Explorar Bebidas
+            </button>
+          </Link>
         </div>
       </div>
       <Footer />
