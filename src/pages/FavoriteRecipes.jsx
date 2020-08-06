@@ -62,7 +62,7 @@ export default function DoneRecipes() {
             </div>
             <div className="row d-flex justify-content-around">
               <img src={shareIcon} alt="Share" />
-              <img data-testid={`-horizontal-favorite-btn`} src={blackHeartIcon} alt="Icon-Heart" />
+              <img data-testid={'-horizontal-favorite-btn'} src={blackHeartIcon} alt="Icon-Heart" />
             </div>
           </div>
         </div>
