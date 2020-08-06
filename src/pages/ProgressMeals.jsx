@@ -13,8 +13,13 @@ import './ProgressMeals.css';
 export default function ProgressMeals() {
   const [meal, setMeal] = useState({});
   const [ingredients, setIngredients] = useState([]);
-  const [inputs, setInputs] = useState([]);
   const { id } = useParams();
+  const [inputs, setInputs] = useState(() => {
+    const inputsInLocalStorage = localStorage.getItem('inProgressRecipes');
+    if (inputsInLocalStorage && Object.keys(JSON.parse(inputsInLocalStorage).meals).includes(id))
+      return JSON.parse(inputsInLocalStorage).meals[id];
+    return [];
+  });
   const { addToInProgressRecipes, handleFavoriteRecipes, enableHeart } = useUserRecipes(meal);
   const [message, copy] = useCopy(`http://localhost:3000/comidas/${id}`);
   const history = useHistory();
@@ -88,6 +93,7 @@ export default function ProgressMeals() {
                   htmlFor={index}
                 >
                   <input
+                    defaultChecked={inputs.some((input) => input === ingredient)}
                     type="checkbox"
                     name={index}
                     className="form-check-input cc"

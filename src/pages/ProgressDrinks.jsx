@@ -11,8 +11,13 @@ import useCopy from '../hooks/useCopy';
 export default function ProgressMeals() {
   const [drink, setDrink] = useState({});
   const [ingredients, setIngredients] = useState([]);
-  const [inputs, setInputs] = useState([]);
   const { id } = useParams();
+  const [inputs, setInputs] = useState(() => {
+    const inputsInLocalStorage = localStorage.getItem('inProgressRecipes');
+    if (inputsInLocalStorage && Object.keys(JSON.parse(inputsInLocalStorage).cocktails).includes(id))
+      return JSON.parse(inputsInLocalStorage).cocktails[id];
+    return [];
+  });
   const { addToInProgressRecipes, handleFavoriteRecipes, enableHeart } = useUserRecipes(drink);
   const [message, copy] = useCopy(`http://localhost:3000/bebidas/${id}`);
   const history = useHistory();
@@ -86,6 +91,7 @@ export default function ProgressMeals() {
                   data-testid={`${index}-ingredient-step`}
                 >
                   <input
+                    defaultChecked={inputs.some((input) => input === ingredient)}
                     type="checkbox"
                     name={index}
                     className="form-check-input"
