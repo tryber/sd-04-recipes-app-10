@@ -84,7 +84,7 @@ export default function ProgressMeals() {
           </div>
         </div>
       </div>
-      <div className="row">
+      <div className="row mb-4">
         <div className="col">
           <h4>Instructions</h4>
           <p data-testid="instructions" className="bg-light">
