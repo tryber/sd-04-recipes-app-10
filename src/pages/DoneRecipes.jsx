@@ -1,14 +1,14 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import HeaderMeals from '../components/HeaderMeals';
 import mock from '../services/mock';
 import shareIcon from '../images/shareIcon.svg';
 import useCopy from '../hooks/useCopy';
 import ButtonToggle from '../components/ButtonToggle';
-import { Link } from 'react-router-dom';
 
 export default function DoneRecipes() {
   const meal = mock[0];
-  const [ message, copy ] =  useCopy(window.location.href)
+  const [message, copy] = useCopy(window.location.href);
 
   function getTag(tags) {
     const newTags = tags.split(',');
