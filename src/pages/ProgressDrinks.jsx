@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import makeArray from '../utils/makeIngredientsArray';
 import { getDrinksById } from '../services/api';
 import useUserRecipes from '../hooks/useUserRecipes';
+import useCopy from '../hooks/useCopy';
 
 export default function ProgressMeals() {
   const [drink, setDrink] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [inputs, setInputs] = useState([]);
   const { id } = useParams();
-  const { addToInProgressRecipes } = useUserRecipes(drink);
+  const { addToInProgressRecipes, handleFavoriteRecipes, enableHeart } = useUserRecipes(drink);
+  const [message, copy] = useCopy(`http://localhost:3000/bebidas/${id}`);
+  const history = useHistory();
 
   useEffect(() => {
     getDrinksById(id).then(({ drink: { drinks } }) => {
@@ -47,8 +51,23 @@ export default function ProgressMeals() {
           </h5>
         </div>
         <div>
-          <img data-testid="share-btn" src={shareIcon} alt="share" />
-          <img data-testid="favorite-btn" src={whiteHeartIcon} alt="share" />
+          {message || (
+            <input
+              type="image"
+              data-testid="share-btn"
+              src={shareIcon}
+              alt="share"
+              onClick={() => copy()}
+            />
+          )}
+
+          <input
+            type="image"
+            data-testid="favorite-btn"
+            src={enableHeart ? blackHeartIcon : whiteHeartIcon}
+            alt="share"
+            onClick={() => handleFavoriteRecipes(drink)}
+          />
         </div>
       </div>
       <div className="row">
@@ -64,9 +83,9 @@ export default function ProgressMeals() {
                       : 'form-check-label'
                   }
                   htmlFor={index}
+                  data-testid={`${index}-ingredient-step`}
                 >
                   <input
-                    data-testid={`${index}-ingredient-step`}
                     type="checkbox"
                     name={index}
                     className="form-check-input"
@@ -95,6 +114,7 @@ export default function ProgressMeals() {
           className="btn btn-block btn-success fixed-bottom"
           data-testid="finish-recipe-btn"
           disabled={ingredients.length === inputs.length ? false : true}
+          onClick={() => history.push('/receitas-feitas')}
         >
           Finalizar Receita
         </button>
