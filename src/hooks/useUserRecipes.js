@@ -12,12 +12,12 @@ const useUserRecipes = (currentRecipe) => {
   const checkIfRecipeIsInProgress = useCallback(() => {
     if (inProgress.meals && Object.keys(inProgress.meals).length) {
       return Object.keys(inProgress.meals).some(
-        (id) => id === currentRecipe.idMeal
+        (id) => id === currentRecipe.idMeal,
       );
     }
     if (inProgress.cocktails && Object.keys(inProgress.cocktails).length) {
       return Object.keys(inProgress.cocktails).some(
-        (id) => id === currentRecipe.idDrink
+        (id) => id === currentRecipe.idDrink,
       );
     }
     return false;
@@ -27,7 +27,7 @@ const useUserRecipes = (currentRecipe) => {
     (element) =>
       element.id === currentRecipe.idMeal ||
       element.id === currentRecipe.idDrink,
-    [currentRecipe]
+    [currentRecipe],
   );
 
   const [enableHeart, setEnableHeart] = useState(() => {
@@ -43,7 +43,7 @@ const useUserRecipes = (currentRecipe) => {
         return 'done';
       }
       return 'none';
-    }
+    },
   );
 
   useEffect(() => {
