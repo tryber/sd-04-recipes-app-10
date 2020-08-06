@@ -4,12 +4,14 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import makeArray from '../utils/makeIngredientsArray';
 import { getDrinksById } from '../services/api';
+import useUserRecipes from '../hooks/useUserRecipes';
 
 export default function ProgressMeals() {
   const [drink, setDrink] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [inputs, setInputs] = useState([]);
   const { id } = useParams();
+  const { addToInProgressRecipes } = useUserRecipes(drink);
 
   useEffect(() => {
     getDrinksById(id).then(({ drink: { drinks } }) => {
@@ -17,6 +19,11 @@ export default function ProgressMeals() {
       setIngredients(makeArray(drinks[0]));
     });
   }, [id]);
+
+  useEffect(() => {
+    addToInProgressRecipes('cocktails', id, inputs);
+    //  eslint-disable-next-line
+  }, [inputs]);
 
   function handleInput(e) {
     if (inputs.includes(e)) {
@@ -29,7 +36,12 @@ export default function ProgressMeals() {
     <React.Fragment>
       <div className="row justify-content-center p-0">
         <div className="col-12 p-0">
-          <img data-testid="recipe-photo" src={drink.strDrinkThumb} alt="foto" width="100%" />
+          <img
+            data-testid="recipe-photo"
+            src={drink.strDrinkThumb}
+            alt="foto"
+            width="100%"
+          />
         </div>
       </div>
       <div className="row justify-content-between">
