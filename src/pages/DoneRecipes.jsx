@@ -23,9 +23,9 @@ export default function DoneRecipes() {
       <div className="card pt-2">
         <div className="row">
           <div className="col">
-          <Link to="/comidas">
-            <img data-testid={`-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
-          </Link>
+            <Link to="/comidas">
+              <img data-testid={`-horizontal-image`} src={meal.strMealThumb} width="100%" alt="Food" />
+            </Link>
           </div>
           <div className="col">
             <div className="row">
@@ -33,15 +33,15 @@ export default function DoneRecipes() {
                 {meal.strCategory}, {meal.strArea}
               </p>
               {message || (<button type="button" onClick={() => copy()}>
-                  <img data-testid={`-horizontal-share-btn`} src={shareIcon} alt="Share" />
+                <img data-testid={`-horizontal-share-btn`} src={shareIcon} alt="Share" />
                 </button>)}
             </div>
             <div className="row">
-            <Link to="/comidas">
-              <p data-testid={`-horizontal-name`}>
-                {meal.strMeal}
-              </p>
-            </Link>
+              <Link to="/comidas">
+                <p data-testid={`-horizontal-name`}>
+                  {meal.strMeal}
+                </p>
+              </Link>
             </div>
             <div className="row">
               <p data-testid={`-horizontal-done-date`}>
