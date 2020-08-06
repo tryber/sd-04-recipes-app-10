@@ -66,10 +66,12 @@ export default function ProgressMeals() {
                       ? 'form-check-label done'
                       : 'form-check-label cc'
                   }
+                  htmlFor={index}
                 >
                   <input
-                    data-testid={`ingredient-step`}
+                    data-testid={`${index}-ingredient-step`}
                     type="checkbox"
+                    name={index}
                     className="form-check-input cc"
                     value={ingredient}
                     onClick={(e) => handleInput(e.target.value)}
