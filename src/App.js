@@ -56,7 +56,7 @@ function App() {
               component={ExploreIngredientsDrinks}
             />
           </DrinksProvider>
-          <Route component={NotFound} />
+          <Route path="/explorar/bebidas/area" component={NotFound} exact />
         </UsersProvider>
       </Switch>
     </BrowserRouter>
