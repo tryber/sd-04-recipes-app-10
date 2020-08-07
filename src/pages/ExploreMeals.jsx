@@ -6,14 +6,14 @@ import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
 
 
-export default function ExploreMeals (){
+export default function ExploreMeals() {
 
   const [recipe, setRecipe] = useState({});
 
   useEffect(() => {
     getMealsRandom().then((result) => {
       setRecipe(result.meal.meals[0]);
-    })
+    });
   }, []);
 
   return (
