@@ -8,12 +8,11 @@ import Footer from '../components/Footer';
 export default function ExploreDrinks() {
   const [recipe, setRecipe] = useState({});
 
-  // useEffect(() => {
-  //   getDrinksRandom().then((result) => {
-  //     setRecipe(result.[0]);
-  //     console.log('oi')
-  //   });
-  // }, []);
+  useEffect(() => {
+    getDrinksRandom().then((result) => {
+      setRecipe(result.drink.drinks[0]);
+    });
+  }, []);
 
   return (
     <React.Fragment>
