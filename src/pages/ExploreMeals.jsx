@@ -8,7 +8,7 @@ export default function ExploreMeals() {
     <React.Fragment>
       <HeaderMeals title="Explorar Comidas" />
         <div className="row justify-content-center align-items-center">
-          <div className="col-12 mt-5 pt-5"> 
+          <div className="col-12 mt-5 pt-5">
             <Link to="/">
               <button
                 data-testid="explore-by-ingredient"
