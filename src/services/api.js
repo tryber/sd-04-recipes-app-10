@@ -76,9 +76,9 @@ export const getMealsByCategory = async (category) => {
 export const getMealsById = async (id) => {
   try {
     const response = await fetch(urls.meals.byId + id);
-    return { meal: await response.json(), error: false };
+    return { meals: await response.json(), error: false };
   } catch (e) {
-    return { meal: {}, error: true };
+    return { meals: {}, error: true };
   }
 };
 
@@ -133,32 +133,32 @@ export const getDrinksById = async (id) => {
 export const getMealsIngredients = async () => {
   try {
     const response = await fetch(urls.meals.ingredients);
-    return { meal: await response.json(), error: false };
+    return { meals: await response.json(), error: false };
   } catch (e) {
-    return { meal: {}, error: true };
+    return { meals: {}, error: true };
   }
 };
 export const getMealsArea = async () => {
   try {
     const response = await fetch(urls.meals.area);
-    return { meal: await response.json(), error: false };
+    return { meals: await response.json(), error: false };
   } catch (e) {
-    return { meal: {}, error: true };
+    return { meals: {}, error: true };
   }
 };
 export const getMealsByArea = async (area) => {
   try {
-    const response = await fetch(urls.meals.ingredients + area);
-    return { meal: await response.json(), error: false };
+    const response = await fetch(urls.meals.byArea + area);
+    return { ...(await response.json()), error: false };
   } catch (e) {
-    return { meal: {}, error: true };
+    return { meals: {}, error: true };
   }
 };
 export const getMealsRandom = async () => {
   try {
     const response = await fetch(urls.meals.random);
-    return { meal: await response.json(), error: false };
+    return { meals: await response.json(), error: false };
   } catch (e) {
-    return { meal: {}, error: true };
+    return { meals: {}, error: true };
   }
 };
