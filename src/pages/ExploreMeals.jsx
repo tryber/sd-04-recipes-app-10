@@ -1,20 +1,20 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { getMealsRandom } from '../services/api';
 import React from 'react';
 import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
-import { getMealsRandom } from '../services/api';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
-export default function ExploreMeals() {
 
-  const [ recipe, setRecipe ] = useState({});
+export default function ExploreMeals(){
 
-  useEffect(()=>{
-    getMealsRandom().then((result)=>{
-      setRecipe(result.meal.meals[0])
+  const [recipe, setRecipe] = useState({});
+
+  useEffect(() => {
+    getMealsRandom().then((result)=> {
+      setRecipe(result.meal.meals[0]);
     })
-  },[])
+  },[]);
 
   return (
     <React.Fragment>
@@ -54,4 +54,5 @@ export default function ExploreMeals() {
     </React.Fragment>
   );
 }
+
 
