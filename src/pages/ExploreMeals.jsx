@@ -2,14 +2,26 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
+import { getMealsRandom } from '../services/api';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function ExploreMeals() {
+
+  const [ recipe, setRecipe ] = useState({});
+
+  useEffect(()=>{
+    getMealsRandom().then((result)=>{
+      setRecipe(result.meal.meals[0])
+    })
+  },[])
+
   return (
     <React.Fragment>
       <HeaderMeals title="Explorar Comidas" />
       <div className="row justify-content-center align-items-center">
         <div className="col-12 mt-5 pt-5">
-          <Link to="/">
+          <Link to="/explorar/comidas/ingredientes">
             <button
               data-testid="explore-by-ingredient"
               className="btn btn-secondary btn-block btn-lg"
@@ -18,7 +30,7 @@ export default function ExploreMeals() {
               Por Ingredientes
             </button>
           </Link>
-          <Link to="/">
+          <Link to="/explorar/comidas/areas">
             <button
               data-testid="explore-by-area"
               className="btn btn-secondary btn-block btn-lg"
@@ -27,7 +39,7 @@ export default function ExploreMeals() {
               Por Local de Origem
             </button>
           </Link>
-          <Link to="/">
+          <Link to={`/comidas/${recipe.idMeal}`}>
             <button
               data-testid="explore-surprise"
               className="btn btn-secondary btn-block btn-lg"
@@ -42,4 +54,4 @@ export default function ExploreMeals() {
     </React.Fragment>
   );
 }
-// teste CC loko
+
