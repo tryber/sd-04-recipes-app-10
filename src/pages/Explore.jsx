@@ -7,12 +7,9 @@ export default function Explore() {
   return (
     <React.Fragment>
       <HeaderMeals title="Explorar" />
-<<<<<<< HEAD
-      A festa vai começar
-=======
       <div className="row justify-content-center align-items-center">
         <div className="col-12 mt-5 pt-5">
-          <Link to="/explorar/comidas" >
+          <Link to="/explorar/comidas">
             <button
               data-testid="explore-food"
               className="btn btn-secondary btn-block btn-lg"
@@ -32,7 +29,6 @@ export default function Explore() {
           </Link>
         </div>
       </div>
->>>>>>> f4f5556f64913786d1963420a2a6a40d63f30518
       <Footer />
     </React.Fragment>
   );
