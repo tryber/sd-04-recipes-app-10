@@ -36,8 +36,14 @@ export default function ExploreAreaMeals() {
       <HeaderMeals title="Explorar Origem" isSearcheable />
       <div className="row mt-5 pt-2">
         <div className="col pt-2">
-          <select data-testid="explore-by-area-dropdown" className="form-control" onChange={(e) => setValue(e.target.value)}>
-            <option data-testid="All-option" defaultValue>All</option>
+          <select
+            data-testid="explore-by-area-dropdown"
+            className="form-control"
+            onChange={(e) => setValue(e.target.value)}
+          >
+            <option data-testid="All-option" defaultValue>
+              All
+            </option>
             {selectArea()}
           </select>
         </div>

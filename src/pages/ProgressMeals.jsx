@@ -27,8 +27,9 @@ export default function ProgressMeals() {
 
   useEffect(() => {
     getMealsById(id).then(({ meals }) => {
-      setMeal(meals[0]);
-      setIngredients(makeArray(meals[0]));
+      const x = meals[0];
+      setMeal(x);
+      setIngredients(makeArray(x));
     });
   }, [id]);
 
