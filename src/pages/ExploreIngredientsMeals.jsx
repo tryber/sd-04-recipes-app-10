@@ -14,15 +14,20 @@ export default function ExploreIngredientsMeals() {
     <React.Fragment>
       <HeaderMeals title="Explorar Ingredientes" />
       <div className="row mt-5 pt-3">
-        {ingredients.slice(0, 12).map((ingredient) => (
-          <div className="col-6 mb-3" key={ingredient.idIngredient}>
+        {ingredients.slice(0, 12).map((ingredient, index) => (
+          <div
+            data-testid={`${index}-ingredient-card`}
+            className="col-6 mb-3"
+            key={ingredient.idIngredient}
+          >
             <div className="card shadow-sm bg-white rounded">
               <img
+                data-testid={`${index}-card-img`}
                 className="card-img-top"
                 src={`https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png`}
               />
               <div className="card-body">
-                <h5 className="card-title mb-0">{ingredient.strIngredient}</h5>
+                <h5 className="card-title mb-0" data-testid={`${index}-card-name`}>{ingredient.strIngredient}</h5>
               </div>
             </div>
           </div>
