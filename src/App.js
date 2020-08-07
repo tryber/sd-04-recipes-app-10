@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import DrinksProvider from './contexts/DrinkContext';
 import MeatsProvider from './contexts/MeatContext';
@@ -56,7 +56,7 @@ function App() {
               component={ExploreIngredientsDrinks}
             />
           </DrinksProvider>
-          <Route path="/explorar/bebidas/area" component={NotFound} exact/>
+          <Route path="/explorar/bebidas/area" component={NotFound} exact />
         </UsersProvider>
       </Switch>
     </BrowserRouter>
