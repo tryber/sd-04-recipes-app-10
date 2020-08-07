@@ -78,7 +78,7 @@ export const getMealsByCategory = async (category) => {
 export const getMealsById = async (id) => {
   try {
     const response = await fetch(urls.meals.byId + id);
-    return { meals: await response.json(), error: false };
+    return { ...(await response.json()), error: false };
   } catch (e) {
     return { meals: {}, error: true };
   }
@@ -159,7 +159,7 @@ export const getMealsByArea = async (area) => {
 export const getMealsRandom = async () => {
   try {
     const response = await fetch(urls.meals.random);
-    return { meals: await response.json(), error: false };
+    return { ...(await response.json()), error: false };
   } catch (e) {
     return { meals: {}, error: true };
   }

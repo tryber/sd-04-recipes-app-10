@@ -15,11 +15,7 @@ export default function DetailsDrinks() {
   const [ingredients, setIngredients] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const { id } = useParams();
-  const {
-    enableHeart,
-    handleFavoriteRecipes,
-    isRecipeDoneOrInProgress,
-  } = useUserRecipes(drink);
+  const { enableHeart, handleFavoriteRecipes, isRecipeDoneOrInProgress } = useUserRecipes(drink);
   const [message, copy] = useCopy(window.location.href);
 
   useEffect(() => {
@@ -36,12 +32,7 @@ export default function DetailsDrinks() {
         <React.Fragment>
           <div className="row justify-content-center p-0">
             <div className="col-12 p-0">
-              <img
-                data-testid="recipe-photo"
-                src={drink.strDrinkThumb}
-                alt="foto"
-                width="100%"
-              />
+              <img data-testid="recipe-photo" src={drink.strDrinkThumb} alt="foto" width="100%" />
             </div>
           </div>
           <div className="row justify-content-between">
@@ -76,10 +67,7 @@ export default function DetailsDrinks() {
               <h4>Ingredients</h4>
               <ul className="bg-light">
                 {ingredients.map((ingredient, index) => (
-                  <li
-                    data-testid={`${index}-ingredient-name-and-measure`}
-                    key={ingredient}
-                  >
+                  <li data-testid={`${index}-ingredient-name-and-measure`} key={ingredient}>
                     {ingredient}
                   </li>
                 ))}
@@ -99,34 +87,24 @@ export default function DetailsDrinks() {
               <h4>Recomendadas</h4>
               <div className="d-flex flex-row overflow-auto">
                 {suggestions &&
-                  suggestions.map(
-                    ({ idMeal, strMeal, strCategory, strMealThumb }, index) => (
-                      <div
-                        key={idMeal}
-                        data-testid={`${index}-recomendation-card`}
-                        className={index < 2 ? 'col-6' : 'col-6 invisible'} //  gambiarra pro teste
-                      >
-                        <div className="card w-100">
-                          <img
-                            src={strMealThumb}
-                            className="card-img-top"
-                            alt={strMeal}
-                          />
-                          <div className="card-body">
-                            <p className="card-subtitle text-muted">
-                              {strCategory}
-                            </p>
-                            <h5
-                              data-testid={`${index}-recomendation-title`}
-                              className={'card-title'}
-                            >
-                              {strMeal}
-                            </h5>
-                          </div>
+                  suggestions.map(({ idMeal, strMeal, strCategory, strMealThumb }, index) => (
+                    <div
+                      key={idMeal}
+                      data-testid={`${index}-recomendation-card`}
+                      className={index < 2 ? 'col-6' : 'col-6 invisible'} //  gambiarra pro teste
+                    >
+                      {console.log(idMeal)}
+                      <div className="card w-100">
+                        <img src={strMealThumb} className="card-img-top" alt={strMeal} />
+                        <div className="card-body">
+                          <p className="card-subtitle text-muted">{strCategory}</p>
+                          <h5 data-testid={`${index}-recomendation-title`} className={'card-title'}>
+                            {strMeal}
+                          </h5>
                         </div>
                       </div>
-                    ),
-                  )}
+                    </div>
+                  ))}
               </div>
             </div>
           </div>

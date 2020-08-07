@@ -24,7 +24,7 @@ export default function DetailsMeals() {
   } = useUserRecipes(meal);
 
   useEffect(() => {
-    getMealsById(id).then(({ meal: { meals } }) => {
+    getMealsById(id).then(({ meals }) => {
       setMeal(meals[0]);
       setIngredients(makeArray(meals[0]));
     });
