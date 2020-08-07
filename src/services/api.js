@@ -10,6 +10,7 @@ const urls = {
     ingredients: 'https://www.themealdb.com/api/json/v1/1/list.php?i=list',
     byArea: 'https://www.themealdb.com/api/json/v1/1/filter.php?a=', // name area
     area: 'https://www.themealdb.com/api/json/v1/1/list.php?a=list',
+    random: 'https://www.themealdb.com/api/json/v1/1/random.php',
   },
   drinks: {
     all: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
@@ -139,7 +140,7 @@ export const getMealsIngredients = async () => {
 };
 export const getMealsArea = async () => {
   try {
-    const response = await fetch(urls.meals.area );
+    const response = await fetch(urls.meals.area);
     return { meal: await response.json(), error: false };
   } catch (e) {
     return { meal: {}, error: true };
@@ -153,5 +154,11 @@ export const getMealsByArea = async (area) => {
     return { meal: {}, error: true };
   }
 };
-
-
+export const getMealsRandom = async () => {
+  try {
+    const response = await fetch(urls.meals.random);
+    return { meal: await response.json(), error: false };
+  } catch (e) {
+    return { meal: {}, error: true };
+  }
+};
