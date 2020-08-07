@@ -6,6 +6,7 @@ import {
   getMealsByIngredient,
   getMealsByName,
   getMealsByCategory,
+  getMealsByArea,
 } from '../services/api';
 
 const useMeals = () => {
@@ -50,6 +51,12 @@ const useMeals = () => {
           break;
         case 'firstLetter':
           getMealsByFirstLetter(query.text).then((result) => {
+            callback(result);
+            setMeals(result);
+          });
+          break;
+        case 'area':
+          getMealsByArea(query.text).then((result) => {
             callback(result);
             setMeals(result);
           });

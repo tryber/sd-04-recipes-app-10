@@ -9,7 +9,7 @@ export default function Explore() {
       <HeaderMeals title="Explorar" />
       <div className="row justify-content-center align-items-center">
         <div className="col-12 mt-5 pt-5">
-          <Link to="/comidas" >
+          <Link to="/explorar/comidas" >
             <button
               data-testid="explore-food"
               className="btn btn-secondary btn-block btn-lg"
@@ -18,7 +18,7 @@ export default function Explore() {
               Explorar Comidas
             </button>
           </Link>
-          <Link to="/bebidas">
+          <Link to="/explorar/bebidas">
             <button
               data-testid="explore-drinks"
               className="btn btn-secondary btn-block btn-lg"
