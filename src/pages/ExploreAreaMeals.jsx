@@ -24,7 +24,7 @@ export default function ExploreAreaMeals() {
 
   function selectArea() {
     const result = areas.map((area) => (
-      <option data-testid={`${area}-option`} value={area.strArea} key={area.strArea}>
+      <option data-testid={`${area.strArea}-option`} value={area.strArea} key={area.strArea}>
         {area.strArea}
       </option>
     ));
@@ -37,7 +37,7 @@ export default function ExploreAreaMeals() {
       <div className="row mt-5 pt-2">
         <div className="col pt-2">
           <select data-testid="explore-by-area-dropdown" className="form-control" onChange={(e) => setValue(e.target.value)}>
-            <option defaultValue>All</option>
+            <option data-testid="All-option" defaultValue>All</option>
             {selectArea()}
           </select>
         </div>
