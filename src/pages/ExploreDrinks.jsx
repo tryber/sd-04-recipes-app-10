@@ -33,5 +33,4 @@ export default function ExploreDrinks() {
     </React.Fragment>
   );
 }
-//teste pq o CC tá loko
 
