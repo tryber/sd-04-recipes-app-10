@@ -26,9 +26,10 @@ export default function ProgressMeals() {
   const history = useHistory();
 
   useEffect(() => {
-    getMealsById(id).then(({ meal: { meals } }) => {
-      setMeal(meals[0]);
-      setIngredients(makeArray(meals[0]));
+    getMealsById(id).then(({ meals }) => {
+      const x = meals[0];
+      setMeal(x);
+      setIngredients(makeArray(x));
     });
   }, [id]);
 

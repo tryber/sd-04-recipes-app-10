@@ -8,7 +8,7 @@ const urls = {
     byId: 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=',
     categories: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
     ingredients: 'https://www.themealdb.com/api/json/v1/1/list.php?i=list',
-    byArea: 'https://www.themealdb.com/api/json/v1/1/filter.php?a=', // name area
+    byArea: 'https://www.themealdb.com/api/json/v1/1/filter.php?a=',
     area: 'https://www.themealdb.com/api/json/v1/1/list.php?a=list',
     random: 'https://www.themealdb.com/api/json/v1/1/random.php',
   },
@@ -20,6 +20,8 @@ const urls = {
     byCategory: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=',
     byId: 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=',
     categories: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
+    ingredients: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list',
+    random: 'https://www.thecocktaildb.com/api/json/v1/1/random.php',
   },
 };
 
@@ -76,7 +78,7 @@ export const getMealsByCategory = async (category) => {
 export const getMealsById = async (id) => {
   try {
     const response = await fetch(urls.meals.byId + id);
-    return { meals: await response.json(), error: false };
+    return { ...(await response.json()), error: false };
   } catch (e) {
     return { meals: {}, error: true };
   }
@@ -157,8 +159,24 @@ export const getMealsByArea = async (area) => {
 export const getMealsRandom = async () => {
   try {
     const response = await fetch(urls.meals.random);
-    return { meals: await response.json(), error: false };
+    return { ...(await response.json()), error: false };
   } catch (e) {
     return { meals: {}, error: true };
+  }
+};
+export const getDrinksRandom = async () => {
+  try {
+    const response = await fetch(urls.drinks.random);
+    return { drink: await response.json(), error: false };
+  } catch (e) {
+    return { drink: {}, error: true };
+  }
+};
+export const getDrinksIngredients = async () => {
+  try {
+    const response = await fetch(urls.drinks.ingredients);
+    return { drink: await response.json(), error: false };
+  } catch (e) {
+    return { drink: {}, error: true };
   }
 };

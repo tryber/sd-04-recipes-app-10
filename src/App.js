@@ -16,7 +16,7 @@ import DetailsMeals from './pages/DetailsMeals';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Explore from './pages/Explore';
-import ExploreAreaDrinks from './pages/ExploreAreaDrinks';
+import NotFound from './pages/NotFound';
 import ExploreAreaMeals from './pages/ExploreAreaMeals';
 import ExploreDrinks from './pages/ExploreDrinks';
 import ExploreMeals from './pages/ExploreMeals';
@@ -44,19 +44,19 @@ function App() {
               component={ExploreIngredientsMeals}
             />
             <Route path="/explorar/comidas/area" exact component={ExploreAreaMeals} />
-            <DrinksProvider>
-              <Route path="/bebidas" exact component={HomeDrinks} />
-              <Route path="/bebidas/:id" exact component={DetailsDrinks} />
-              <Route path="/bebidas/:id/in-progress" exact component={ProgressDrinks} />
-              <Route path="/explorar/bebidas" exact component={ExploreDrinks} />
-              <Route
-                path="/explorar/bebidas/ingredientes"
-                exact
-                component={ExploreIngredientsDrinks}
-              />
-              <Route path="/explorar/bebidas/area" exact component={ExploreAreaDrinks} />
-            </DrinksProvider>
           </MeatsProvider>
+          <DrinksProvider>
+            <Route path="/bebidas" exact component={HomeDrinks} />
+            <Route path="/bebidas/:id" exact component={DetailsDrinks} />
+            <Route path="/bebidas/:id/in-progress" exact component={ProgressDrinks} />
+            <Route path="/explorar/bebidas" exact component={ExploreDrinks} />
+            <Route
+              path="/explorar/bebidas/ingredientes"
+              exact
+              component={ExploreIngredientsDrinks}
+            />
+          </DrinksProvider>
+          <Route component={NotFound} />
         </UsersProvider>
       </Switch>
     </BrowserRouter>
