@@ -56,10 +56,18 @@ const useMeals = () => {
           });
           break;
         case 'area':
-          getMealsByArea(query.text).then((result) => {
-            callback(result);
-            setMeals(result);
-          });
+          if (query.text === 'All') {
+            getAllMeals().then((result) => {
+              callback(result);
+              setMeals(result);
+            });
+          } else {
+            getMealsByArea(query.text).then((result) => {
+              callback(result);
+              setMeals(result);
+            });
+          }
+
           break;
         default:
           getAllMeals(query.text).then((result) => {
@@ -75,7 +83,6 @@ const useMeals = () => {
       });
     }
   };
-
   return [[meals, getMeals], [toggleFilters]];
 };
 
