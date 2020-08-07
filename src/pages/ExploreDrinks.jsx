@@ -1,9 +1,20 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
-import HeaderDrinks from '../components/HeaderDrinks';
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { getDrinksRandom } from '../services/api';
+import HeaderDrinks from '../components/HeaderMeals';
 import Footer from '../components/Footer';
 
 export default function ExploreDrinks() {
+  const [recipe, setRecipe] = useState({});
+
+  // useEffect(() => {
+  //   getDrinksRandom().then((result) => {
+  //     setRecipe(result.[0]);
+  //     console.log('oi')
+  //   });
+  // }, []);
+
   return (
     <React.Fragment>
       <HeaderDrinks title="Explorar Bebidas" />
@@ -18,7 +29,7 @@ export default function ExploreDrinks() {
             Por Ingredientes
             </button>
           </Link>
-          <Link to="/">
+          <Link to={`/bebidas/${recipe.idDrink}`}>
             <button
               data-testid="explore-surprise"
               className="btn btn-secondary btn-block btn-lg"
