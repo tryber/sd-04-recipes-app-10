@@ -28,7 +28,7 @@ export default function ExploreMeals() {
               Por Ingredientes
             </button>
           </Link>
-          <Link to="/explorar/comidas/areas">
+          <Link to="/explorar/comidas/area">
             <button
               data-testid="explore-by-area"
               className="btn btn-secondary btn-block btn-lg"
