@@ -5,8 +5,7 @@ import { getMealsRandom } from '../services/api';
 import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
 
-export default function ExploreMeals(){
-
+export default function ExploreMeals() {
   const [recipe, setRecipe] = useState({});
 
   useEffect(() => {
