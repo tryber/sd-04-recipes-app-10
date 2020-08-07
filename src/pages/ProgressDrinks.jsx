@@ -5,7 +5,8 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import makeArray from '../utils/makeIngredientsArray';
 import { getDrinksById } from '../services/api';
-import useUserRecipes from '../hooks/useUserRecipes';
+import useFavoriteRecipes from '../hooks/useFavoriteRecipes';
+import useInProgressRecipe from '../hooks/useInProgressRecipes';
 import useCopy from '../hooks/useCopy';
 
 export default function ProgressMeals() {
@@ -22,7 +23,8 @@ export default function ProgressMeals() {
     }
     return [];
   });
-  const { addToInProgressRecipes, handleFavoriteRecipes, enableHeart } = useUserRecipes(drink);
+  const { enableHeart, handleFavoriteRecipes } = useFavoriteRecipes(drink);
+  const { addToInProgressRecipes } = useInProgressRecipe(drink);
   const [message, copy] = useCopy(`http://localhost:3000/bebidas/${id}`);
   const history = useHistory();
 
@@ -49,7 +51,12 @@ export default function ProgressMeals() {
     <React.Fragment>
       <div className="row justify-content-center p-0">
         <div className="col-12 p-0">
-          <img data-testid="recipe-photo" src={drink.strDrinkThumb} alt="foto" width="100%" />
+          <img
+            data-testid="recipe-photo"
+            src={drink.strDrinkThumb}
+            alt="foto"
+            width="100%"
+          />
         </div>
       </div>
       <div className="row justify-content-between">
@@ -95,7 +102,9 @@ export default function ProgressMeals() {
                   data-testid={`${index}-ingredient-step`}
                 >
                   <input
-                    defaultChecked={inputs.some((input) => input === ingredient)}
+                    defaultChecked={inputs.some(
+                      (input) => input === ingredient,
+                    )}
                     type="checkbox"
                     name={index}
                     className="form-check-input"

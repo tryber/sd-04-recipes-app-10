@@ -11,8 +11,7 @@ export default function DoneRecipes() {
 
   return (
     <React.Fragment>
-      <HeaderMeals title="Receitas Feitas" />;
-        {/* <ButtonToggle /> */}
+      <HeaderMeals title="Receitas Favoritas" />;{/* <ButtonToggle /> */}
       <div className="card pt-2">
         <div className="row">
           <div className="col aa">
@@ -27,10 +26,8 @@ export default function DoneRecipes() {
               </p>
             </div>
             <div className="row bb">
-              <p >
-                <Link to="/comidas">
-                  {meal.strMeal}
-                </Link>
+              <p>
+                <Link to="/comidas">{meal.strMeal}</Link>
               </p>
             </div>
             <div className="row d-flex justify-content-around">
@@ -55,14 +52,16 @@ export default function DoneRecipes() {
             </div>
             <div className="row ">
               <p>
-                <Link to="/comidas">
-                  {meal.strMeal}
-                </Link>
+                <Link to="/comidas">{meal.strMeal}</Link>
               </p>
             </div>
             <div className="row d-flex justify-content-around">
               <img src={shareIcon} alt="Share" />
-              <img data-testid={'-horizontal-favorite-btn'} src={blackHeartIcon} alt="Icon-Heart" />
+              <img
+                data-testid={'-horizontal-favorite-btn'}
+                src={blackHeartIcon}
+                alt="Icon-Heart"
+              />
             </div>
           </div>
         </div>

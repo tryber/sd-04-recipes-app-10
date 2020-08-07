@@ -3,7 +3,9 @@ import { useParams, Link } from 'react-router-dom';
 
 import { getDrinksById, getAllMeals } from '../services/api';
 import makeArray from '../utils/makeIngredientsArray';
-import useUserRecipes from '../hooks/useUserRecipes';
+import useFavoriteRecipes from '../hooks/useFavoriteRecipes';
+import useDoneRecipes from '../hooks/useDoneRecipes';
+import useInProgressRecipe from '../hooks/useInProgressRecipes';
 
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHearticon from '../images/blackHeartIcon.svg';
@@ -15,11 +17,11 @@ export default function DetailsDrinks() {
   const [ingredients, setIngredients] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const { id } = useParams();
-  const {
-    enableHeart,
-    handleFavoriteRecipes,
-    isRecipeDoneOrInProgress,
-  } = useUserRecipes(drink);
+  const { checkIfRecipeIsFavorite, handleFavoriteRecipes } = useFavoriteRecipes(
+    drink,
+  );
+  const { isDone } = useDoneRecipes(drink);
+  const { isInProgress } = useInProgressRecipe(drink);
   const [message, copy] = useCopy(window.location.href);
 
   useEffect(() => {
@@ -65,7 +67,9 @@ export default function DetailsDrinks() {
                 className="pl-2"
                 type="image"
                 data-testid="favorite-btn"
-                src={enableHeart ? blackHearticon : whiteHeartIcon}
+                src={
+                  checkIfRecipeIsFavorite() ? blackHearticon : whiteHeartIcon
+                }
                 alt="favorite"
                 onClick={() => handleFavoriteRecipes(drink)}
               />
@@ -131,7 +135,7 @@ export default function DetailsDrinks() {
             </div>
           </div>
           <div className="row justify-content-center">
-            {isRecipeDoneOrInProgress === 'none' && (
+            {!isDone && !isInProgress && (
               <Link
                 to={`/bebidas/${drink.idDrink}/in-progress`}
                 className="btn btn-block btn-success fixed-bottom"
@@ -140,7 +144,7 @@ export default function DetailsDrinks() {
                 Iniciar Receita
               </Link>
             )}
-            {isRecipeDoneOrInProgress === 'progress' && (
+            {isInProgress && (
               <Link
                 to={`/bebidas/${drink.idDrink}/in-progress`}
                 className="btn btn-block btn-success fixed-bottom"

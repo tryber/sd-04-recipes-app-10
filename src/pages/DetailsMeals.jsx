@@ -4,7 +4,9 @@ import { useParams, Link } from 'react-router-dom';
 import { getMealsById, getAllDrinks } from '../services/api';
 import makeArray from '../utils/makeIngredientsArray';
 import getCodeYT from '../utils/getYoutubeId';
-import useUserRecipes from '../hooks/useUserRecipes';
+import useFavoriteRecipes from '../hooks/useFavoriteRecipes';
+import useDoneRecipes from '../hooks/useDoneRecipes';
+import useInProgressRecipe from '../hooks/useInProgressRecipes';
 
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHearticon from '../images/blackHeartIcon.svg';
@@ -18,15 +20,17 @@ export default function DetailsMeals() {
   const [suggestions, setSuggestions] = useState([]);
   const { id } = useParams();
   const {
-    enableHeart,
     handleFavoriteRecipes,
-    isRecipeDoneOrInProgress,
-  } = useUserRecipes(meal);
+    checkIfRecipeIsFavorite,
+  } = useFavoriteRecipes(meal);
+  const { isDone } = useDoneRecipes(meal);
+  const { isInProgress } = useInProgressRecipe(meal);
 
   useEffect(() => {
     getMealsById(id).then(({ meal: { meals } }) => {
       setMeal(meals[0]);
       setIngredients(makeArray(meals[0]));
+      checkIfRecipeIsFavorite(meals[0]);
     });
     getAllDrinks().then(({ drinks }) => setSuggestions(drinks.slice(0, 6)));
   }, [id]);
@@ -66,7 +70,7 @@ export default function DetailsMeals() {
                 className="pl-2"
                 type="image"
                 data-testid="favorite-btn"
-                src={enableHeart ? blackHearticon : whiteHeartIcon}
+                src={checkIfRecipeIsFavorite(meal) ? blackHearticon : whiteHeartIcon}
                 alt="favorite"
                 onClick={() => handleFavoriteRecipes(meal)}
               />
@@ -147,7 +151,7 @@ export default function DetailsMeals() {
             </div>
           </div>
           <div className="row justify-content-center">
-            {isRecipeDoneOrInProgress === 'none' && (
+            {!isDone && !isInProgress && (
               <Link
                 to={`/comidas/${meal.idMeal}/in-progress`}
                 className="btn btn-block btn-success fixed-bottom"
@@ -156,7 +160,7 @@ export default function DetailsMeals() {
                 Iniciar Receita
               </Link>
             )}
-            {isRecipeDoneOrInProgress === 'progress' && (
+            {isInProgress && (
               <Link
                 to={`/comidas/${meal.idMeal}/in-progress`}
                 className="btn btn-block btn-success fixed-bottom"
