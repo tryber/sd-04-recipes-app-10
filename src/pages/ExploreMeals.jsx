@@ -15,7 +15,7 @@ export default function ExploreMeals() {
               className="btn btn-secondary btn-block btn-lg"
               type="button"
             >
-            Por Ingredientes
+              Por Ingredientes
             </button>
           </Link>
           <Link to="/">
@@ -24,7 +24,7 @@ export default function ExploreMeals() {
               className="btn btn-secondary btn-block btn-lg"
               type="button"
             >
-            Por Local de Origem
+              Por Local de Origem
             </button>
           </Link>
           <Link to="/">
@@ -33,7 +33,7 @@ export default function ExploreMeals() {
               className="btn btn-secondary btn-block btn-lg"
               type="button"
             >
-            Me Surpreenda!
+              Me Surpreenda!
             </button>
           </Link>
         </div>
