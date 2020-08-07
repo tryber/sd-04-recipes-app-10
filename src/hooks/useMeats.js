@@ -6,6 +6,7 @@ import {
   getMealsByIngredient,
   getMealsByName,
   getMealsByCategory,
+  getMealsByArea,
 } from '../services/api';
 
 const useMeals = () => {
@@ -54,6 +55,20 @@ const useMeals = () => {
             setMeals(result);
           });
           break;
+        case 'area':
+          if (query.text === 'All') {
+            getAllMeals().then((result) => {
+              callback(result);
+              setMeals(result);
+            });
+          } else {
+            getMealsByArea(query.text).then((result) => {
+              callback(result);
+              setMeals(result);
+            });
+          }
+
+          break;
         default:
           getAllMeals(query.text).then((result) => {
             callback(result);
@@ -68,7 +83,6 @@ const useMeals = () => {
       });
     }
   };
-
   return [[meals, getMeals], [toggleFilters]];
 };
 

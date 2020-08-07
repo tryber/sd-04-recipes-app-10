@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import useMeals from '../hooks/useMeats';
 
 const ListMeals = () => {
-  const [[{ meals }]] = useMeals();
+  const [[meals]] = useMeals();
   return (
     <div className="row">
-      {meals &&
-        meals.slice(0, 12).map((meal, index) => {
+      {meals.meals &&
+        meals.meals.slice(0, 12).map((meal, index) => {
           const { idMeal, strMeal, strMealThumb } = meal;
           return (
             <div className="col-6 mb-3" key={idMeal}>

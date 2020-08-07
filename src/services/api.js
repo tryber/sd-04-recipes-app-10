@@ -7,6 +7,10 @@ const urls = {
     byCategory: 'https://www.themealdb.com/api/json/v1/1/filter.php?c=',
     byId: 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=',
     categories: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
+    ingredients: 'https://www.themealdb.com/api/json/v1/1/list.php?i=list',
+    byArea: 'https://www.themealdb.com/api/json/v1/1/filter.php?a=', // name area
+    area: 'https://www.themealdb.com/api/json/v1/1/list.php?a=list',
+    random: 'https://www.themealdb.com/api/json/v1/1/random.php',
   },
   drinks: {
     all: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
@@ -72,9 +76,9 @@ export const getMealsByCategory = async (category) => {
 export const getMealsById = async (id) => {
   try {
     const response = await fetch(urls.meals.byId + id);
-    return { meal: await response.json(), error: false };
+    return { meals: await response.json(), error: false };
   } catch (e) {
-    return { meal: {}, error: true };
+    return { meals: {}, error: true };
   }
 };
 
@@ -124,5 +128,37 @@ export const getDrinksById = async (id) => {
     return { drink: await response.json(), error: false };
   } catch (e) {
     return { drink: {}, error: true };
+  }
+};
+export const getMealsIngredients = async () => {
+  try {
+    const response = await fetch(urls.meals.ingredients);
+    return { meals: await response.json(), error: false };
+  } catch (e) {
+    return { meals: {}, error: true };
+  }
+};
+export const getMealsArea = async () => {
+  try {
+    const response = await fetch(urls.meals.area);
+    return { meals: await response.json(), error: false };
+  } catch (e) {
+    return { meals: {}, error: true };
+  }
+};
+export const getMealsByArea = async (area) => {
+  try {
+    const response = await fetch(urls.meals.byArea + area);
+    return { ...(await response.json()), error: false };
+  } catch (e) {
+    return { meals: {}, error: true };
+  }
+};
+export const getMealsRandom = async () => {
+  try {
+    const response = await fetch(urls.meals.random);
+    return { meals: await response.json(), error: false };
+  } catch (e) {
+    return { meals: {}, error: true };
   }
 };
