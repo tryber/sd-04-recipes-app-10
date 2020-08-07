@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useState, useEffet } from 'react';
+
 import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
 
@@ -42,4 +44,4 @@ export default function ExploreMeals() {
     </React.Fragment>
   );
 }
-// teste CC loko
+
