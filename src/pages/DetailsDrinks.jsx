@@ -28,6 +28,7 @@ export default function DetailsDrinks() {
       setIngredients(makeArray(drinks[0]));
     });
     getAllMeals().then(({ meals }) => setSuggestions(meals.slice(0, 6)));
+    
   }, [id]);
 
   return (
@@ -105,7 +106,8 @@ export default function DetailsDrinks() {
                         key={idMeal}
                         data-testid={`${index}-recomendation-card`}
                         className={index < 2 ? 'col-6' : 'col-6 invisible'} //  gambiarra pro teste
-                      >
+                        >
+                        {console.log(idMeal)}
                         <div className="card w-100">
                           <img
                             src={strMealThumb}
