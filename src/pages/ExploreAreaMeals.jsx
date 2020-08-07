@@ -17,10 +17,10 @@ export default function ExploreAreaMeals() {
   }, []);
 
   useEffect(() => {
-    if(value !== ''){
-      getMeals({searchBy: 'area', text: value}, () => {});
+    if (value !== '') {
+      getMeals({ searchBy: 'area', text: value }, () => {});
     }
-  }, [value])
+  }, [value]);
 
   function selectArea() {
     const result = areas.map((area) => (
