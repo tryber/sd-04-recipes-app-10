@@ -20,6 +20,7 @@ export default function ExploreAreaMeals() {
     if (value !== '') {
       getMeals({ searchBy: 'area', text: value }, () => {});
     }
+    // eslint-disable-next-line
   }, [value]);
 
   function selectArea() {

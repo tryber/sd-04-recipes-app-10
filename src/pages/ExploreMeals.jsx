@@ -11,7 +11,6 @@ export default function ExploreMeals() {
   useEffect(() => {
     getMealsRandom().then((result) => {
       setRecipe(result.meals[0]);
-      console.log(result);
     });
   }, []);
 
