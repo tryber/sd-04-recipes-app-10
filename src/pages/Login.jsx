@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import useAuthentication from '../hooks/useAuthentication';
+import logo from '../images/logo.png';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -28,7 +29,8 @@ export default function Login() {
       {user.email && <Redirect to="/comidas" />}
       <div className="col">
         <div className="row justify-content-center">
-          <h1 className="mb-4">Recipes App</h1>
+          <img src={logo} width="100%" alt="Recipes App" />
+          {/* <h1 className="mb-4">Recipes App</h1> */}
         </div>
         <form>
           <div className="form-group">
