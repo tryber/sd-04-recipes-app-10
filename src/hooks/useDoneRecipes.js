@@ -15,12 +15,11 @@ const useDoneRecipes = () => {
     doneRecipes.filter((recipe) => filter === 'All' || recipe.type === filter);
 
   const checkIfRecipeIsDone = useCallback(
-    (recipe) => {
-      return dones.some(
+    (recipe) =>
+      dones.some(
         (doneRecipe) =>
           doneRecipe.id === recipe.idMeal || doneRecipe.id === recipe.idDrink,
-      );
-    },
+      ),
     [dones],
   );
 

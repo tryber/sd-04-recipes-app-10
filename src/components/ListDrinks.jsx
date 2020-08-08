@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useDrinks from '../hooks/useDrinks';
 
 const ListDrinks = () => {
-  const [[ drinks ]] = useDrinks();
+  const [[drinks]] = useDrinks();
   return (
     <div className="row">
       {drinks &&
@@ -23,7 +23,10 @@ const ListDrinks = () => {
                     alt={strDrink}
                   />
                   <div className="card-body">
-                    <h5 className="card-title mb-1" data-testid={`${index}-card-name`}>
+                    <h5
+                      className="card-title mb-1"
+                      data-testid={`${index}-card-name`}
+                    >
                       {strDrink}
                     </h5>
                   </div>

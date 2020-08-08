@@ -33,6 +33,6 @@ const CategoryFiltersDrinks = () => {
       ))}
     </div>
   );
-}
+};
 
 export default CategoryFiltersDrinks;
