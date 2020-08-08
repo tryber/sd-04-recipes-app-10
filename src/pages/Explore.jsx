@@ -1,35 +1,32 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
 
-export default function Explore() {
-  return (
-    <React.Fragment>
-      <HeaderMeals title="Explorar" />
-      <div className="row justify-content-center align-items-center">
-        <div className="col-12 mt-5 pt-5">
-          <Link to="/comidas" >
-            <button
-              data-testid="explore-food"
-              className="btn btn-secondary btn-block btn-lg"
-              type="button"
-            >
-              Explorar Comidas
-            </button>
-          </Link>
-          <Link to="/bebidas">
-            <button
-              data-testid="explore-drinks"
-              className="btn btn-secondary btn-block btn-lg"
-              type="button"
-            >
-              Explorar Bebidas
-            </button>
-          </Link>
-        </div>
+const Explore = () => (
+  <React.Fragment>
+    <HeaderMeals title="Explorar" />
+    <div className="row h-100 justify-content-center align-items-center">
+      <div className="col">
+        <Link
+          to="/explorar/comidas"
+          data-testid="explore-food"
+          className="btn btn-secondary btn-block btn-lg"
+        >
+          Explorar Comidas
+        </Link>
+        <Link
+          to="/explorar/bebidas"
+          data-testid="explore-drinks"
+          className="btn btn-secondary btn-block btn-lg"
+        >
+          Explorar Bebidas
+        </Link>
       </div>
-      <Footer />
-    </React.Fragment>
-  );
-}
+    </div>
+    <Footer />
+  </React.Fragment>
+);
+
+export default Explore;

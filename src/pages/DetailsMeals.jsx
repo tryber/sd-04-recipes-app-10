@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import { getMealsById, getAllDrinks } from '../services/api';
-import makeArray from '../utils/makeIngredientsArray';
-import getCodeYT from '../utils/getYoutubeId';
-import useFavoriteRecipes from '../hooks/useFavoriteRecipes';
-import useDoneRecipes from '../hooks/useDoneRecipes';
-import useInProgressRecipe from '../hooks/useInProgressRecipes';
-
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHearticon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+
+import { getMealsById, getAllDrinks } from '../services/api';
+
+import makeArray from '../utils/makeIngredientsArray';
+import getCodeYT from '../utils/getYoutubeId';
+
+import useFavoriteRecipes from '../hooks/useFavoriteRecipes';
+import useDoneRecipes from '../hooks/useDoneRecipes';
+import useInProgressRecipe from '../hooks/useInProgressRecipes';
 import useCopy from '../hooks/useCopy';
 
-export default function DetailsMeals() {
+const DetailsMeals = () => {
   const [meal, setMeal] = useState({});
   const [message, copy] = useCopy(window.location.href);
   const [ingredients, setIngredients] = useState([]);
@@ -22,15 +24,13 @@ export default function DetailsMeals() {
   const {
     handleFavoriteRecipes,
     checkIfRecipeIsFavorite,
-  } = useFavoriteRecipes(meal);
-  const { isDone } = useDoneRecipes(meal);
-  const { isInProgress } = useInProgressRecipe(meal);
-
+  } = useFavoriteRecipes();
+  const { checkIfRecipeIsDone } = useDoneRecipes();
+  const { checkIfRecipeIsInProgress } = useInProgressRecipe();
   useEffect(() => {
-    getMealsById(id).then(({ meal: { meals } }) => {
+    getMealsById(id).then(({ meals }) => {
       setMeal(meals[0]);
       setIngredients(makeArray(meals[0]));
-      checkIfRecipeIsFavorite(meals[0]);
     });
     getAllDrinks().then(({ drinks }) => setSuggestions(drinks.slice(0, 6)));
   }, [id]);
@@ -70,7 +70,11 @@ export default function DetailsMeals() {
                 className="pl-2"
                 type="image"
                 data-testid="favorite-btn"
-                src={checkIfRecipeIsFavorite(meal) ? blackHearticon : whiteHeartIcon}
+                src={
+                  checkIfRecipeIsFavorite(meal)
+                    ? blackHearticon
+                    : whiteHeartIcon
+                }
                 alt="favorite"
                 onClick={() => handleFavoriteRecipes(meal)}
               />
@@ -151,7 +155,7 @@ export default function DetailsMeals() {
             </div>
           </div>
           <div className="row justify-content-center">
-            {!isDone && !isInProgress && (
+            {!checkIfRecipeIsDone(meal) && !checkIfRecipeIsInProgress(meal) && (
               <Link
                 to={`/comidas/${meal.idMeal}/in-progress`}
                 className="btn btn-block btn-success fixed-bottom"
@@ -160,7 +164,7 @@ export default function DetailsMeals() {
                 Iniciar Receita
               </Link>
             )}
-            {isInProgress && (
+            {checkIfRecipeIsInProgress(meal) && (
               <Link
                 to={`/comidas/${meal.idMeal}/in-progress`}
                 className="btn btn-block btn-success fixed-bottom"
@@ -174,4 +178,6 @@ export default function DetailsMeals() {
       )}
     </div>
   );
-}
+};
+
+export default DetailsMeals;

@@ -95,7 +95,7 @@ const SearchBar = () => {
   );
 };
 
-export default function HeaderDrinks({ title, isSearcheable = false }) {
+const HeaderDrinks = ({ title, isSearcheable = false }) => {
   const [isSearchBarOpen, setSearchBarOpen] = useState(false);
   return (
     <React.Fragment>
@@ -130,3 +130,5 @@ HeaderDrinks.propTypes = {
   title: PropTypes.string.isRequired,
   isSearcheable: PropTypes.bool,
 };
+
+export default HeaderDrinks;

@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+
 import makeArray from '../utils/makeIngredientsArray';
+
 import { getMealsById } from '../services/api';
+
 import useFavoriteRecipes from '../hooks/useFavoriteRecipes';
 import useInProgressRecipe from '../hooks/useInProgressRecipes';
+import useDoneRecipes from '../hooks/useDoneRecipes';
 import useCopy from '../hooks/useCopy';
 
 import './ProgressMeals.css';
 
-export default function ProgressMeals() {
+const ProgressMeals = () => {
   const [meal, setMeal] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const { id } = useParams();
@@ -25,15 +30,20 @@ export default function ProgressMeals() {
     }
     return [];
   });
-  const { enableHeart, handleFavoriteRecipes } = useFavoriteRecipes(meal);
-  const { addToInProgressRecipes } = useInProgressRecipe(meal);
+  const {
+    checkIfRecipeIsFavorite,
+    handleFavoriteRecipes,
+  } = useFavoriteRecipes();
+  const { addToInProgressRecipes } = useInProgressRecipe();
+  const { addToDoneRecipes } = useDoneRecipes();
   const [message, copy] = useCopy(`http://localhost:3000/comidas/${id}`);
   const history = useHistory();
 
   useEffect(() => {
-    getMealsById(id).then(({ meal: { meals } }) => {
-      setMeal(meals[0]);
-      setIngredients(makeArray(meals[0]));
+    getMealsById(id).then(({ meals }) => {
+      const x = meals[0];
+      setMeal(x);
+      setIngredients(makeArray(x));
     });
   }, [id]);
 
@@ -42,13 +52,20 @@ export default function ProgressMeals() {
     //  eslint-disable-next-line
   }, [inputs]);
 
-  function handleInput(x) {
+  const handleInput = (x) => {
     if (inputs.includes(x)) {
       setInputs(inputs.filter((input) => input !== x));
     } else {
       setInputs([...inputs, x]);
     }
-  }
+  };
+
+  const handleFinishRecipe = () => {
+    addToDoneRecipes(meal);
+    setTimeout(() => {
+      history.push('/receitas-feitas');
+    }, 500);
+  };
 
   return (
     <React.Fragment>
@@ -83,7 +100,9 @@ export default function ProgressMeals() {
           <input
             type="image"
             data-testid="favorite-btn"
-            src={enableHeart ? blackHeartIcon : whiteHeartIcon}
+            src={
+              checkIfRecipeIsFavorite(meal) ? blackHeartIcon : whiteHeartIcon
+            }
             alt="share"
             onClick={() => handleFavoriteRecipes(meal)}
           />
@@ -139,11 +158,13 @@ export default function ProgressMeals() {
           className="btn btn-block btn-success fixed-bottom cc"
           data-testid="finish-recipe-btn"
           disabled={ingredients.length !== inputs.length}
-          onClick={() => history.push('/receitas-feitas')}
+          onClick={handleFinishRecipe}
         >
           Finalizar Receita
         </button>
       </div>
     </React.Fragment>
   );
-}
+};
+
+export default ProgressMeals;

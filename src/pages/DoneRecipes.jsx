@@ -1,31 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+import shareIcon from '../images/shareIcon.svg';
+
 import HeaderMeals from '../components/HeaderMeals';
 import ButtonToggle from '../components/ButtonToggle';
-import shareIcon from '../images/shareIcon.svg';
+
 import useCopy from '../hooks/useCopy';
 import useDoneRecipes from '../hooks/useDoneRecipes';
 
-export default function DoneRecipes() {
-  const [message, copy] = useCopy(window.location.href);
+const DoneRecipes = () => {
+  const [message, copy] = useCopy();
+  const { dones, filterByType, toggleFilter } = useDoneRecipes();
 
-  function getTag(tags) {
-    const newTags = tags.split(',');
-    const result = newTags.slice(0, 2);
+  const getTag = (tags) => {
+    const result = tags.slice(0, 2);
     return result;
-  }
+  };
 
   return (
     <React.Fragment>
       <HeaderMeals title="Receitas Feitas" />;
-      <ButtonToggle />
-      {/* {dones.map((recipe) => (
+      <ButtonToggle setFilter={toggleFilter} />
+      {filterByType(dones).map((recipe, index) => (
         <div key={recipe.id} className="card pt-2">
           <div className="row">
             <div className="col">
-              <Link to="/comidas">
+              <Link to={`/${recipe.type}s/${recipe.id}`}>
                 <img
-                  data-testid={'-horizontal-image'}
+                  data-testid={`${index}-horizontal-image`}
                   src={recipe.image}
                   width="100%"
                   alt="Food"
@@ -34,13 +37,18 @@ export default function DoneRecipes() {
             </div>
             <div className="col">
               <div className="row">
-                <p data-testid={'-horizontal-top-text'}>
-                  {recipe.category}, {recipe.area}
+                <p data-testid={`${index}-horizontal-top-text`}>
+                  {recipe.area || recipe.alcoholicOrNot} - {recipe.category}
                 </p>
                 {message || (
-                  <button type="button" onClick={() => copy()}>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      copy(`http://localhost:3000/${recipe.type}s/${recipe.id}`)
+                    }
+                  >
                     <img
-                      data-testid={'-horizontal-share-btn'}
+                      data-testid={`${index}-horizontal-share-btn`}
                       src={shareIcon}
                       alt="Share"
                     />
@@ -48,16 +56,25 @@ export default function DoneRecipes() {
                 )}
               </div>
               <div className="row">
-                <Link to="/comidas">
-                  <p data-testid={'-horizontal-name'}>{recipe.name}</p>
+                <Link to={`/${recipe.type}s/${recipe.id}`}>
+                  <p data-testid={`${index}-horizontal-name`}>{recipe.name}</p>
                 </Link>
               </div>
               <div className="row">
-                <p data-testid={'-horizontal-done-date'}>Feito em {recipe.doneDate}</p>
+                <p>
+                  Feito em{' '}
+                  <span data-testid={`${index}-horizontal-done-date`}>
+                    {recipe.doneDate}
+                  </span>
+                </p>
               </div>
-              <div data-testid={'-horizontal-tag'} className="row">
+              <div className="row">
                 {getTag(recipe.tags).map((tag) => (
-                  <p key={tag} className="mr-2">
+                  <p
+                    data-testid={`${index}-${tag}-horizontal-tag`}
+                    key={tag}
+                    className="mr-2"
+                  >
                     {tag}
                   </p>
                 ))}
@@ -65,7 +82,9 @@ export default function DoneRecipes() {
             </div>
           </div>
         </div>
-      ))} */}
+      ))}
     </React.Fragment>
   );
-}
+};
+
+export default DoneRecipes;

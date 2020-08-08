@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+
 import makeArray from '../utils/makeIngredientsArray';
+
 import { getDrinksById } from '../services/api';
+
 import useFavoriteRecipes from '../hooks/useFavoriteRecipes';
 import useInProgressRecipe from '../hooks/useInProgressRecipes';
 import useCopy from '../hooks/useCopy';
+import useDoneRecipes from '../hooks/useDoneRecipes';
 
-export default function ProgressMeals() {
+import './ProgressMeals.css';
+
+const ProgressDrinks = () => {
   const [drink, setDrink] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const { id } = useParams();
@@ -23,13 +30,17 @@ export default function ProgressMeals() {
     }
     return [];
   });
-  const { enableHeart, handleFavoriteRecipes } = useFavoriteRecipes(drink);
-  const { addToInProgressRecipes } = useInProgressRecipe(drink);
+  const {
+    checkIfRecipeIsFavorite,
+    handleFavoriteRecipes,
+  } = useFavoriteRecipes();
+  const { addToInProgressRecipes } = useInProgressRecipe();
+  const { addToDoneRecipes } = useDoneRecipes();
   const [message, copy] = useCopy(`http://localhost:3000/bebidas/${id}`);
   const history = useHistory();
 
   useEffect(() => {
-    getDrinksById(id).then(({ drink: { drinks } }) => {
+    getDrinksById(id).then(({ drinks }) => {
       setDrink(drinks[0]);
       setIngredients(makeArray(drinks[0]));
     });
@@ -40,13 +51,21 @@ export default function ProgressMeals() {
     //  eslint-disable-next-line
   }, [inputs]);
 
-  function handleInput(e) {
+  const handleInput = (e) => {
     if (inputs.includes(e)) {
       setInputs(inputs.filter((input) => input !== e));
     } else {
       setInputs([...inputs, e]);
     }
-  }
+  };
+
+  const handleFinishRecipe = () => {
+    addToDoneRecipes(drink);
+    setTimeout(() => {
+      history.push('/receitas-feitas');
+    }, 500);
+  };
+
   return (
     <React.Fragment>
       <div className="row justify-content-center p-0">
@@ -80,7 +99,9 @@ export default function ProgressMeals() {
           <input
             type="image"
             data-testid="favorite-btn"
-            src={enableHeart ? blackHeartIcon : whiteHeartIcon}
+            src={
+              checkIfRecipeIsFavorite(drink) ? blackHeartIcon : whiteHeartIcon
+            }
             alt="share"
             onClick={() => handleFavoriteRecipes(drink)}
           />
@@ -133,11 +154,13 @@ export default function ProgressMeals() {
           className="btn btn-block btn-success fixed-bottom"
           data-testid="finish-recipe-btn"
           disabled={ingredients.length !== inputs.length}
-          onClick={() => history.push('/receitas-feitas')}
+          onClick={handleFinishRecipe}
         >
           Finalizar Receita
         </button>
       </div>
     </React.Fragment>
   );
-}
+};
+
+export default ProgressDrinks;

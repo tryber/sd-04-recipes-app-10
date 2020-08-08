@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useMeals from '../hooks/useMeats';
 
 const ListMeals = () => {
-  const [[{ meals }]] = useMeals();
+  const [[meals]] = useMeals();
   return (
     <div className="row">
       {meals &&
