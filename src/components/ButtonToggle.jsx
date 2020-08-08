@@ -31,7 +31,7 @@ const ButtonToggle = ({ setFilter }) => (
 );
 
 ButtonToggle.propTypes = {
-  setFilter: PropTypes.func().isRequired,
+  setFilter: PropTypes.func.isRequired,
 };
 
 export default ButtonToggle;
