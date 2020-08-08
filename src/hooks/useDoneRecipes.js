@@ -27,22 +27,26 @@ const useDoneRecipes = () => {
     localStorage.setItem('doneRecipes', JSON.stringify(dones));
   }, [dones]);
 
+  const reallyAddToDoneRecipes = (recipe) => {
+    setDones([
+      ...dones,
+      {
+        id: recipe.idMeal || recipe.idDrink,
+        type: recipe.idMeal ? 'comida' : 'bebida',
+        area: recipe.strArea || '',
+        category: recipe.strCategory,
+        alcoholicOrNot: recipe.strAlcoholic || '',
+        name: recipe.strMeal || recipe.strDrink,
+        image: recipe.strMealThumb || recipe.strDrinkThumb,
+        doneDate: new Date().toLocaleDateString('pt-BR'),
+        tags: recipe.strTags ? recipe.strTags.split(',') : [],
+      },
+    ]);
+  };
+
   const addToDoneRecipes = (recipe) => {
     if (!checkIfRecipeIsDone(recipe)) {
-      setDones([
-        ...dones,
-        {
-          id: recipe.idMeal || recipe.idDrink,
-          type: recipe.idMeal ? 'comida' : 'bebida',
-          area: recipe.strArea || '',
-          category: recipe.strCategory,
-          alcoholicOrNot: recipe.strAlcoholic || '',
-          name: recipe.strMeal || recipe.strDrink,
-          image: recipe.strMealThumb || recipe.strDrinkThumb,
-          doneDate: new Date().toLocaleDateString('pt-BR'),
-          tags: recipe.strTags ? recipe.strTags.split(',') : [],
-        },
-      ]);
+      reallyAddToDoneRecipes(recipe);
       setInProgress(removeRecipeFromInProgress(inProgress, recipe));
     }
   };

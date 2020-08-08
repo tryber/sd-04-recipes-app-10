@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ButtonToggle = ({ setFilter }) => (
   <div className="row justify-content-center mb-2 mt-5">
@@ -28,5 +29,9 @@ const ButtonToggle = ({ setFilter }) => (
     </button>
   </div>
 );
+
+ButtonToggle.propTypes = {
+  setFilter: PropTypes.func.isRequired(),
+};
 
 export default ButtonToggle;
