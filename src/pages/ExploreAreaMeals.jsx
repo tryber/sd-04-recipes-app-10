@@ -23,7 +23,8 @@ const ExploreAreaMeals = () => {
     if (value !== '') {
       getMeals({ searchBy: 'area', text: value }, () => {});
     }
-  }, [value, getMeals]);
+    // eslint-disable-next-line
+  }, [value]);
 
   const selectArea = () => {
     const result = areas.map((area) => (

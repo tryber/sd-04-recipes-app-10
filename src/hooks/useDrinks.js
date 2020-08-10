@@ -14,6 +14,10 @@ const useDrinks = () => {
   const toggleFilters = (filter = null) =>
     setFiltersDrinks({ on: filtersDrinks.by === filter ? !filtersDrinks.on : true, by: filter });
 
+  const turnOffFilter = () => {
+    setFiltersDrinks({ ...filtersDrinks, off: true });
+  };
+
   const filter = useCallback(
     (category) => {
       if (category === 'All') {
@@ -28,7 +32,7 @@ const useDrinks = () => {
   useEffect(() => {
     if (filtersDrinks.on) {
       filter(filtersDrinks.by);
-    } else {
+    } else if (!filtersDrinks.off) {
       getAllDrinks().then((result) => setDrinks(result.drinks));
     }
   }, [filtersDrinks, filter, setDrinks]);
@@ -69,7 +73,10 @@ const useDrinks = () => {
     }
   };
 
-  return [[drinks, getDrinks], [toggleFilters]];
+  return [
+    [drinks, getDrinks],
+    [toggleFilters, turnOffFilter],
+  ];
 };
 
 export default useDrinks;

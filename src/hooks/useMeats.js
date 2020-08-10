@@ -15,6 +15,10 @@ const useMeals = () => {
   const toggleFilters = (filter = null) =>
     setFiltersMeals({ on: filtersMeals.by === filter ? !filtersMeals.on : true, by: filter });
 
+  const turnOffFilter = () => {
+    setFiltersMeals({ ...filtersMeals, off: true });
+  };
+
   const filter = useCallback(
     (category) => {
       if (category === 'All') {
@@ -29,7 +33,7 @@ const useMeals = () => {
   useEffect(() => {
     if (filtersMeals.on) {
       filter(filtersMeals.by);
-    } else {
+    } else if (!filtersMeals.off) {
       getAllMeals().then((result) => setMeals(result.meals));
     }
   }, [filtersMeals, filter, setMeals]);
@@ -67,7 +71,6 @@ const useMeals = () => {
               setMeals(result.meals);
             });
           }
-
           break;
         default:
           getAllMeals(query.text).then((result) => {
@@ -83,7 +86,10 @@ const useMeals = () => {
       });
     }
   };
-  return [[meals, getMeals], [toggleFilters]];
+  return [
+    [meals, getMeals],
+    [toggleFilters, turnOffFilter],
+  ];
 };
 
 export default useMeals;

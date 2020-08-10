@@ -21,7 +21,7 @@ const ExploreDrinks = () => {
       <div className="row h-100 justify-content-center align-items-center">
         <div className="col">
           <Link
-            to="/"
+            to="/explorar/bebidas/ingredientes"
             data-testid="explore-by-ingredient"
             className="btn btn-secondary btn-block btn-lg"
           >
