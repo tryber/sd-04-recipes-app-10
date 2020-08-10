@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export const UserContext = createContext();
 
-export default function UsersProvider({ children }) {
+const UsersProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const userStoraged = localStorage.getItem('user');
     if (userStoraged) return JSON.parse(userStoraged);
@@ -38,8 +38,10 @@ export default function UsersProvider({ children }) {
   return (
     <UserContext.Provider value={context}>{children}</UserContext.Provider>
   );
-}
+};
 
 UsersProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export default UsersProvider;

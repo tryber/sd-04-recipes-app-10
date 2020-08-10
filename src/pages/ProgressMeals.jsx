@@ -1,27 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+
 import makeArray from '../utils/makeIngredientsArray';
+
 import { getMealsById } from '../services/api';
-import useUserRecipes from '../hooks/useUserRecipes';
+
+import useFavoriteRecipes from '../hooks/useFavoriteRecipes';
+import useInProgressRecipe from '../hooks/useInProgressRecipes';
+import useDoneRecipes from '../hooks/useDoneRecipes';
 import useCopy from '../hooks/useCopy';
 
 import './ProgressMeals.css';
 
-export default function ProgressMeals() {
+const ProgressMeals = () => {
   const [meal, setMeal] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const { id } = useParams();
   const [inputs, setInputs] = useState(() => {
     const inputsInLocalStorage = localStorage.getItem('inProgressRecipes');
-    if (inputsInLocalStorage && Object.keys(JSON.parse(inputsInLocalStorage).meals).includes(id)) {
+    if (
+      inputsInLocalStorage &&
+      Object.keys(JSON.parse(inputsInLocalStorage).meals).includes(id)
+    ) {
       return JSON.parse(inputsInLocalStorage).meals[id];
     }
     return [];
   });
-  const { addToInProgressRecipes, handleFavoriteRecipes, enableHeart } = useUserRecipes(meal);
+  const {
+    checkIfRecipeIsFavorite,
+    handleFavoriteRecipes,
+  } = useFavoriteRecipes();
+  const { addToInProgressRecipes } = useInProgressRecipe();
+  const { addToDoneRecipes } = useDoneRecipes();
   const [message, copy] = useCopy(`http://localhost:3000/comidas/${id}`);
   const history = useHistory();
 
@@ -38,19 +52,31 @@ export default function ProgressMeals() {
     //  eslint-disable-next-line
   }, [inputs]);
 
-  function handleInput(x) {
+  const handleInput = (x) => {
     if (inputs.includes(x)) {
       setInputs(inputs.filter((input) => input !== x));
     } else {
       setInputs([...inputs, x]);
     }
-  }
+  };
+
+  const handleFinishRecipe = () => {
+    addToDoneRecipes(meal);
+    setTimeout(() => {
+      history.push('/receitas-feitas');
+    }, 500);
+  };
 
   return (
     <React.Fragment>
       <div className="row justify-content-center p-0">
         <div className="col-12 p-0">
-          <img data-testid="recipe-photo" src={meal.strMealThumb} alt="foto" width="100%" />
+          <img
+            data-testid="recipe-photo"
+            src={meal.strMealThumb}
+            alt="foto"
+            width="100%"
+          />
         </div>
       </div>
       <div className="row justify-content-between">
@@ -74,7 +100,9 @@ export default function ProgressMeals() {
           <input
             type="image"
             data-testid="favorite-btn"
-            src={enableHeart ? blackHeartIcon : whiteHeartIcon}
+            src={
+              checkIfRecipeIsFavorite(meal) ? blackHeartIcon : whiteHeartIcon
+            }
             alt="share"
             onClick={() => handleFavoriteRecipes(meal)}
           />
@@ -85,7 +113,11 @@ export default function ProgressMeals() {
           <h4>Ingredients</h4>
           <div className="bg-light">
             {ingredients.map((ingredient, index) => (
-              <div className="form-check" key={ingredient} data-testid={`${index}-ingredient-step`}>
+              <div
+                className="form-check"
+                key={ingredient}
+                data-testid={`${index}-ingredient-step`}
+              >
                 <label
                   className={
                     inputs.some((input) => input === ingredient)
@@ -95,7 +127,9 @@ export default function ProgressMeals() {
                   htmlFor={index}
                 >
                   <input
-                    defaultChecked={inputs.some((input) => input === ingredient)}
+                    defaultChecked={inputs.some(
+                      (input) => input === ingredient,
+                    )}
                     type="checkbox"
                     name={index}
                     className="form-check-input cc"
@@ -124,11 +158,13 @@ export default function ProgressMeals() {
           className="btn btn-block btn-success fixed-bottom cc"
           data-testid="finish-recipe-btn"
           disabled={ingredients.length !== inputs.length}
-          onClick={() => history.push('/receitas-feitas')}
+          onClick={handleFinishRecipe}
         >
           Finalizar Receita
         </button>
       </div>
     </React.Fragment>
   );
-}
+};
+
+export default ProgressMeals;

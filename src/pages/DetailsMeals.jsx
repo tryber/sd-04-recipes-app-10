@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import { getMealsById, getAllDrinks } from '../services/api';
-import makeArray from '../utils/makeIngredientsArray';
-import getCodeYT from '../utils/getYoutubeId';
-import useUserRecipes from '../hooks/useUserRecipes';
-
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHearticon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+
+import { getMealsById, getAllDrinks } from '../services/api';
+
+import makeArray from '../utils/makeIngredientsArray';
+import getCodeYT from '../utils/getYoutubeId';
+
+import useFavoriteRecipes from '../hooks/useFavoriteRecipes';
+import useDoneRecipes from '../hooks/useDoneRecipes';
+import useInProgressRecipe from '../hooks/useInProgressRecipes';
 import useCopy from '../hooks/useCopy';
 
-export default function DetailsMeals() {
+const DetailsMeals = () => {
   const [meal, setMeal] = useState({});
   const [message, copy] = useCopy(window.location.href);
   const [ingredients, setIngredients] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const { id } = useParams();
   const {
-    enableHeart,
     handleFavoriteRecipes,
-    isRecipeDoneOrInProgress,
-  } = useUserRecipes(meal);
-
+    checkIfRecipeIsFavorite,
+  } = useFavoriteRecipes();
+  const { checkIfRecipeIsDone } = useDoneRecipes();
+  const { checkIfRecipeIsInProgress } = useInProgressRecipe();
   useEffect(() => {
     getMealsById(id).then(({ meals }) => {
       setMeal(meals[0]);
@@ -66,7 +70,11 @@ export default function DetailsMeals() {
                 className="pl-2"
                 type="image"
                 data-testid="favorite-btn"
-                src={enableHeart ? blackHearticon : whiteHeartIcon}
+                src={
+                  checkIfRecipeIsFavorite(meal)
+                    ? blackHearticon
+                    : whiteHeartIcon
+                }
                 alt="favorite"
                 onClick={() => handleFavoriteRecipes(meal)}
               />
@@ -147,7 +155,7 @@ export default function DetailsMeals() {
             </div>
           </div>
           <div className="row justify-content-center">
-            {isRecipeDoneOrInProgress === 'none' && (
+            {!checkIfRecipeIsDone(meal) && !checkIfRecipeIsInProgress(meal) && (
               <Link
                 to={`/comidas/${meal.idMeal}/in-progress`}
                 className="btn btn-block btn-success fixed-bottom"
@@ -156,7 +164,7 @@ export default function DetailsMeals() {
                 Iniciar Receita
               </Link>
             )}
-            {isRecipeDoneOrInProgress === 'progress' && (
+            {checkIfRecipeIsInProgress(meal) && (
               <Link
                 to={`/comidas/${meal.idMeal}/in-progress`}
                 className="btn btn-block btn-success fixed-bottom"
@@ -170,4 +178,6 @@ export default function DetailsMeals() {
       )}
     </div>
   );
-}
+};
+
+export default DetailsMeals;

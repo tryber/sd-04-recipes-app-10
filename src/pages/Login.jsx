@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+
 import useAuthentication from '../hooks/useAuthentication';
 
-export default function Login() {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisable, setIsDisable] = useState(true);
@@ -72,4 +72,6 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+export default Login;

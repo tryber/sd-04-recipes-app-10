@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getCategoriesMeals } from '../services/api';
 import useMeals from '../hooks/useMeats';
 
-export default function CategoryFiltersMeals() {
+const CategoryFiltersMeals = () => {
   const [, [toggleFilter]] = useMeals();
   const [categories, setCategories] = useState([]);
 
@@ -33,4 +33,6 @@ export default function CategoryFiltersMeals() {
       ))}
     </div>
   );
-}
+};
+
+export default CategoryFiltersMeals;

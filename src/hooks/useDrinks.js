@@ -17,9 +17,9 @@ const useDrinks = () => {
   const filter = useCallback(
     (category) => {
       if (category === 'All') {
-        getAllDrinks().then((result) => setDrinks(result));
+        getAllDrinks().then((result) => setDrinks(result.drinks));
       } else {
-        getDrinksByCategory(category).then((result) => setDrinks(result));
+        getDrinksByCategory(category).then((result) => setDrinks(result.drinks));
       }
     },
     [setDrinks],
@@ -29,7 +29,7 @@ const useDrinks = () => {
     if (filtersDrinks.on) {
       filter(filtersDrinks.by);
     } else {
-      getAllDrinks().then((result) => setDrinks(result));
+      getAllDrinks().then((result) => setDrinks(result.drinks));
     }
   }, [filtersDrinks, filter, setDrinks]);
 
@@ -39,25 +39,25 @@ const useDrinks = () => {
         case 'ingredient':
           getDrinksByIngredient(query.text).then((result) => {
             callback(result);
-            setDrinks(result);
+            setDrinks(result.drinks);
           });
           break;
         case 'name':
           getDrinksByName(query.text).then((result) => {
             callback(result);
-            setDrinks(result);
+            setDrinks(result.drinks);
           });
           break;
         case 'firstLetter':
           getDrinksByFirstLetter(query.text).then((result) => {
             callback(result);
-            setDrinks(result);
+            setDrinks(result.drinks);
           });
           break;
         default:
           getAllDrinks(query.text).then((result) => {
             callback(result);
-            setDrinks(result);
+            setDrinks(result.drinks);
           });
           break;
       }

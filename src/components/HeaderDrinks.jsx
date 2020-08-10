@@ -21,7 +21,9 @@ const SearchBar = () => {
     }
     const redirectByResult = ({ drinks }) => {
       if (!drinks) {
-        alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+        alert(
+          'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+        );
         return;
       }
       if (drinks.length === 1) {
@@ -95,7 +97,7 @@ const SearchBar = () => {
   );
 };
 
-export default function HeaderDrinks({ title, isSearcheable = false }) {
+const HeaderDrinks = ({ title, isSearcheable = false }) => {
   const [isSearchBarOpen, setSearchBarOpen] = useState(false);
   return (
     <React.Fragment>
@@ -120,7 +122,7 @@ export default function HeaderDrinks({ title, isSearcheable = false }) {
       {isSearchBarOpen && <SearchBar />}
     </React.Fragment>
   );
-}
+};
 
 HeaderDrinks.defaultProps = {
   isSearcheable: false,
@@ -130,3 +132,5 @@ HeaderDrinks.propTypes = {
   title: PropTypes.string.isRequired,
   isSearcheable: PropTypes.bool,
 };
+
+export default HeaderDrinks;
