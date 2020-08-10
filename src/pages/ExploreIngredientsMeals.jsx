@@ -14,10 +14,6 @@ export default function ExploreIngredientsMeals() {
     getMealsIngredients().then((result) => setIngredients(result.meals));
   }, []);
 
-  useEffect(() => {
-    console.log(meals);
-  }, [meals]);
-
   const handleRedirect = (filter) => {
     getMeals(filter, () => {});
     turnOffFilter();
