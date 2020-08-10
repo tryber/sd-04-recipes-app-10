@@ -22,7 +22,7 @@ export default function ExploreMeals() {
           <Link to="/explorar/comidas/ingredientes">
             <button
               data-testid="explore-by-ingredient"
-              className="btn btn-secondary btn-block btn-lg"
+              className="btn btn-secondary btn-block btn-lg mb-4"
               type="button"
             >
               Por Ingredientes
@@ -31,7 +31,7 @@ export default function ExploreMeals() {
           <Link to="/explorar/comidas/area">
             <button
               data-testid="explore-by-area"
-              className="btn btn-secondary btn-block btn-lg"
+              className="btn btn-secondary btn-block btn-lg mb-4"
               type="button"
             >
               Por Local de Origem

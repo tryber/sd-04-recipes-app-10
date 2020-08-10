@@ -67,7 +67,6 @@ const useMeals = () => {
               setMeals(result);
             });
           }
-
           break;
         default:
           getAllMeals(query.text).then((result) => {

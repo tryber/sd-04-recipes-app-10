@@ -12,7 +12,7 @@ export default function Explore() {
           <Link to="/explorar/comidas" >
             <button
               data-testid="explore-food"
-              className="btn btn-secondary btn-block btn-lg"
+              className="btn btn-secondary btn-block btn-lg mb-4"
               type="button"
             >
               Explorar Comidas
