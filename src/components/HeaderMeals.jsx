@@ -22,7 +22,9 @@ const SearchBar = () => {
 
     const redirectByResult = ({ meals }) => {
       if (!meals) {
-        alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+        alert(
+          'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+        );
         return;
       }
       if (meals.length === 1) {
@@ -97,7 +99,7 @@ const SearchBar = () => {
   );
 };
 
-export default function HeaderMeals({ title, isSearcheable = false }) {
+const HeaderMeals = ({ title, isSearcheable = false }) => {
   const [isSearchBarOpen, setSearchBarOpen] = useState(false);
   return (
     <React.Fragment>
@@ -122,7 +124,7 @@ export default function HeaderMeals({ title, isSearcheable = false }) {
       {isSearchBarOpen && <SearchBar />}
     </React.Fragment>
   );
-}
+};
 
 HeaderMeals.defaultProps = {
   isSearcheable: false,
@@ -132,3 +134,5 @@ HeaderMeals.propTypes = {
   title: PropTypes.string.isRequired,
   isSearcheable: PropTypes.bool,
 };
+
+export default HeaderMeals;

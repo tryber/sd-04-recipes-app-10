@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getCategoriesDrinks } from '../services/api';
 import useDrinks from '../hooks/useDrinks';
 
-export default function CategoryFiltersDrinks() {
+const CategoryFiltersDrinks = () => {
   const [categories, setCategories] = useState([]);
   const [, [toggleFilter]] = useDrinks();
 
@@ -33,4 +33,6 @@ export default function CategoryFiltersDrinks() {
       ))}
     </div>
   );
-}
+};
+
+export default CategoryFiltersDrinks;

@@ -1,37 +1,58 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
 import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
+
 import useAuthentication from '../hooks/useAuthentication';
 
-function createButton(name, link, testid) {
-  return (
-    <div className="row justify-content-center py-3">
-      <Link
-        to={link}
-        className="btn btn-secondary btn-lg btn-block justify-content-center"
-        data-testid={`profile-${testid}-btn`}
-      >
-        {name}
-      </Link>
-    </div>
-  );
-}
+const createButton = (name, link, testid) => (
+  <Link
+    to={link}
+    className="btn btn-secondary btn-lg btn-block"
+    data-testid={`profile-${testid}-btn`}
+  >
+    {name}
+  </Link>
+);
 
-export default function Profile() {
-  const [user] = useAuthentication();
+const Profile = () => {
+  const history = useHistory();
+  const [user, , logout] = useAuthentication();
+
+  const handleLogout = () => {
+    logout();
+    history.push('/');
+  };
+
   return (
     <React.Fragment>
       <HeaderMeals title="Perfil" />
-      <div className="col mt-5 py-">
+      <div className="col mt-5 h-100">
         <div className="row justify-content-center py-3">
           <h5 data-testid="profile-email">{user.email}</h5>
         </div>
-        {createButton('Receitas Feitas', 'receitas-feitas', 'done')}
-        {createButton('Receitas Favoritas', 'receitas-favoritas', 'favorite')}
-        {createButton('Sair', '/', 'logout')}
+        <div className="row align-items-center h-50">
+          <div className="col">
+            {createButton('Receitas Feitas', 'receitas-feitas', 'done')}
+            {createButton(
+              'Receitas Favoritas',
+              'receitas-favoritas',
+              'favorite',
+            )}
+            <button
+              data-testid="profile-logout-btn"
+              className="btn btn-secondary btn-lg btn-block"
+              onClick={handleLogout}
+            >
+              Sair
+            </button>
+          </div>
+        </div>
       </div>
       <Footer />
     </React.Fragment>
   );
-}
+};
+
+export default Profile;

@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import { getDrinksById, getAllMeals } from '../services/api';
-import makeArray from '../utils/makeIngredientsArray';
-import useUserRecipes from '../hooks/useUserRecipes';
-
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHearticon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+
+import { getDrinksById, getAllMeals } from '../services/api';
+
+import makeArray from '../utils/makeIngredientsArray';
+
+import useFavoriteRecipes from '../hooks/useFavoriteRecipes';
+import useDoneRecipes from '../hooks/useDoneRecipes';
+import useInProgressRecipe from '../hooks/useInProgressRecipes';
 import useCopy from '../hooks/useCopy';
 
-export default function DetailsDrinks() {
-  const [drink, setMeal] = useState({});
+const DetailsDrinks = () => {
+  const [drink, setDrink] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const { id } = useParams();
-  const { enableHeart, handleFavoriteRecipes, isRecipeDoneOrInProgress } = useUserRecipes(drink);
+  const {
+    checkIfRecipeIsFavorite,
+    handleFavoriteRecipes,
+  } = useFavoriteRecipes();
+  const { checkIfRecipeIsDone } = useDoneRecipes();
+  const { checkIfRecipeIsInProgress } = useInProgressRecipe();
   const [message, copy] = useCopy(window.location.href);
 
   useEffect(() => {
-    getDrinksById(id).then(({ drink: { drinks } }) => {
-      setMeal(drinks[0]);
+    getDrinksById(id).then(({ drinks }) => {
+      setDrink(drinks[0]);
       setIngredients(makeArray(drinks[0]));
     });
     getAllMeals().then(({ meals }) => setSuggestions(meals.slice(0, 6)));
@@ -32,7 +41,12 @@ export default function DetailsDrinks() {
         <React.Fragment>
           <div className="row justify-content-center p-0">
             <div className="col-12 p-0">
-              <img data-testid="recipe-photo" src={drink.strDrinkThumb} alt="foto" width="100%" />
+              <img
+                data-testid="recipe-photo"
+                src={drink.strDrinkThumb}
+                alt="foto"
+                width="100%"
+              />
             </div>
           </div>
           <div className="row justify-content-between">
@@ -56,7 +70,11 @@ export default function DetailsDrinks() {
                 className="pl-2"
                 type="image"
                 data-testid="favorite-btn"
-                src={enableHeart ? blackHearticon : whiteHeartIcon}
+                src={
+                  checkIfRecipeIsFavorite(drink)
+                    ? blackHearticon
+                    : whiteHeartIcon
+                }
                 alt="favorite"
                 onClick={() => handleFavoriteRecipes(drink)}
               />
@@ -67,7 +85,10 @@ export default function DetailsDrinks() {
               <h4>Ingredients</h4>
               <ul className="bg-light">
                 {ingredients.map((ingredient, index) => (
-                  <li data-testid={`${index}-ingredient-name-and-measure`} key={ingredient}>
+                  <li
+                    data-testid={`${index}-ingredient-name-and-measure`}
+                    key={ingredient}
+                  >
                     {ingredient}
                   </li>
                 ))}
@@ -87,29 +108,39 @@ export default function DetailsDrinks() {
               <h4>Recomendadas</h4>
               <div className="d-flex flex-row overflow-auto">
                 {suggestions &&
-                  suggestions.map(({ idMeal, strMeal, strCategory, strMealThumb }, index) => (
-                    <div
-                      key={idMeal}
-                      data-testid={`${index}-recomendation-card`}
-                      className={index < 2 ? 'col-6' : 'col-6 invisible'} //  gambiarra pro teste
-                    >
-                      {console.log(idMeal)}
-                      <div className="card w-100">
-                        <img src={strMealThumb} className="card-img-top" alt={strMeal} />
-                        <div className="card-body">
-                          <p className="card-subtitle text-muted">{strCategory}</p>
-                          <h5 data-testid={`${index}-recomendation-title`} className={'card-title'}>
-                            {strMeal}
-                          </h5>
+                  suggestions.map(
+                    ({ idMeal, strMeal, strCategory, strMealThumb }, index) => (
+                      <div
+                        key={idMeal}
+                        data-testid={`${index}-recomendation-card`}
+                        className={index < 2 ? 'col-6' : 'col-6 invisible'} //  gambiarra pro teste
+                      >
+                        <div className="card w-100">
+                          <img
+                            src={strMealThumb}
+                            className="card-img-top"
+                            alt={strMeal}
+                          />
+                          <div className="card-body">
+                            <p className="card-subtitle text-muted">
+                              {strCategory}
+                            </p>
+                            <h5
+                              data-testid={`${index}-recomendation-title`}
+                              className={'card-title'}
+                            >
+                              {strMeal}
+                            </h5>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ),
+                  )}
               </div>
             </div>
           </div>
           <div className="row justify-content-center">
-            {isRecipeDoneOrInProgress === 'none' && (
+            {!checkIfRecipeIsDone(drink) && !checkIfRecipeIsInProgress(drink) && (
               <Link
                 to={`/bebidas/${drink.idDrink}/in-progress`}
                 className="btn btn-block btn-success fixed-bottom"
@@ -118,7 +149,7 @@ export default function DetailsDrinks() {
                 Iniciar Receita
               </Link>
             )}
-            {isRecipeDoneOrInProgress === 'progress' && (
+            {checkIfRecipeIsInProgress(drink) && (
               <Link
                 to={`/bebidas/${drink.idDrink}/in-progress`}
                 className="btn btn-block btn-success fixed-bottom"
@@ -132,4 +163,6 @@ export default function DetailsDrinks() {
       )}
     </div>
   );
-}
+};
+
+export default DetailsDrinks;

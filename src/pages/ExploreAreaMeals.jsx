@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
+
+import { getMealsArea } from '../services/api';
+
 import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
-import { getMealsArea } from '../services/api';
 import ListMeals from '../components/ListMeals';
+
 import useMeals from '../hooks/useMeats';
 
-export default function ExploreAreaMeals() {
+const ExploreAreaMeals = () => {
   const [areas, setAreas] = useState([]);
   const [value, setValue] = useState('');
   const [[, getMeals]] = useMeals();
 
   useEffect(() => {
     getMealsArea().then((result) => {
-      setAreas(result.meals.meals);
+      setAreas(result.meals);
     });
   }, []);
 
@@ -23,14 +26,18 @@ export default function ExploreAreaMeals() {
     // eslint-disable-next-line
   }, [value]);
 
-  function selectArea() {
+  const selectArea = () => {
     const result = areas.map((area) => (
-      <option data-testid={`${area.strArea}-option`} value={area.strArea} key={area.strArea}>
+      <option
+        data-testid={`${area.strArea}-option`}
+        value={area.strArea}
+        key={area.strArea}
+      >
         {area.strArea}
       </option>
     ));
     return result;
-  }
+  };
 
   return (
     <React.Fragment>
@@ -57,4 +64,6 @@ export default function ExploreAreaMeals() {
       <Footer />
     </React.Fragment>
   );
-}
+};
+
+export default ExploreAreaMeals;
