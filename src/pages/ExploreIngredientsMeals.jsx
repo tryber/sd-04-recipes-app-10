@@ -31,7 +31,7 @@ export default function ExploreIngredientsMeals() {
             key={ingredient.idIngredient}
             onClick={() => {
               handleRedirect({ text: ingredient.strIngredient, searchBy: 'ingredient' });
-            } }
+            }}
           >
             <div className="card shadow-sm bg-white rounded">
               <img
