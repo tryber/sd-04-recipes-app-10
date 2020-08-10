@@ -25,7 +25,7 @@ export default function ExploreIngredientsMeals() {
       <HeaderMeals title="Explorar Ingredientes" />
       <div className="row mb-5 mt-5 pt-3">
         {ingredients.slice(0, 12).map((ingredient, index) => (
-          <div
+          <button
             data-testid={`${index}-ingredient-card`}
             className="col-6 mb-3"
             key={ingredient.idIngredient}
@@ -46,7 +46,7 @@ export default function ExploreIngredientsMeals() {
                 </h5>
               </div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
       <Footer />
