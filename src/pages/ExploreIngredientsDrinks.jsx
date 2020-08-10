@@ -25,13 +25,13 @@ const ExploreIngredientsDrinks = () => {
       <HeaderDrinks title="Explorar Ingredientes" />
       <div className="row mb-5 mt-5 pt-3">
         {ingredients.slice(0, 12).map((ingredient, index) => (
-          <div
+          <button
             data-testid={`${index}-ingredient-card`}
             className="col-6 mb-3"
             key={ingredient.strIngredient1}
-            onClick={() => handleRedirect({ text: ingredient.strIngredient1, searchBy: 'ingredient' })}
-            onKeyPress={() => handleRedirect({ text: ingredient.strIngredient1, searchBy: 'ingredient' })}
-            role="button"
+            onClick={() =>
+              handleRedirect({ text: ingredient.strIngredient1, searchBy: 'ingredient' })
+            }
           >
             <div className="card shadow-sm bg-white rounded">
               <img
@@ -46,7 +46,7 @@ const ExploreIngredientsDrinks = () => {
                 </h5>
               </div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
       <Footer />
