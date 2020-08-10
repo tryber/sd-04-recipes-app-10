@@ -31,6 +31,7 @@ const ExploreIngredientsDrinks = () => {
             key={ingredient.strIngredient1}
             onClick={() => handleRedirect({ text: ingredient.strIngredient1, searchBy: 'ingredient' })}
             onKeyPress={() => handleRedirect({ text: ingredient.strIngredient1, searchBy: 'ingredient' })}
+            role="button"
           >
             <div className="card shadow-sm bg-white rounded">
               <img
