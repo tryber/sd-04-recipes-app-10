@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import HeaderMeals from '../components/HeaderMeals';
 import Footer from '../components/Footer';
 import { getMealsIngredients } from '../services/api';
 import useMeals from '../hooks/useMeats';
-import { useHistory } from 'react-router-dom';
 
 export default function ExploreIngredientsMeals() {
   const [ingredients, setIngredients] = useState([]);

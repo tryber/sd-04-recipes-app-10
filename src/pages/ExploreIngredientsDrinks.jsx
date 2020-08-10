@@ -29,9 +29,6 @@ const ExploreIngredientsDrinks = () => {
             data-testid={`${index}-ingredient-card`}
             className="col-6 mb-3"
             key={ingredient.strIngredient1}
-            onClick={() => {
-              handleRedirect({ text: ingredient.strIngredient1, searchBy: 'ingredient' });
-            }}
           >
             <div className="card shadow-sm bg-white rounded">
               <img
@@ -39,6 +36,9 @@ const ExploreIngredientsDrinks = () => {
                 className="card-img-top"
                 src={`https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png`}
                 alt={`ingredient-${ingredient.strIngredient1}`}
+                onClick={() => {
+                  handleRedirect({ text: ingredient.strIngredient1, searchBy: 'ingredient' });
+                }}
               />
               <div className="card-body">
                 <h5 className="card-title mb-0" data-testid={`${index}-card-name`}>
