@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 export default function ExploreIngredientsMeals() {
   const [ingredients, setIngredients] = useState([]);
-  const [[meals, getMeals], [, turnOffFilter]] = useMeals();
+  const [[, getMeals], [, turnOffFilter]] = useMeals();
   const history = useHistory();
 
   useEffect(() => {

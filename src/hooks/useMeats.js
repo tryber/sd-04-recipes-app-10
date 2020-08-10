@@ -33,7 +33,7 @@ const useMeals = () => {
   useEffect(() => {
     if (filtersMeals.on) {
       filter(filtersMeals.by);
-    } else if(!filtersMeals.off){
+    } else if (!filtersMeals.off) {
       getAllMeals().then((result) => setMeals(result.meals));
     }
   }, [filtersMeals, filter, setMeals]);
@@ -86,7 +86,10 @@ const useMeals = () => {
       });
     }
   };
-  return [[meals, getMeals], [toggleFilters, turnOffFilter]];
+  return [
+    [meals, getMeals],
+    [toggleFilters, turnOffFilter],
+  ];
 };
 
 export default useMeals;

@@ -32,7 +32,7 @@ const useDrinks = () => {
   useEffect(() => {
     if (filtersDrinks.on) {
       filter(filtersDrinks.by);
-    } else if(!filtersDrinks.off) {
+    } else if (!filtersDrinks.off) {
       getAllDrinks().then((result) => setDrinks(result.drinks));
     }
   }, [filtersDrinks, filter, setDrinks]);
@@ -73,7 +73,10 @@ const useDrinks = () => {
     }
   };
 
-  return [[drinks, getDrinks], [toggleFilters, turnOffFilter]];
+  return [
+    [drinks, getDrinks],
+    [toggleFilters, turnOffFilter],
+  ];
 };
 
 export default useDrinks;

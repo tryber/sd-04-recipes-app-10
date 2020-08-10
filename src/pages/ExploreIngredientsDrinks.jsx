@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import HeaderDrinks from '../components/HeaderDrinks';
 import Footer from '../components/Footer';
 import { getDrinksIngredients } from '../services/api';
 import useDrinks from '../hooks/useDrinks';
-import { useHistory } from 'react-router-dom';
 
 const ExploreIngredientsDrinks = () => {
   const [ingredients, setIngredients] = useState([]);
-  const [[drinks, getDrinks], [, turnOffFilter]] = useDrinks();
+  const [[, getDrinks], [, turnOffFilter]] = useDrinks();
   const history = useHistory();
 
   useEffect(() => {
