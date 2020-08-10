@@ -7,21 +7,22 @@ import { useHistory } from 'react-router-dom';
 
 export default function ExploreIngredientsMeals() {
   const [ingredients, setIngredients] = useState([]);
-  const [[meals, getMeals]] = useMeals();
+  const [[meals, getMeals], [, turnOffFilter]] = useMeals();
   const history = useHistory();
 
   useEffect(() => {
-    getMealsIngredients().then((result) => setIngredients(result.meals.meals));
+    getMealsIngredients().then((result) => setIngredients(result.meals));
   }, []);
 
   useEffect(() => {
     console.log(meals);
   }, [meals]);
 
-  // const handleRedirect = (filter) => {
-  //   getMeals(filter, () => {});
-  //   history.push('/comidas');
-  // };
+  const handleRedirect = (filter) => {
+    getMeals(filter, () => {});
+    turnOffFilter();
+    history.push('/comidas');
+  };
 
   return (
     <React.Fragment>
@@ -33,14 +34,14 @@ export default function ExploreIngredientsMeals() {
             className="col-6 mb-3"
             key={ingredient.idIngredient}
             onClick={() => {
-              getMeals({ text: ingredient.strIngredient, searchBy: 'ingredient' }, () => {});
+              handleRedirect({ text: ingredient.strIngredient, searchBy: 'ingredient' });
             } }
           >
             <div className="card shadow-sm bg-white rounded">
               <img
                 data-testid={`${index}-card-img`}
                 className="card-img-top"
-                src={`https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png`}
+                src={`https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png`}
                 alt={`ingredient-${ingredient.strIngredient}`}
               />
               <div className="card-body">
