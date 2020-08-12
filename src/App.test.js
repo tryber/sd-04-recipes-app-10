@@ -13,3 +13,9 @@ test('Login contains input Field', () => {
   const linkElement = getByText(/EMail/i);
   expect(linkElement).toBeInTheDocument();
 });
+
+test('Login contains input Field', () => {
+  const { getByText } = render(<App />);
+  const linkElement = getByText(/Password/i);
+  expect(linkElement).toBeInTheDocument();
+});
